@@ -4,16 +4,13 @@
   assign animation_anchor = '#FaqTabs--' | append: section.id
 
   assign tabs_string = ''
-  assign icons_string = ''
   for block in section.blocks
     assign t = block.settings.tab | strip
     unless tabs_string contains t
       assign tabs_string = tabs_string | append: t | append: '||'
-      assign icons_string = icons_string | append: block.settings.tab_icon | append: '||'
     endunless
   endfor
   assign tabs = tabs_string | split: '||' | compact
-  assign tab_icons = icons_string | split: '||'
 -%}
 
 {%- if section.blocks.size > 0 -%}
@@ -202,6 +199,15 @@
         <faq-tabs class="faq-tabs" data-tabs-holder>
           <ul class="faq-tabs__head" role="tablist">
             {%- for tab in tabs -%}
+              {%- assign tab_icon = '' -%}
+              {%- assign tab_display = 'both' -%}
+              {%- for block in section.blocks -%}
+                {%- if block.settings.tab == tab -%}
+                  {%- assign tab_icon = block.settings.tab_icon -%}
+                  {%- assign tab_display = block.settings.tab_display | default: 'both' -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
               <li
                 class="tab-link tab-link-{{ forloop.index0 }}{% if forloop.first %} current{% endif %}"
                 data-tab="{{ forloop.index0 }}"
@@ -210,11 +216,10 @@
                 aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
                 aria-controls="panel-{{ section.id }}-{{ forloop.index0 }}"
                 tabindex="0">
-                {%- assign tab_icon = tab_icons[forloop.index0] -%}
-                {%- if tab_icon != blank -%}
+                {%- if tab_display != 'title' and tab_icon != blank -%}
                   <img class="tab-link__icon" src="{{ tab_icon | image_url: width: 24 }}" alt="{{ tab | escape }}">
                 {%- endif -%}
-                {%- if tab != blank -%}
+                {%- if tab_display != 'image' and tab != blank -%}
                   <span>{{ tab }}</span>
                 {%- endif -%}
               </li>
@@ -369,6 +374,17 @@
       "settings": [
         { "type": "text", "id": "tab", "label": "Tab title", "default": "General Questions" },
         { "type": "image_picker", "id": "tab_icon", "label": "Tab icon" },
+        {
+          "type": "select",
+          "id": "tab_display",
+          "label": "Show",
+          "options": [
+            { "value": "both", "label": "Title and icon" },
+            { "value": "title", "label": "Title only" },
+            { "value": "image", "label": "Icon only" }
+          ],
+          "default": "both"
+        },
         { "type": "text", "id": "question", "label": "Question", "default": "Sample question?" },
         { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Sample answer content goes here.</p>" }
       ]
