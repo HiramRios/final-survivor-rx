@@ -67,18 +67,501 @@
         "subheading": "Your treatment was breast cancer specific—now your supplements can be too."
       }
     },
+
     "cancer_quiz_xaXxzq": {
       "type": "cancer-quiz",
       "name": "Cancer Quiz",
+      "blocks": {
+        "question_kmpQk6": {
+          "type": "question",
+          "settings": {
+            "step": 1,
+            "parent": "",
+            "title": "Estrogen Negative (ER-) DCIS ",
+            "description": "",
+            "value": "",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-6",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": "Your breast cancer subtype, including hormone receptor status and other markers, can significantly impact which nutrients are safe and beneficial after treatment. By understanding these details, we can avoid ingredients that may interfere with your past or ongoing treatment, make smarter and safer formulation decisions, and help fill nutritional gaps that are common post-treatment."
+          }
+        },
+        "question_UNLVWj": {
+          "type": "question",
+          "settings": {
+            "step": 1,
+            "parent": "",
+            "title": "Estrogen Positive (ER+)",
+            "description": "",
+            "value": "erap",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_khEiwH": {
+          "type": "question",
+          "settings": {
+            "step": 1,
+            "parent": "",
+            "title": "Estrogen Negative (ER-)",
+            "description": "",
+            "value": "era",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_MAWC3w": {
+          "type": "question",
+          "settings": {
+            "step": 1,
+            "parent": "",
+            "title": "Estrogen Positive (ER+) DCIS",
+            "description": "",
+            "value": "erpdcis",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_crbwbY": {
+          "type": "question",
+          "settings": {
+            "step": 1,
+            "parent": "",
+            "title": "I’ve had multiple breast cancers",
+            "description": "",
+            "value": "multiplebr",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_FLtyAF": {
+          "type": "question",
+          "settings": {
+            "step": 1,
+            "parent": "",
+            "title": "I don’t know",
+            "description": "",
+            "value": "",
+            "url": "https://survivorrx.com/pages/quiz",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_xKDnkp": {
+          "type": "question",
+          "settings": {
+            "step": 2,
+            "parent": "Estrogen Positive (ER+) |Estrogen Negative (ER-)|Estrogen Positive (ER+) DCIS|I’ve had multiple breast cancers",
+            "title": "HER2 Positive",
+            "description": "",
+            "value": "HER2P",
+            "url": "",
+            "step_heading": "What is your HER2 status?",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_XRwM99": {
+          "type": "question",
+          "settings": {
+            "step": 2,
+            "parent": "Estrogen Positive (ER+) |Estrogen Negative (ER-)|Estrogen Positive (ER+) DCIS|I’ve had multiple breast cancers",
+            "title": "TPBC (Triple-Positive Breast Cancer)",
+            "description": "",
+            "value": "TPBC",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_bkxNam": {
+          "type": "question",
+          "settings": {
+            "step": 2,
+            "parent": "Estrogen Positive (ER+) |Estrogen Negative (ER-)|Estrogen Positive (ER+) DCIS|I’ve had multiple breast cancers",
+            "title": "HER2 Negative",
+            "description": "",
+            "value": "HER2N",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_bdmFqq": {
+          "type": "question",
+          "settings": {
+            "step": 2,
+            "parent": "Estrogen Positive (ER+) |Estrogen Negative (ER-)|Estrogen Positive (ER+) DCIS|I’ve had multiple breast cancers",
+            "title": "TNBC (Triple-Negative Breast Cancer)",
+            "description": "",
+            "value": "TNBC",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_cRNwVV": {
+          "type": "question",
+          "settings": {
+            "step": 3,
+            "parent": "HER2 Positive|TPBC (Triple-Positive Breast Cancer)|HER2 Negative|TNBC (Triple-Negative Breast Cancer)",
+            "title": "No cancer related support medications",
+            "description": "",
+            "value": "ncm",
+            "url": "",
+            "step_heading": "Question 3: Are you currently taking any of the following medications?",
+            "step_subheading": "I’m currently on:",
+            "step_why": "Understanding your HER2 status helps us provide more personalized support and ensure the safest approach to your wellness."
+          }
+        },
+        "question_D6WGJJ": {
+          "type": "question",
+          "settings": {
+            "step": 3,
+            "parent": "HER2 Positive|TPBC (Triple-Positive Breast Cancer)|HER2 Negative|TNBC (Triple-Negative Breast Cancer)",
+            "title": "SERMs (e.g., tamoxifen)",
+            "description": "Selective Estrogen Receptor Modulators, such as tamoxifen, raloxifene, toremifene, ospemifene, are used to block estrogen's effects in hormone-sensitive cancers. Products: tamoxifen (Nolvadex), raloxifene (Evista), toremifene (Fareston), ospemifene (Osphena), lasofoxifene (Fablyn)",
+            "value": "SERMs",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_wWxnj9": {
+          "type": "question",
+          "settings": {
+            "step": 3,
+            "parent": "HER2 Positive|TPBC (Triple-Positive Breast Cancer)|HER2 Negative|TNBC (Triple-Negative Breast Cancer)",
+            "title": "AIs (e.g., anastrozole)",
+            "description": "Aromatase Inhibitors, such as anastrozole, letrozole, and exemestane, reduce estrogen production by inhibiting the aromatase enzyme, which is involved in estrogen synthesis. Products: anastrozole (Arimidex), letrozole (Femara), exemestane (Aromasin), formestane (Lentaron)",
+            "value": "AIs",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_V4dVte": {
+          "type": "question",
+          "settings": {
+            "step": 3,
+            "parent": "HER2 Positive|TPBC (Triple-Positive Breast Cancer)|HER2 Negative|TNBC (Triple-Negative Breast Cancer)",
+            "title": "SERDs (e.g., fulvestrant)",
+            "description": "Selective Estrogen Receptor Degraders, such as fulvestrant, degrade the estrogen receptor, preventing estrogen from stimulating cancer cells. Products: fulvestrant (Faslodex), arzoxifene, bazedoxifene",
+            "value": "SERDs",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_xgpB8i": {
+          "type": "question",
+          "settings": {
+            "step": 3,
+            "parent": "HER2 Positive|TPBC (Triple-Positive Breast Cancer)|HER2 Negative|TNBC (Triple-Negative Breast Cancer)",
+            "title": "4/6 Inhibitors with SERMs (e.g., tamoxifen & Ibrance)",
+            "description": "A combination of SERMs and 4/6 inhibitors that target cancer cells in multiple ways. Products: tamoxifen (Nolvadex), raloxifene (Evista), Ibrance (palbociclib), Kisqali (ribociclib), Verzenio (abemaciclib)",
+            "value": "4/6SERMs",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_7z4ryY": {
+          "type": "question",
+          "settings": {
+            "step": 3,
+            "parent": "HER2 Positive|TPBC (Triple-Positive Breast Cancer)|HER2 Negative|TNBC (Triple-Negative Breast Cancer)",
+            "title": "4/6 Inhibitors with AIs (e.g., anastrozole & Ibrance)",
+            "description": "A combination of AIs and 4/6 inhibitors that help reduce estrogen and slow cancer cell growth. Products: anastrozole (Arimidex), letrozole (Femara), exemestane (Aromasin), Ibrance (palbociclib), Kisqali (ribociclib), Verzenio (abemaciclib)",
+            "value": "4/6AIs",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_mLXbHB": {
+          "type": "question",
+          "settings": {
+            "step": 3,
+            "parent": "HER2 Positive|TPBC (Triple-Positive Breast Cancer)|HER2 Negative|TNBC (Triple-Negative Breast Cancer)",
+            "title": "4/6 Inhibitors with SERDs (e.g., fulvestrant & Ibrance)",
+            "description": "A combination of SERDs and 4/6 inhibitors to target estrogen and cancer cell growth. Products: fulvestrant (Faslodex), Ibrance (palbociclib), Kisqali (ribociclib), Verzenio (abemaciclib)",
+            "value": "4/6SERDs",
+            "url": "",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_MmWX9r": {
+          "type": "question",
+          "settings": {
+            "step": 3,
+            "parent": "HER2 Positive|TPBC (Triple-Positive Breast Cancer)|HER2 Negative|TNBC (Triple-Negative Breast Cancer)",
+            "title": "IV or Oral Chemotherapy (e.g., Herceptin)",
+            "description": "IV or Oral Chemotherapy (e.g., Herceptin) Chemotherapy treatments aim to target and kill rapidly dividing cancer cells. Products: Herceptin (trastuzumab), Perjeta (pertuzumab), Xeloda (capecitabine), Adriamycin (doxorubicin), Taxol (paclitaxel), Taxotere (docetaxel)",
+            "value": "",
+            "url": "shopify://pages/contact-us",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_pqrqqq": {
+          "type": "question",
+          "settings": {
+            "step": 3,
+            "parent": "HER2 Positive|TPBC (Triple-Positive Breast Cancer)|HER2 Negative|TNBC (Triple-Negative Breast Cancer)",
+            "title": "I’m not sure",
+            "description": "",
+            "value": "",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-8",
+            "step_heading": "",
+            "step_subheading": "",
+            "step_why": ""
+          }
+        },
+        "question_t3BJTQ": {
+          "type": "question",
+          "settings": {
+            "step": 4,
+            "parent": "No cancer related support medications|SERMs (e.g., tamoxifen)|AIs (e.g., anastrozole)|SERDs (e.g., fulvestrant)|4/6 Inhibitors with SERMs (e.g., tamoxifen & Ibrance)|4/6 Inhibitors with AIs (e.g., anastrozole & Ibrance)|4/6 Inhibitors with SERDs (e.g., fulvestrant & Ibrance)",
+            "title": "N0",
+            "description": "",
+            "value": "",
+            "url": "",
+            "step_heading": "Are you postmenopausal?",
+            "step_subheading": "You are considered postmenopausal if you haven’t had a menstrual period for 12 months or if your medical team has told you that you are.",
+            "step_why": "Once your ovaries stop producing estrogen, your body’s nutritional needs—and how it interacts with certain natural ingredients or cancer medications—shift. Our oncologist-led team took this into account when formulating each SurvivorRx routine, because one size does not fit all."
+          }
+        },
+        "question_dXLqYM": {
+          "type": "question",
+          "settings": {
+            "step": 4,
+            "parent": "No cancer related support medications|SERMs (e.g., tamoxifen)|AIs (e.g., anastrozole)|SERDs (e.g., fulvestrant)|4/6 Inhibitors with SERMs (e.g., tamoxifen & Ibrance)|4/6 Inhibitors with AIs (e.g., anastrozole & Ibrance)|4/6 Inhibitors with SERDs (e.g., fulvestrant & Ibrance)",
+            "title": "Yes",
+            "description": "",
+            "value": "",
+            "url": "",
+            "step_heading": "Are you postmenopausal?",
+            "step_subheading": "You are considered postmenopausal if you haven’t had a menstrual period for 12 months or if your medical team has told you that you are.",
+            "step_why": ""
+          }
+        },
+        "result_HFxW63": {
+          "type": "result",
+          "settings": {
+            "combination": "era|HER2P",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-7"
+          }
+        },
+        "result_hHUhge": {
+          "type": "result",
+          "settings": {
+            "combination": "era|HER2N",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-5"
+          }
+        },
+        "result_QmcnDe": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2P|3=SERMs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-10"
+          }
+        },
+        "result_MiCbFB": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2N|3=SERMs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-8"
+          }
+        },
+        "result_8fhTkM": {
+          "type": "result",
+          "settings": {
+            "combination": "2=TPBC|3=SERMs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-10"
+          }
+        },
+        "result_M3Qk3t": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2N|3=AIs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-8"
+          }
+        },
+        "result_yMFAgi": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2P|3=AIs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-12"
+          }
+        },
+        "result_jdNnRQ": {
+          "type": "result",
+          "settings": {
+            "combination": "2=TPBC|3=AIs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-12"
+          }
+        },
+        "result_gNFpFH": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2N|3=SERDs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-8"
+          }
+        },
+        "result_z9Fnmk": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2P|3=SERDs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-12"
+          }
+        },
+        "result_km6caE": {
+          "type": "result",
+          "settings": {
+            "combination": "2=TPBC|3=SERDs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-12"
+          }
+        },
+        "result_mEjLGF": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2N|3=4/6SERMs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-9"
+          }
+        },
+        "result_QaHVfK": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2P|3=4/6SERMs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-15"
+          }
+        },
+        "result_E8zBiV": {
+          "type": "result",
+          "settings": {
+            "combination": "2=TPBC|3=4/6SERMs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-15"
+          }
+        },
+        "result_pQK9d7": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2N|3=4/6AIs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-13"
+          }
+        },
+        "result_fA4Q9D": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2P|3=4/6AIs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-14"
+          }
+        },
+        "result_YawKnq": {
+          "type": "result",
+          "settings": {
+            "combination": "2=TPBC|3=4/6AIs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-14"
+          }
+        },
+        "result_7VJyD7": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2N|3=4/6SERDs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-13"
+          }
+        },
+        "result_hD48aQ": {
+          "type": "result",
+          "settings": {
+            "combination": "2=HER2P|3=4/6SERDs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-14"
+          }
+        },
+        "result_q69aRy": {
+          "type": "result",
+          "settings": {
+            "combination": "2=TPBC|3=4/6SERDs",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-14"
+          }
+        }
+      },
+      "block_order": [
+        "question_kmpQk6",
+        "question_UNLVWj",
+        "question_khEiwH",
+        "question_MAWC3w",
+        "question_crbwbY",
+        "question_FLtyAF",
+        "question_xKDnkp",
+        "question_XRwM99",
+        "question_bkxNam",
+        "question_bdmFqq",
+        "question_cRNwVV",
+        "question_D6WGJJ",
+        "question_wWxnj9",
+        "question_V4dVte",
+        "question_xgpB8i",
+        "question_7z4ryY",
+        "question_mLXbHB",
+        "question_MmWX9r",
+        "question_pqrqqq",
+        "question_t3BJTQ",
+        "question_dXLqYM",
+        "result_HFxW63",
+        "result_hHUhge",
+        "result_QmcnDe",
+        "result_MiCbFB",
+        "result_8fhTkM",
+        "result_M3Qk3t",
+        "result_yMFAgi",
+        "result_jdNnRQ",
+        "result_gNFpFH",
+        "result_z9Fnmk",
+        "result_km6caE",
+        "result_mEjLGF",
+        "result_QaHVfK",
+        "result_E8zBiV",
+        "result_pQK9d7",
+        "result_fA4Q9D",
+        "result_YawKnq",
+        "result_7VJyD7",
+        "result_hD48aQ",
+        "result_q69aRy"
+      ],
+
       "settings": {
-        "bg_color": "#ffffff",
-        "padding_top": 20,
-        "padding_bottom": 20,
-        "heading": "Need help finding the right product?",
-        "subheading": "Answer a few quick questions below."
+        "bg_color": "#f9dee5",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "image": "shopify://shop_images/Breast_Landing_Page_6d2c7a8d-c971-4e65-873d-b8f230dbc2f9.jpg",
+        "heading": "Which type of breast cancer did you survive?",
+        "subheading": "Your treatment was breast cancer specific—now your supplements can be too."
       }
     }
   },
+
   "order": [
     "main",
     "cancer_question_6xCDwY",
