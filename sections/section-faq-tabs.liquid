@@ -2,6 +2,8 @@
   assign bg_color = section.settings.bg_color
   assign text_color = section.settings.text_color
   assign animation_anchor = '#FaqTabs--' | append: section.id
+  assign tab_icon_size = section.settings.tab_icon_size | default: 32
+  assign tab_icon_size_2x = tab_icon_size | times: 2
 
   assign tabs_string = ''
   for block in section.blocks
@@ -23,6 +25,7 @@
       --card-bg: #fff;
       --card-radius: 14px;
       --tab-accent: #1d6a3a;
+      --tab-icon-size: {{ tab_icon_size }}px;
       --muted: #6b7280;
       --heading-font-family: {{ section.settings.heading_font.family }}, {{ section.settings.heading_font.fallback_families }};
       --heading-font-weight: {{ section.settings.heading_font.weight }};
@@ -95,8 +98,8 @@
       gap: 6px;
     }
     #FaqTabs--{{ section.id }} .faq-tabs__head .tab-link__icon{
-      width: 20px;
-      height: 20px;
+      width: var(--tab-icon-size);
+      height: var(--tab-icon-size);
     }
     #FaqTabs--{{ section.id }} .faq-tabs__head .tab-link.current{ color: #0f172a; }
     #FaqTabs--{{ section.id }} .faq-tabs__head .tab-link.current::after{
@@ -217,7 +220,7 @@
                 aria-controls="panel-{{ section.id }}-{{ forloop.index0 }}"
                 tabindex="0">
                 {%- if tab_display != 'title' and tab_icon != blank -%}
-                  <img class="tab-link__icon" src="{{ tab_icon | image_url: width: 24 }}" alt="{{ tab | escape }}">
+                  <img class="tab-link__icon" src="{{ tab_icon | image_url: width: tab_icon_size_2x }}" alt="{{ tab | escape }}">
                 {%- endif -%}
                 {%- if tab_display != 'image' and tab != blank -%}
                   <span>{{ tab }}</span>
@@ -365,7 +368,8 @@
     { "type": "font_picker", "id": "heading_font", "label": "Heading font", "default": "poppins_n7" },
     { "type": "range", "id": "heading_font_size", "min": 16, "max": 80, "step": 1, "unit": "px", "label": "Heading font size", "default": 32 },
     { "type": "font_picker", "id": "question_font", "label": "Question font", "default": "poppins_n5" },
-    { "type": "range", "id": "question_font_size", "min": 12, "max": 40, "step": 1, "unit": "px", "label": "Question font size", "default": 16 }
+    { "type": "range", "id": "question_font_size", "min": 12, "max": 40, "step": 1, "unit": "px", "label": "Question font size", "default": 16 },
+    { "type": "range", "id": "tab_icon_size", "min": 16, "max": 64, "step": 1, "unit": "px", "label": "Tab icon size", "default": 32 }
   ],
   "blocks": [
     {
