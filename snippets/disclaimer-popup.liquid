@@ -1,0 +1,43 @@
+{% assign disclaimer = nil %}
+
+{% for item in cart.items %}
+  {% if item.product.metafields.custom.shopping_cart_disclaimers != blank %}
+    {% for data in item.product.metafields.custom.shopping_cart_disclaimers.value %}
+      {% assign disclaimer = data %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% if disclaimer != nil %}
+  <div class="disclaimer-popup">
+    <div class="disclaimer-popup__overlay"></div>
+    <div class="disclaimer-popup__inner">
+      <div class="disclaimer-popup__close">
+        <button class="disclaimer-popup__close__btn">
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1 1 12 12M1 13 13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+      </div>
+      <div class="disclaimer-popup__body">
+        <div class="disclaimer-popup__heading">
+          <h3>{{ disclaimer.shopping_cart_message | metafield_tag }}</h3>
+          {{ disclaimer.disclaimer_message | metafield_tag }}
+        </div>
+        <div class="disclaimer-popup__actions">
+          <button class="disclaimer-popup__accept">Acknowledge</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $(document).on('click', '.disclaimer-popup__trigger', function () {
+        $('.disclaimer-popup').addClass('disclaimer-popup--active');
+      });
+
+      $(document).on('click', '.disclaimer-popup__close, .disclaimer-popup__overlay, .disclaimer-popup__accept', function () {
+        $('.disclaimer-popup').removeClass('disclaimer-popup--active');
+      });
+    });
+  </script>
+{% endif %}

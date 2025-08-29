@@ -1,0 +1,101 @@
+{% layout none %}
+<div class="product-inside-package-section" style="height:0; overflow: hidden">
+  <div class="shopify-section">
+    {% if product.metafields.custom.inside_the_package != blank %}
+      <div class="wrapper">
+        <div class="inside-package">
+          <div class="inside-package__blocks tab tab-active active-a" data-id="viewall">
+            {% for item in product.metafields.custom.inside_the_package.value %}
+              <div class="inside-package__block cstm_ingredient_read"
+                   open_text_handle="{{ item.heading | handle }}"
+                   open_text="{{ item.heading | handle }}">
+                <div class="inside-package__block-image">
+                  <img class="package-block__img" src="{{ item.image | img_url: '70x' }}">
+                </div>
+                <div class="inside-package__block-content">
+                  <span class="package-block__title">{{ item.heading }}</span>
+                  <span class="package-block__subtitle">{{ item.benefits }}</span>
+                </div>
+                <div class="inside-package__block-icon">
+                  <span class="package-block__link btn btn--solid" 
+                    data-id="{{ item.heading | handle }}"
+                    href="#"
+                    open_text_handle="{{ item.heading | handle }}"
+                    open_text="{{ item.heading | handle }}">+</span>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="cstm_slider_wrapper cstm_new_popup" style="visibility:hidden">
+        <div class="cstm-popup-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M25 7L7 25" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25 25L7 7" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      
+        <div class="main_tab_wrapper cstm-slider-img" style="display:none">
+          {% assign counting = 0 %}
+          {% for item in product.metafields.custom.inside_the_package.value %} 
+            {% if item.heading %}
+              {% assign counting = counting | plus: 1 %}
+              <div
+                class="tab newidtab"
+                data-count="{{ counting }}"
+                data-id="viewall"
+                open_tab_cstm="{{ item.heading | handle }}"
+              >
+                <div class="inner_wrapper_tab">
+                  <img
+                    src="{{ item.image | img_url: 'master' }}"
+                    alt="Ingredient Image"
+                    width="200px"
+                    height="200px"
+                  >
+    
+                  <div class="center-text ingredient-heading">
+                    <h3>{{ item.heading }}</h3>
+                    <p style="text-align:center;">{{ item.sub_heading }}</p>
+                  </div>
+    
+                  <hr>
+    
+                  <div class="csmt_info--jtpl">
+                    <div class="package-block__content">
+                      {{ item.content | metafield_tag }}
+                    </div>
+                    
+                    <hr class="package-block__hr">
+    
+                    <div class="package-block__supplement-facts">
+                      <a class="collapsible">View Supplement Facts</a>
+                      <img
+                        class="toggled-content"
+                        src="{{ item.supplement_fact_panel | img_url: 'master' }}"
+                        alt="Supplements Facts"
+                        width="200px"
+                        height="200px"
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      
+        <div class="btn-wrap">
+          <button class="prev-btn  ">
+            {% render 'slider-prev-arrow' %}
+          </button>
+          <div class="e_count"></div>
+          <button class="next-btn">
+            {% render 'slider-next-arrow' %}
+          </button>
+        </div>
+      </div>
+    {% endif %}
+  </div>  
+</div>

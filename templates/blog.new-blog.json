@@ -1,0 +1,131 @@
+{
+  "sections": {
+    "section_rich_text_XAPxnC": {
+      "type": "section-rich-text",
+      "blocks": {
+        "subheading_LmM6B7": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Survivorship <i> Simplified<\/i>",
+            "text_size": 5,
+            "padding_bottom": 16
+          }
+        },
+        "heading_4MxjKe": {
+          "type": "heading",
+          "settings": {
+            "title": "Ready to take control of your <i>survivorship journey<\/i>",
+            "text_size": 10,
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "subheading_LmM6B7",
+        "heading_4MxjKe"
+      ],
+      "settings": {
+        "custom_class": "",
+        "width": "wrapper",
+        "align_text": "text-center",
+        "overlay_opacity": 0,
+        "overlay_color": "#000000",
+        "show_overlay_text": false,
+        "bg_color": "",
+        "color": "",
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    },
+    "featured": {
+      "type": "featured-posts",
+      "blocks": {
+        "featured_post_WXbQYf": {
+          "type": "featured_post",
+          "settings": {
+            "featured_post": "news\/let-s-talk-about-prioritizing-sex-as-a-parent",
+            "subheading": ""
+          }
+        },
+        "feat": {
+          "type": "featured_post",
+          "settings": {
+            "featured_post": "news\/3-science-backed-benefits-of-ginger-for-expecting-postpartum-moms",
+            "subheading": "Featured post"
+          }
+        },
+        "featured_post_gUH9hN": {
+          "type": "featured_post",
+          "settings": {
+            "featured_post": "news\/how-much-collagen-should-you-take-per-day",
+            "subheading": "Featured post"
+          }
+        }
+      },
+      "block_order": [
+        "featured_post_WXbQYf",
+        "feat",
+        "featured_post_gUH9hN"
+      ],
+      "settings": {
+        "custom_class": "",
+        "height": "four-fifty-height-hero",
+        "mobile_height": "screen-height-one-half--mobile",
+        "width": "wrapper--full",
+        "show_author": false,
+        "show_date": false,
+        "show_button": true,
+        "bg_color": "",
+        "color": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_hero_J77FCU": {
+      "type": "section-hero",
+      "disabled": true,
+      "settings": {
+        "custom_class": "",
+        "height": "image-height",
+        "width": "wrapper--full",
+        "image_1": "shopify:\/\/shop_images\/Group_3631.png",
+        "link": "",
+        "mobile_height": "screen-height-three-quarters--mobile",
+        "flex_align_desktop": "align--middle-center-desktop",
+        "flex_align_mobile": "align--middle-center-mobile",
+        "overlay_opacity": 0,
+        "overlay_color": "#000000",
+        "show_overlay_text": false,
+        "bg_color": "",
+        "color": "#ffffff",
+        "show_placeholder": true
+      }
+    },
+    "main": {
+      "type": "blog",
+      "settings": {
+        "custom_class": "",
+        "show_title": false,
+        "show_rss": false,
+        "show_tag_nav": true,
+        "grid": 3,
+        "rows": 4,
+        "aspect_ratio": 1,
+        "title_size": 4,
+        "show_tags": false,
+        "show_author": false,
+        "show_date": false,
+        "show_button": false,
+        "show_comments": false,
+        "padding_top": 32,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "section_rich_text_XAPxnC",
+    "featured",
+    "section_hero_J77FCU",
+    "main"
+  ]
+}

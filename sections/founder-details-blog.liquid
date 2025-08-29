@@ -1,0 +1,61 @@
+ {% assign metaobj = article.metafields.custom.founder_details.value %}
+   {% if metaobj.image != blank or metaobj.name != blank or   metaobj.designation != blank or metaobj.description  !=blank %}
+<div class="custom_blog_post founder_wrapper_outer" style="background:{{ section.settings.background_color }};" id="founder__details--jtpl">
+<div class="custom_blog_post founder_wrapper {{ section.settings.width }}">
+  <div class="image_title_wrapper">
+    <div class="founder_image_wrapper">
+     
+      {% if metaobj.image != blank %}
+      <img src="{{ metaobj.image | img_url :'500x500' }}" alt="founder image">
+        {% endif %}
+     </div>
+    {% if metaobj.name != blank or  metaobj.designation  %}
+     <div class="founder_image_content_wrapper">
+       {% if metaobj.name != blank %}
+       <p>{{ metaobj.name }}</p>
+         {% endif %}
+       {% if metaobj.designation != blank %}
+       <span>{{ metaobj.designation }}</span>
+         {% endif %}
+     </div>
+      {% endif %}
+  </div>
+  {% if metaobj.description  != blank %}
+  <div class="custom_descritpion_content">
+    {{ metaobj.description | metafield_tag }}
+  </div>
+    {% endif %}
+</div>
+</div>
+     {% endif %}
+{% schema %}
+  {
+    "name": "Founder Detail",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color"
+        
+      },
+       {
+        "type": "select",
+        "id": "width",
+        "label": "Width",
+        "default": "wrapper--full-padded",
+        "options": [
+          {"value": "wrapper--full", "label": "Full width"},
+          {"value": "wrapper--full-padded", "label": "Full width padded"},
+          {"value": "wrapper", "label": "Normal"}
+        ]
+      }
+    ],
+     "presets": [
+      {
+        "name": "Founder Detail"
+       
+      }
+    ]
+   
+  }
+{% endschema %}

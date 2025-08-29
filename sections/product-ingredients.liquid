@@ -1,0 +1,165 @@
+{% capture available_data %}
+{% for item in pages['ingredients'].metafields.custom.ingredient.value %}
+          {% for productmeta in item.products.value %}
+            {% if product.handle == productmeta.handle  %}
+              ingredients available
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+  {% endcapture %}
+  {% if available_data != blank %}
+   
+   
+<div class="custom-slider-ingridient">
+  <div class="wrapper--full-padded ">
+      
+    <div class="custom_button_section_wrapper">
+      <div class="custom_button_text">
+        {% if section.settings.heading != blank %}
+          <h5>{{ section.settings.heading }}</h5>
+        {% endif %}
+      </div>
+      <div class="custom_button_text_button">
+        {% if section.settings.button_link != blank and section.settings.button %}
+          <a class="btn btn--solid btn--primary" href="{{ section.settings.button_link }}">
+            {{- section.settings.button -}}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="cstm_ingredients_container">
+      {% for item in pages['ingredients'].metafields.custom.ingredient.value %}
+          {% for productmeta in item.products.value %}
+            {% if product.handle == productmeta.handle  %}
+        <div>
+          <img class="cstm_ingredient_img" src="{{ item.ingredient_image | img_url: 'master' }}">
+          <h4>{{ item.ingredient_short_name }}</h4>
+              <p>{{ item.ingredient_description | metafield_tag| strip_html | truncate: 90 }}</p>
+
+          <a target="_blank" class="cstm-btn__link" href="/pages/ingredients?name={{ item.ingredient_short_name | handleize}}">
+            More info
+          </a>
+        </div>
+            {% endif %} 
+     {% endfor %} 
+    {% endfor %}
+    </div>
+    {% if pages['ingredients'].metafields.custom.ingredient.value != blank %}
+     <div class="btn-wrap">
+      <button class="prev-btn ingrediant_arrow ">
+        {% render 'slider-prev-arrow' %}
+      </button>
+      <button class="next-btn ingrediant_arrow">
+        {% render 'slider-next-arrow' %}
+      </button>
+    </div> 
+      {% endif %}
+  </div>
+</div>
+     {% endif %}
+
+<script>
+  $(document).ready(function () {
+    $('.prev-btn').addClass('hidden');
+    var slider = $(".cstm_ingredients_container").slick({
+      slidesToShow: 5,
+      slidesToScroll: 1,
+      arrows: false,
+      infinite: false,
+      autoplay: false,
+      dots: true,
+      
+      adaptiveHeight: true,
+      responsive: [
+        {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 700,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+
+          }
+        }
+      ]
+    });
+
+    $(".prev-btn").click(function () {
+      $(".cstm_ingredients_container").slick("slickPrev");
+    });
+
+    $(".next-btn").click(function () {
+      $(".cstm_ingredients_container").slick("slickNext");
+    });
+var sliderlength = $('.slick-dots').find('[role=presentation]').length;
+    if(parseInt(sliderlength) <= 1){
+       $('.next-btn').addClass('hidden');
+      $('.slick-dots').hide();
+    }
+$('.cstm_ingredients_container').on('afterChange', function (event, slick, currentSlide) {
+    var totalSlides = slick.slider;
+  
+
+
+    if (currentSlide === sliderlength - 1) {
+     
+        $('.next-btn').addClass('hidden');
+    } else {
+        $('.next-btn').removeClass('hidden');
+    }
+
+    
+    if (currentSlide === 0) {
+        $('.prev-btn').addClass('hidden');
+    } else {
+        $('.prev-btn').removeClass('hidden');
+    }
+});
+
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Ingredients",
+  "settings": [
+        {
+  "type": "text",
+  "id": "heading",
+  "label": "Heading"
+
+},
+   {
+  "type": "text",
+  "id": "button",
+  "label": "Button"
+
+},
+{
+  "type": "url",
+  "id": "button_link",
+  "label": "Button link"
+}
+
+
+  ],
+  "presets": [{
+    "name":"Product Ingredients"
+  }]
+}
+{% endschema %}

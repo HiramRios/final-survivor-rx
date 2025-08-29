@@ -1,0 +1,170 @@
+<div class="recommended-products">
+  <div class="recommended-products__inner">
+    <div class="recommended-products__heading">
+      <h2 class="heading-size-7">{{ section.settings.title }}</h2>
+    </div>
+    <div class="recommended-products__blocks">
+      {% for block in section.blocks %}
+        <div class="recommended-products__block">
+          <a href="{{ block.settings.btn_link }}">
+            <img class="recommended-products__block__img" src="{{ block.settings.image | img_url: '800x' }}">
+            <img class="recommended-products__block__img__hover" src="{{ block.settings.hover_image | img_url: '800x' }}">
+          </a>
+          <h5 class="recommended-products__block__title">{{ block.settings.title }}</h5>
+          <span class="recommended-products__block__content">{{ block.settings.content }}</span>
+          <a class="recommended-products__block__link btn btn--solid" href="{{ block.settings.btn_link }}">{{ block.settings.btn_label }}</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<style>
+  .recommended-products {
+    padding-top: 300px;
+    position: relative;
+    overflow: hidden;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  .recommended-products::before {
+    content: "";
+    position: absolute;
+    background-image: url({{ section.settings.image | img_url: 'master' }});
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: calc(50% + 125px);
+    width: 100%;
+    background-position: center;
+    top: 0;
+  }
+
+  @media (max-width: 768px) {
+    .recommended-products {
+      padding-top: 250px;
+    }
+  }
+</style>
+
+<script>
+  $(document).ready(function () {
+    $('.recommended-products__blocks').slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      dots: false,
+      arrows: true,
+      prevArrow: `<div class="slick-prev">{% render 'slider-prev-arrow' %}</div>`,
+      nextArrow: `<div class="slick-next">{% render 'slider-next-arrow' %}</div>`,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Recommended Products",
+  "class": "recommended-products-wrapper",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color"
+    }
+  ],
+  "blocks": [
+     {
+      "name": "block",
+      "type": "Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "hover_image",
+          "label": "Hover Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button Link"
+        }
+      ]
+     }
+  ],
+  "presets": [
+    {
+      "name":"Recommended Products"
+    }
+  ]
+}
+{% endschema %}
+
+<!-- 
+<script>
+  $(document).ready(function () {
+    if (window.innerWidth <= 768) {
+      $('.recommended-products__blocks').slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false,
+        arrows: true,
+        prevArrow: `<div class="slick-prev">{% render 'slider-prev-arrow' %}</div>`,
+        nextArrow: `<div class="slick-next">{% render 'slider-next-arrow' %}</div>`
+      });
+    }
+    
+    $(window).resize(function () {
+      if (window.innerWidth <= 768) {
+        $('.recommended-products__blocks').slick({
+          infinite: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: false,
+          arrows: true,
+          prevArrow: `<div class="slick-prev">{% render 'slider-prev-arrow' %}</div>`,
+          nextArrow: `<div class="slick-next">{% render 'slider-next-arrow' %}</div>`
+        });
+      }
+      else {
+        $('.recommended-products__blocks').slick('unslick');
+      }
+    });
+  });
+</script> -->

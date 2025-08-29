@@ -1,0 +1,1996 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://static.truemed.com/widgets/product-page-widget.min.js" defer></script>
+<!-- Load Slick Slider -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+
+<div class="fee-product-handle" data-id="{{ settings.free_product.first_available_variant.id }}"></div>
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+  <div class="recommendation-container">
+    <div class="recommendation-header">
+      <h1 class="recommendation-name-container"></h1>
+      <h2 class="recommendation-h2"></h2>
+    </div>
+    <div class="main-parent-container"  style="display: none;">
+      <button class="back-button" onclick="goBack()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M32 15H3.41l8.29-8.29-1.41-1.42-10 10a1 1 0 0 0 0 1.41l10 10 1.41-1.41L3.41 17H32z" data-name="4-Arrow Left"/></svg>
+        <span>Need to go back?</span>
+      </button>
+      <div class="end-early-container" style="display: none;">
+        <div class="early-heading-container">
+          <p class="unfortunately-text">Unfortunately, now’s not the time…</p>
+          <p class="dynamic-text dynamic-paragraph"></p>
+          <p class="social-text dynamic-text">In the meantime, follow us on social media!</p>
+          <div class="social-icons-container">
+            <a href="https://www.instagram.com/survivorrx/" target="_blank"><svg class="social-icon" height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" viewBox="0 0 512 512" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M256,0c141.29,0 256,114.71 256,256c0,141.29 -114.71,256 -256,256c-141.29,0 -256,-114.71 -256,-256c0,-141.29 114.71,-256 256,-256Zm0,96c-43.453,0 -48.902,0.184 -65.968,0.963c-17.03,0.777 -28.661,3.482 -38.839,7.437c-10.521,4.089 -19.444,9.56 -28.339,18.455c-8.895,8.895 -14.366,17.818 -18.455,28.339c-3.955,10.177 -6.659,21.808 -7.437,38.838c-0.778,17.066 -0.962,22.515 -0.962,65.968c0,43.453 0.184,48.902 0.962,65.968c0.778,17.03 3.482,28.661 7.437,38.838c4.089,10.521 9.56,19.444 18.455,28.34c8.895,8.895 17.818,14.366 28.339,18.455c10.178,3.954 21.809,6.659 38.839,7.436c17.066,0.779 22.515,0.963 65.968,0.963c43.453,0 48.902,-0.184 65.968,-0.963c17.03,-0.777 28.661,-3.482 38.838,-7.436c10.521,-4.089 19.444,-9.56 28.34,-18.455c8.895,-8.896 14.366,-17.819 18.455,-28.34c3.954,-10.177 6.659,-21.808 7.436,-38.838c0.779,-17.066 0.963,-22.515 0.963,-65.968c0,-43.453 -0.184,-48.902 -0.963,-65.968c-0.777,-17.03 -3.482,-28.661 -7.436,-38.838c-4.089,-10.521 -9.56,-19.444 -18.455,-28.339c-8.896,-8.895 -17.819,-14.366 -28.34,-18.455c-10.177,-3.955 -21.808,-6.66 -38.838,-7.437c-17.066,-0.779 -22.515,-0.963 -65.968,-0.963Zm0,28.829c42.722,0 47.782,0.163 64.654,0.933c15.6,0.712 24.071,3.318 29.709,5.509c7.469,2.902 12.799,6.37 18.397,11.969c5.6,5.598 9.067,10.929 11.969,18.397c2.191,5.638 4.798,14.109 5.509,29.709c0.77,16.872 0.933,21.932 0.933,64.654c0,42.722 -0.163,47.782 -0.933,64.654c-0.711,15.6 -3.318,24.071 -5.509,29.709c-2.902,7.469 -6.369,12.799 -11.969,18.397c-5.598,5.6 -10.928,9.067 -18.397,11.969c-5.638,2.191 -14.109,4.798 -29.709,5.509c-16.869,0.77 -21.929,0.933 -64.654,0.933c-42.725,0 -47.784,-0.163 -64.654,-0.933c-15.6,-0.711 -24.071,-3.318 -29.709,-5.509c-7.469,-2.902 -12.799,-6.369 -18.398,-11.969c-5.599,-5.598 -9.066,-10.928 -11.968,-18.397c-2.191,-5.638 -4.798,-14.109 -5.51,-29.709c-0.77,-16.872 -0.932,-21.932 -0.932,-64.654c0,-42.722 0.162,-47.782 0.932,-64.654c0.712,-15.6 3.319,-24.071 5.51,-29.709c2.902,-7.468 6.369,-12.799 11.968,-18.397c5.599,-5.599 10.929,-9.067 18.398,-11.969c5.638,-2.191 14.109,-4.797 29.709,-5.509c16.872,-0.77 21.932,-0.933 64.654,-0.933Zm0,49.009c-45.377,0 -82.162,36.785 -82.162,82.162c0,45.377 36.785,82.162 82.162,82.162c45.377,0 82.162,-36.785 82.162,-82.162c0,-45.377 -36.785,-82.162 -82.162,-82.162Zm0,135.495c-29.455,0 -53.333,-23.878 -53.333,-53.333c0,-29.455 23.878,-53.333 53.333,-53.333c29.455,0 53.333,23.878 53.333,53.333c0,29.455 -23.878,53.333 -53.333,53.333Zm104.609,-138.741c0,10.604 -8.597,19.199 -19.201,19.199c-10.603,0 -19.199,-8.595 -19.199,-19.199c0,-10.604 8.596,-19.2 19.199,-19.2c10.604,0 19.201,8.596 19.201,19.2Z"/></svg></a>
+            <a href="https://www.facebook.com/survivorrx" target="_blank"><svg class="social-icon" height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" viewBox="0 0 512 512" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M255.022,511.998l0.229,0.001l-0.079,0l-0.15,-0.001Zm1.806,0.001l-0.079,0l0.229,-0.001l-0.15,0.001Zm-2.588,-0.005l0.247,0.001l-0.142,0l-0.105,-0.001Zm3.415,0.001l-0.142,0l0.247,-0.001l-0.105,0.001Zm-4.169,-0.007l0.165,0.001l-0.132,-0.001l-0.033,0Zm4.995,0l-0.132,0.001l0.165,-0.001l-0.033,0Zm0.826,-0.009l-0.058,0.001l0.223,-0.003l-0.165,0.002Zm-6.779,-0.002l0.223,0.003l-0.058,-0.001l-0.165,-0.002Zm7.604,-0.01l-0.135,0.002l0.275,-0.004l-0.14,0.002Zm-8.404,-0.002l0.275,0.004l-0.135,-0.002l-0.14,-0.002Zm9.228,-0.012l-0.182,0.003l0.254,-0.005l-0.072,0.002Zm-9.984,-0.002l0.254,0.005l-0.182,-0.003l-0.072,-0.002Zm-0.937,-0.019l0.225,0.005l-0.04,-0.001l-0.185,-0.004Zm11.745,0.004l-0.04,0.001l0.225,-0.005l-0.185,0.004Zm-12.567,-0.025l0.309,0.008l-0.125,-0.003l-0.184,-0.005Zm13.39,0.005l-0.125,0.003l0.309,-0.008l-0.184,0.005Zm0.823,-0.022l-0.201,0.006l0.316,-0.009l-0.115,0.003Zm-14.967,-0.003l0.316,0.009l-0.201,-0.006l-0.115,-0.003Zm-0.72,-0.022l0.225,0.007l-0.212,-0.007l-0.194,-0.006l0.181,0.006Zm16.509,0l-0.212,0.007l0.225,-0.007l0.181,-0.006l-0.194,0.006Zm0.821,-0.027l-0.112,0.004l0.345,-0.012l-0.233,0.008Zm-18.371,-0.008l0.345,0.012l-0.112,-0.004l-0.233,-0.008Zm-0.749,-0.028l0.362,0.013l-0.201,-0.007l-0.161,-0.006Zm19.941,0.006l-0.201,0.007l0.362,-0.013l-0.161,0.006Zm-20.676,-0.036l0.354,0.015l-0.277,-0.011l-0.077,-0.004Zm21.495,0.004l-0.277,0.011l0.354,-0.015l-0.077,0.004Zm-22.525,-0.049l0.38,0.017l-0.093,-0.003l-0.287,-0.014Zm23.345,0.014l-0.093,0.003l0.38,-0.017l-0.287,0.014Zm-24.084,-0.048l0.394,0.018l-0.186,-0.008l-0.208,-0.01Zm24.902,0.01l-0.186,0.008l0.394,-0.018l-0.208,0.01Zm-25.63,-0.047l0.397,0.02l-0.279,-0.013l-0.118,-0.007Zm26.448,0.007l-0.279,0.013l0.397,-0.02l-0.118,0.007Zm0.818,-0.043l-0.362,0.019l0.321,-0.017l0.378,-0.021l-0.337,0.019Zm-27.925,0.002l0.321,0.017l-0.362,-0.019l-0.337,-0.019l0.378,0.021Zm28.741,-0.048l-0.16,0.009l0.406,-0.023l-0.246,0.014Zm-29.844,-0.014l0.406,0.023l-0.16,-0.009l-0.246,-0.014Zm-0.722,-0.043l0.405,0.024l-0.253,-0.014l-0.152,-0.01Zm31.382,0.01l-0.253,0.014l0.405,-0.024l-0.152,0.01Zm-32.071,-0.053l0.365,0.023l-0.34,-0.021l-0.342,-0.022l0.317,0.02Zm32.887,0.002l-0.34,0.021l0.365,-0.023l0.317,-0.02l-0.342,0.022Zm0.814,-0.053l-0.122,0.008l0.387,-0.026l-0.265,0.018Zm-34.755,-0.018l0.387,0.026l-0.122,-0.008l-0.265,-0.018Zm-0.721,-0.05l0.38,0.027l-0.208,-0.014l-0.172,-0.013Zm36.29,0.013l-0.208,0.014l0.38,-0.027l-0.172,0.013Zm-37.009,-0.064l0.349,0.025l-0.271,-0.019l-0.078,-0.006Zm37.822,0.006l-0.271,0.019l0.349,-0.025l-0.078,0.006Zm-38.789,-0.079l0.306,0.023l-0.074,-0.005l-0.232,-0.018Zm39.602,0.018l-0.074,0.005l0.306,-0.023l-0.232,0.018Zm0.811,-0.063l-0.146,0.011l0.311,-0.025l-0.165,0.014Zm-41.157,-0.014l0.311,0.025l-0.146,-0.011l-0.165,-0.014Zm-0.725,-0.059l0.264,0.022l-0.186,-0.015l-0.078,-0.007Zm42.694,0.007l-0.186,0.015l0.264,-0.022l-0.078,0.007Zm-43.492,-0.074l0.079,0.007l-0.013,-0.001l-0.066,-0.006Zm44.302,0.006l-0.013,0.001l0.079,-0.007l-0.066,0.006Zm0.81,-0.071l-0.072,0.006l0.181,-0.016l-0.109,0.01Zm-45.965,-0.01l0.181,0.016l-0.072,-0.006l-0.109,-0.01Zm-0.75,-0.068l0.135,0.013l-0.084,-0.008l-0.051,-0.005Zm47.523,0.005l-0.084,0.008l0.135,-0.013l-0.051,0.005Zm-63.736,-2.025c-122.319,-19.226 -216,-125.203 -216,-252.887c0,-141.29 114.71,-256 256,-256c141.29,0 256,114.71 256,256c0,127.684 -93.681,233.661 -216,252.887l0,-178.887l59.65,0l11.35,-74l-71,0l0,-48.021c0,-20.245 9.918,-39.979 41.719,-39.979l32.281,0l0,-63c0,0 -29.296,-5 -57.305,-5c-58.476,0 -96.695,35.44 -96.695,99.6l0,56.4l-65,0l0,74l65,0l0,178.887Z"/></svg></a>
+            <a href="https://www.linkedin.com/company/survivorrx/" target="_blank"><svg class="social-icon" height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" viewBox="0 0 512 512" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M256,0c141.29,0 256,114.71 256,256c0,141.29 -114.71,256 -256,256c-141.29,0 -256,-114.71 -256,-256c0,-141.29 114.71,-256 256,-256Zm-80.037,399.871l0,-199.921l-66.464,0l0,199.921l66.464,0Zm239.62,0l0,-114.646c0,-61.409 -32.787,-89.976 -76.509,-89.976c-35.255,0 -51.047,19.389 -59.889,33.007l0,-28.306l-66.447,0c0.881,18.757 0,199.921 0,199.921l66.446,0l0,-111.65c0,-5.976 0.43,-11.95 2.191,-16.221c4.795,-11.935 15.737,-24.299 34.095,-24.299c24.034,0 33.663,18.34 33.663,45.204l0,106.966l66.45,0Zm-272.403,-296.321c-22.74,0 -37.597,14.95 -37.597,34.545c0,19.182 14.405,34.544 36.717,34.544l0.429,0c23.175,0 37.6,-15.362 37.6,-34.544c-0.43,-19.595 -14.424,-34.545 -37.149,-34.545Z"/></svg></a>
+            <a href="https://www.youtube.com/@survivorrx" target="_blank"><svg class="social-icon" height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" viewBox="0 0 512 512" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M256,0c141.29,0 256,114.71 256,256c0,141.29 -114.71,256 -256,256c-141.29,0 -256,-114.71 -256,-256c0,-141.29 114.71,-256 256,-256Zm153.315,178.978c-3.68,-13.769 -14.522,-24.61 -28.29,-28.29c-24.958,-6.688 -125.025,-6.688 -125.025,-6.688c0,0 -100.067,0 -125.025,6.688c-13.765,3.68 -24.61,14.521 -28.29,28.29c-6.685,24.955 -6.685,77.024 -6.685,77.024c0,0 0,52.067 6.685,77.02c3.68,13.769 14.525,24.614 28.29,28.293c24.958,6.685 125.025,6.685 125.025,6.685c0,0 100.067,0 125.025,-6.685c13.768,-3.679 24.61,-14.524 28.29,-28.293c6.685,-24.953 6.685,-77.02 6.685,-77.02c0,0 0,-52.069 -6.685,-77.024Zm-185.316,125.025l0,-96.002l83.137,48.001l-83.137,48.001Z"/></svg></a>
+          </div>
+        </div>
+        <img class="early-image-container" src="https://quizzes-assets.nyc3.cdn.digitaloceanspaces.com/survivor-rx.myshopify.com/6204_OO5QU_1738071905038.jpeg"/>
+      </div>
+    
+      <div class="recommendation_middel_container"></div>
+      <div class="addtocart_recommendation_container"><div class="recommendation_container_pack"></div></div>
+    </div>
+  </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <div class="vqb-container">
+    <div id="vqb-loader-container" class="vqb-loader-container"><div id="vqb-loader" class="vqb-loader"></div></div>
+
+    <div id="primary-products-container" style="display:none;" class="primary-products-container">
+      <div class="content">
+        <h1 class="heading with-result"></h1>
+        <div id="recommended-products" class="recommended-products recommended-products-vbq"></div>
+      </div>
+    </div>
+    <div id="addon-products-container" style="display:none;" class="addon-products-container">
+      <div class="content">
+        <h2 class="result-subheading addon-subheading">
+        </h2>
+        <div id="addon-products" class="addon-products addon-products-vbq"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    function goBack() {
+      window.location.href = "https://survivorrx.com/pages/quiz?backtracking=true"
+    }
+
+    var ShopName = Shopify.shop;
+    var apiUrl = 'https://api-production.visualquizbuilder.com/api/v1/shops/' + ShopName;
+    const currentUrl = window.location.href;
+
+    // Parse the URL and extract query parameters
+    const params = new URL(currentUrl).searchParams;
+    
+    // Get all parameter values
+    const allParams = {};
+    params.forEach((value, key) => {
+      allParams[key] = value;
+    });
+    
+    const quiz_end_early = allParams["Are-you-pregnant"] === "Yes pregnant or breastfeeding" || allParams["ask-about-your-cancer-treatments"] === "I disagree" || allParams["Are-you-allergic-to-mushrooms"] === "Yes" || ["Intravenous (IV) chemotherapy", "Radiation therapy", "Surgery phase", "Oral chemotherapy"].includes(allParams["active-cancer-therapies-18"]) || ["Intravenous (IV) chemotherapy", "Xeloda-(Capecitabine)-oral-chemotherapy", "Radiation therapy", "Surgery phase"].includes(allParams["active-cancer-therapies-19"]);
+    
+    let end_early_message = "";
+
+    if (allParams["Are-you-pregnant"] === "Yes pregnant or breastfeeding") {
+      end_early_message = "We truly believe that supplements must be tailored to the person taking them. Our supplements have not been researched in pregnant or lactating women, and we do not carry any prenatal vitamins. Therefore, we do not recommend our products to women who are pregnant, breastfeeding, or trying to become pregnant. Come back when you are ready. We will be waiting for you!";
+    } else if (allParams["ask-about-your-cancer-treatments"] === "I disagree") {
+      end_early_message = "We’re unable to provide personalized recommendations without your consent to complete the personalization quiz. Explore our shop or visit the SurvivorRx home page to learn more about our offerings, mission, and privacy policy.";
+    } else if (allParams["Are-you-allergic-to-mushrooms"] === "Yes") {
+      end_early_message = "Our SurvivorRx oncologist-formulated blends include 7 functional mushrooms, chosen for their extensive health benefits for survivors. Unfortunately, we currently do not offer a mushroom-free option. However, we are actively working to develop a mushroom-free product. Once it becomes available, we’ll be sure to notify you and look forward to welcoming you back!";
+    } else if (["Intravenous (IV) chemotherapy", "Radiation therapy", "Surgery phase", "Oral chemotherapy"].includes(allParams["active-cancer-therapies-18"]) || ["Intravenous (IV) chemotherapy", "Xeloda-(Capecitabine)-oral-chemotherapy", "Radiation therapy", "Surgery phase"].includes(allParams["active-cancer-therapies-19"])) {
+      end_early_message = "Your active cancer treatment always comes first. We strongly advise against taking our supplements during active cancer therapies as some of our natural ingredients may interfere with the effectiveness of these treatments. We wish you a smooth recovery, and we’ll be here ready to support you as you embark on life beyond cancer once your active treatment is complete!";
+    }
+
+
+    var product_handles = (allParams['products'] || '').split(',');
+    var user_name = decodeURIComponent(allParams['user_name'] || '').trimEnd();
+    
+    let products_counter = [];
+
+    let products = [];
+    // Calling Shopify API to retrieve the products data
+
+    if(!quiz_end_early) {
+        Promise.all(
+          product_handles.map(function (product) {
+            return new Promise(function (resolve, reject) {
+              fetch('/products/' + product + '?view=quiz-item')
+                .then(function (result) {
+                  // Making sure that the product actually exists
+                  if (result.status !== 404) {
+                    return result.text();
+                  } else {
+                    return null;
+                  }
+                })
+                .then(function (data) {
+                  resolve(data);
+                })
+                .catch(reject);
+            });
+          })
+        ).then(function (products) {
+          products = products.filter(function (product) {
+            return !!product;
+          });
+
+        var toHandle = (str) => {
+          return str
+            .toLowerCase()
+            .replace(/[^a-z0-9\s/-]/g, '')
+            .replace(/[\/]/g, ' ')
+            .trim()
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-');
+        };
+
+        buildQuiz(products);
+
+        async function buildQuiz(products) {
+          console.log(products);
+          for (let i = 0; i < products.length; i ++) {
+            if (products[i].indexOf('slick-slider-container') >= 0) { // Primary product
+              if (document.querySelector('.cstm_accrdian_cls')) {
+                const accordionGroup = await fetch(`/products/${$(products[i]).find('button').data('handle')}?view=accordion-group`);
+                const accordionHtml = await accordionGroup.text();
+
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(accordionHtml, "text/html");
+      
+                const accordionElement = doc.querySelector("#AccordionGroup--pdp-accordion-group");
+                document.querySelector('.cstm_accrdian_cls').innerHTML = accordionElement.innerHTML;
+              }
+
+              if (document.querySelector('.fetch-js-reviews-slider-wrapper')) {
+                const reviewApi = await fetch(`/products/${$(products[i]).find('button').data('handle')}`);
+                const reviewHtml = await reviewApi.text();
+
+                const parser = new DOMParser();
+                const reviews = parser.parseFromString(reviewHtml, "text/html");
+
+                const reviewElement = reviews.querySelector('.reviews-slider-wrapper .wrapper');
+                document.querySelector('.fetch-js-reviews-slider-wrapper .wrapper').innerHTML = reviewElement.innerHTML;
+
+                $('.fetch-js-reviews-slider-wrapper .reviews-slider__blocks').slick({
+                  infinite: true,
+                  slidesToShow: 3,
+                  slidesToScroll: 1,
+                  dots: false,
+                  arrows: true,
+                  prevArrow: `<div class="slick-prev">{% render 'slider-prev-arrow' %}</div>`,
+                  nextArrow: `<div class="slick-next">{% render 'slider-next-arrow' %}</div>`,
+                  responsive: [
+                    {
+                      breakpoint: 768,
+                      settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                      }
+                    }
+                  ]
+                });
+              }
+
+              $('.recommendation-header .recommendation-name-container').html(`<span>${user_name}</span>, here is your<br><em> oncologist-recommended</em> daily routine`);
+              $('.recommendation-header .recommendation-h2').html(`Based on the answers from your quiz, here are your results.`);
+
+              if (window.matchMedia("(max-width: 768px)").matches) {
+                // Apply styles for small screens (max-width: 768px)
+                $('.recommendation-header').css({
+                  "padding-bottom": "40px",
+                  "padding-top": "30px",
+                  "background-size": "contain",
+                  "background": "url(https://quizzes-assets.nyc3.cdn.digitaloceanspaces.com/survivor-rx.myshopify.com/6204_UQAOY_1738072071951.jpeg)",
+                });
+              } else {
+                // Apply styles for larger screens
+                $('.recommendation-header').css({
+                  "padding-bottom": "100px",
+                  "padding-top": "80px",
+                  "background-size": "cover",
+                  "background": "url(https://quizzes-assets.nyc3.cdn.digitaloceanspaces.com/survivor-rx.myshopify.com/6204_UQAOY_1738072071951.jpeg)",
+                });
+              }
+              $('.main-parent-container').css({
+                "display": "flex",
+              });
+      
+              $('#primary-products-container').show();
+              $('.recommendation_middel_container').append(products[i]);
+
+              const cstmSliderApi = await fetch(`/products/${$(products[i]).find('button').data('handle')}?view=inside-package`);
+              const cstmSliderHtml = await cstmSliderApi.text();
+              
+              document.body.insertAdjacentHTML('beforeend', cstmSliderHtml);
+  
+              document.querySelectorAll('.js-ingredient-read.essential-support').forEach((item) => {
+                item.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  const handle = item.dataset.handle;
+                  document
+                    .querySelector(`.cstm_ingredient_read[open_text_handle="${handle}"]`)
+                    .click();
+                });
+              });
+
+              $(".slick-slider-image-container").slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                prevArrow: `<div class="slick-prev">{% render 'slider-prev-arrow' %}</div>`,
+                nextArrow: `<div class="slick-next">{% render 'slider-next-arrow' %}</div>`,
+                dots: true,
+                fade: true,
+                asNavFor: ".multi-imgs-blow-slider",
+              });
+              $(".multi-imgs-blow-slider").slick({
+                slidesToShow: 5,
+                slidesToScroll: 5,
+                asNavFor: ".slick-slider-image-container",
+                centerMode: true,
+                focusOnSelect: true,
+              });
+
+              const cstmAddonApi = await fetch(`/products/${$(products[i]).find('button').data('handle')}?view=addon-package`);
+              const cstmAddonHtml = await cstmAddonApi.text();
+
+              document.body.insertAdjacentHTML('beforeend', cstmAddonHtml);
+
+              customIngredientsModal()
+
+              document.querySelectorAll('.js-ingredient-read.addon-support').forEach((item) => {
+                item.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  const handle = item.dataset.handle;
+                  document
+                    .querySelector(`.cstm_ingredient_read[open_text_handle="${handle}"]`)
+                    .click();
+                });
+              });
+            }
+            else {
+              $('.recommendation_container_pack').append(products[i]);
+
+              const cstmAddonApi = await fetch(`/products/${$(products[i]).find('button').data('handle')}?view=addon-package`);
+              const cstmAddonHtml = await cstmAddonApi.text();
+
+              document.body.insertAdjacentHTML('beforeend', cstmAddonHtml);
+
+              customIngredientsModal()
+
+              document.querySelectorAll('.js-ingredient-read.addon-support').forEach((item) => {
+                item.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  const handle = item.dataset.handle;
+                  document
+                    .querySelector(`.cstm_ingredient_read[open_text_handle="${handle}"]`)
+                    .click();
+                });
+              });
+            }
+          }
+          document.getElementById('vqb-loader-container').style.display = 'none';
+        }
+
+      
+        var product_template = function (product, index) {
+          
+          return new Promise((resolve, reject) => {
+            fetch(`${apiUrl}/products/meta-fields?id=${product.id}`)
+              .then(function (result) {
+                return result.json();
+              })
+              .catch(reject)
+              .then(async function (metadata) {
+
+                var isPrimaryProductKey =
+                  metadata.find(function (meta) {
+                    return meta.key === 'is_primary_product';
+                  }) || {};
+
+
+                let isPrimary = false;
+                let survivor_essential_support_metaobject = [];
+                let cancer_specific_support_metaobject = [];
+                let immune_support_metaobject = [];
+
+                if (isPrimaryProductKey && eval(isPrimaryProductKey.value)) {
+                  isPrimary = true;
+                }
+
+
+                if (isPrimary) {
+                  var survivor_essential_support =
+                    metadata.find(function (meta) {
+                      return meta.key === 'survivor_essential_support';
+                    }) || {};
+    
+                  var cancer_specific_support =
+                    metadata.find(function (meta) {
+                      return meta.key === 'cancer_specific_support';
+                    }) || {};
+      
+                  var immune_support =
+                    metadata.find(function (meta) {
+                      return meta.key === 'immune_support';
+                    }) || {};
+      
+                  if (survivor_essential_support.value) {
+                    for (const inside of JSON.parse(survivor_essential_support.value)) {
+                      const value = await fetchMetaobjectById(inside, 'survivor_essential_support');
+                      if (value) {
+                        survivor_essential_support_metaobject.push(value);
+                      }
+                    }
+                  }
+      
+                  if (cancer_specific_support.value) {
+                    for (const inside of JSON.parse(cancer_specific_support.value)) {
+                      const value = await fetchMetaobjectById(inside, 'cancer_specific_support');
+                      if (value) {
+                        cancer_specific_support_metaobject.push(value);
+                      }
+                    }
+                  }
+      
+                  if (immune_support.value) {
+                    for (const inside of JSON.parse(immune_support.value)) {
+                      const value = await fetchMetaobjectById(inside, 'immune_support');
+                      if (value) {
+                        immune_support_metaobject.push(value);
+                      }
+                    }
+                  }
+                }
+    
+                const productHtml = isPrimary ? `<div class="slick-slider-container">
+                  <div class="slick-slider-image-container">
+                    ${product?.media?.map((img, img_index) => `
+                      <div class="main-product-image">
+                        <img
+                          src="${img.src}"
+                          alt="images"
+                        />
+                      </div>
+                    `).join('')}
+                  </div>
+
+                  <div class="multi-imgs-blow-slider">
+                    ${product?.media?.map((img, img_index) => `
+                      <div class="multi-products-images">
+                        <img
+                          src="${img.src}"
+                          alt="images"
+                        />
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+                <div class="recommendation-rightSide_container">
+                  <div class="rightside">
+                    <div class="rightSide_title">
+                      <h1 class="header_title_h1">${product.title}</h1>
+                      <h1 class="header_description_h2">${product.description}</h1>
+                    </div>
+                
+                    ${ survivor_essential_support_metaobject.length ? `
+                    <div class="essential_support">
+                      <div class="essential_support_container">
+                        <p class="sub-title">SURVIVOR ESSENTIAL SUPPORT</p>
+                        <hr class="straight_line"/>
+                      </div>
+                      ${survivor_essential_support_metaobject.map((obj, obj_index) => `
+                      <div class="recommendation_support_detail">
+                        <div class="image_container">
+                          <img class="image_1" src="${obj.image}" />
+                        </div>
+                        <div class="title_image_container1">
+                          <p class="title_1">${obj.heading}</p>
+                          <div class="sub_title_image1">
+                            <p class="sub_title_2">${obj.sub_heading}</p>
+                            <div class="image_container1_description">
+                              <p class="description_1">
+                                ${obj.quiz_short_description}
+                                <a class="js-ingredient-read essential-support" data-handle="${toHandle(obj.heading)}" href="#">Learn More.</a>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      `).join('')}
+                    </div>
+                    ` : "" }
+                
+                    ${ cancer_specific_support_metaobject.length ? `
+                    <div class="cancer_specific_container">
+                      <div class="essential_support_container">
+                        <p class="sub-title">CANCER SPECIFIC SUPPORT</p>
+                        <hr class="straight_line"/>
+                      </div>
+                      ${cancer_specific_support_metaobject.map((obj, obj_index) => `
+                      <div class="recommendation_support_detail">
+                        <div class="image_container">
+                          <img class="image_1" src="${obj.image}" />
+                        </div>
+                        <div class="title_image_container1">
+                          <p class="title_1">${obj.heading}</p>
+                          <div class="sub_title_image1">
+                            <p class="sub_title_2">${obj.sub_heading}</p>
+                            <div class="image_container1_description">
+                              <p class="description_1">
+                                ${obj.quiz_short_description}
+                                <a class="js-ingredient-read essential-support" data-handle="${toHandle(obj.heading)}" href="#">Learn More.</a>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      `).join('')}
+                    </div>
+                    ` : "" }
+                
+                    ${ immune_support_metaobject.length ? `
+                    <div class="immune_support_container">
+                      <div class="essential_support_container">
+                        <p class="sub-title">IMMUNE SUPPORT</p>
+                        <hr class="straight_line"/>
+                      </div>
+                      ${immune_support_metaobject.map((obj, obj_index) => `
+                      <div class="recommendation_support_detail">
+                        <div class="image_container">
+                          <img class="image_1" src="${obj.image}" />
+                        </div>
+                        <div class="title_image_container1">
+                          <p class="title_1">${obj.heading}</p>
+                          <div class="sub_title_image1">
+                            <p class="sub_title_2">${obj.sub_heading}</p>
+                            <div class="image_container1_description">
+                              <p class="description_1">
+                                ${obj.quiz_short_description}
+                                <a class="js-ingredient-read essential-support" data-handle="${toHandle(obj.heading)}" href="#">Learn More.</a>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      `).join('')}
+                    </div>
+                    ` : "" }
+                  </div>
+                
+                  <button onclick="addToCartNew('${product.variants[0].id}', 1, ${product.selling_plan_groups[0].selling_plans[0].id}, '${product.handle}')" class="add-to-cart-btn ${product.variants[0].id}">
+                    <span id="buttonText" class="buttonText">ADD TO CART - $${(product.price / 100).toFixed(2)}</span>
+                    <div id="spinner" class="spinner"></div>
+                  </button>
+                  <div class="list">
+                    <li class="item">4-Week Supply</li>
+                    <li>AM/PM Packs</li>
+                    <li>Auto-renew</li>
+                    <li>Cancel Anytime</li>
+                  </div>
+                  <div id="truemed-prequalify" style="font-size: 14px;" icon-height="12" data-public-id="tm_qual_yppyyw9rg8"></div>
+                </div>
+                ` : "";
+                resolve({ html: productHtml, isPrimary: isPrimary });
+              });
+          });
+        }
+    
+        var addonProductTemplate = function (product, index) {
+          let isPrimary = false;
+          return new Promise((resolve, reject) => {
+            fetch(`${apiUrl}/products/meta-fields?id=${product.id}`)
+              .then(function (result) {
+                return result.json();
+              })
+              .catch(reject)
+              .then(async function (metadata) {
+                var isPrimaryProductKey =
+                  metadata.find(function (meta) {
+                    return meta.key === 'is_primary_product';
+                  }) || {};
+    
+                let inside_the_package_metaobject = []
+                let quiz_add_on_categories_metaobject;
+    
+                if (!eval(isPrimaryProductKey.value)) {
+                  var inside_the_package =
+                    metadata.find(function (meta) {
+                      return meta.key === "inside_the_package";
+                    }) || {};
+    
+                  var quiz_add_on_categories =
+                    metadata.find(function (meta) {
+                      return meta.key === "quiz_add_on_categories";
+                    }) || {};
+    
+                  if (inside_the_package.value) {
+                    for (const inside of JSON.parse(inside_the_package.value)) {
+                      const value = await fetchMetaobjectById(inside, 'inside_the_package');
+                      if (value) {
+                        inside_the_package_metaobject.push(value);
+                      }
+                    }
+                  }
+    
+                  if (quiz_add_on_categories.value) {
+                    const value = await fetchMetaobjectById(quiz_add_on_categories.value.toString(), 'quiz_add_on_categories');
+                    if (value) {
+                      quiz_add_on_categories_metaobject = value;
+                    }
+                  }
+    
+                }
+
+                if (isPrimaryProductKey && eval(isPrimaryProductKey.value)) {
+                  isPrimary = true;
+                }
+
+                const addonProductHTML = !isPrimary ? `<div class="recommendation_pack">
+                  <div class="content_detail">
+                    <div class="product_title">
+                      <div class="heading_container">
+                        <p>${quiz_add_on_categories_metaobject?.title}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- img -->
+                  <div class="addtocart_product_details">
+                    <!--  -->
+                    <div class="product_image_container">
+                      <img
+                        class="product_image_1"
+                        src="${inside_the_package_metaobject[0]?.image}"
+                        alt="{{ amazon }}"
+                      />
+                    </div>
+                    ${inside_the_package_metaobject.length ?
+                    `<div class="product_detail_1">
+                      <p class="title-2">${inside_the_package_metaobject[0]?.heading}</p>
+                      <div class="sub_heading_1">
+                        <p class="dose-heading">${inside_the_package_metaobject[0]?.sub_heading}</p>
+                        <div class="product_description">
+                          <p>
+                            ${inside_the_package_metaobject[0]?.quiz_short_description}
+                            <a class="js-ingredient-read addon-support" data-handle="${toHandle(inside_the_package_metaobject[0]?.heading)}" href="#">Learn More.</a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>` : ""}
+          
+                  </div>
+                  <button onclick="addToCartNew('${product.variants[0].id}', 1, ${product.selling_plan_groups[0].selling_plans[0].id}, '${product.handle}')" class="add_to_cart_btn ${product.variants[0].id}">
+                    <span id="buttonText" class="buttonText">ADD TO PACK - $${(product.price / 100).toFixed(2)}</span>
+                    <div id="spinner" class="spinner"></div>
+                  </button>
+                </div>` : "";
+                resolve({ html: addonProductHTML, isPrimary: isPrimary });
+              });
+          });
+        }
+    
+        // callAll(products);
+    
+        async function fetchMetaobjectById(metaobjectId, metaFieldName) {
+          const query = `
+            query getMetaobject($id: ID!) {
+              metaobject(id: $id) {
+                id
+                type
+                fields {
+                  key
+                  value
+                }
+              }
+            }
+          `;
+          const imageQuery = `
+            query getMediaImage($id: ID!) {
+              node(id: $id) {
+                ... on MediaImage {
+                  id
+                  image {
+                    url
+                    altText
+                    width
+                    height
+                  }
+                }
+              }
+            }
+          `;
+              
+          const response = await fetch(`https://${Shopify.shop}//api/2023-10/graphql.json`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Shopify-Storefront-Access-Token': '526ac0561d3c634d10ae7135db214679',
+            },
+            body: JSON.stringify({
+              query,
+              variables: {
+                id: metaobjectId,
+              },
+            }),
+          });
+
+          const result = await response.json();
+
+          const id = result?.data?.metaobject?.fields?.find(f => f.key === "image")?.value;
+
+          const image_response = await fetch(`https://${Shopify.shop}//api/2023-10/graphql.json`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Shopify-Storefront-Access-Token': '526ac0561d3c634d10ae7135db214679',
+            },
+            body: JSON.stringify({
+              query: imageQuery,
+              variables: {
+                id: id,
+              },
+            }),
+          });
+
+          const image_result = await image_response.json();
+    
+          const metaobjectInfo = () => {
+            // Create an object containing the heading, subheading, and quiz_short_description
+            return {
+              heading: result?.data?.metaobject?.fields?.find(f => f.key === "heading")?.value || "No heading available",
+              sub_heading: result?.data?.metaobject?.fields?.find(f => f.key === "sub_heading")?.value || "No subheading available",
+              quiz_short_description: result?.data?.metaobject?.fields?.find(f => f.key === "quiz_short_description")?.value || "No quiz_short_description listed",
+              image: image_result.data.node.image.url || "",
+            };
+          };
+    
+          const categoriesMetaobjectInfo = () => {
+            // Create an object containing the heading, subheading, and quiz_short_description
+            return {
+              title: result?.data?.metaobject?.fields?.find(f => f.key === "quiz_add_on_support_categories")?.value || "No heading available",
+              description: result?.data?.metaobject?.fields?.find(f => f.key === "quiz_add_on_support_type_description")?.value || "No subheading available",
+            };
+          };
+    
+          if(['survivor_essential_support', 'cancer_specific_support', 'immune_support', 'inside_the_package'].includes(metaFieldName)) {
+
+            return metaobjectInfo();
+          } else if ('quiz_add_on_categories' === metaFieldName) {
+            return categoriesMetaobjectInfo();
+          }
+        }
+    
+        async function callAll(products) {
+          console.log(products,'products');
+          const primaryProducts = [];
+          const primaryProdcutsArr = []
+          const addonProducts = [];
+
+          const primaryProduct = products.find(product => product.tags.includes("primary"));
+          
+          if(primaryProduct && document.querySelector('.cstm_accrdian_cls')) {
+            const accordionGroup = await fetch(`${primaryProduct.url}?view=accordion-group`);
+            const accordionHtml = await accordionGroup.text();
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(accordionHtml, "text/html");
+  
+            const accordionElement = doc.querySelector("#AccordionGroup--pdp-accordion-group");
+            document.querySelector('.cstm_accrdian_cls').innerHTML = accordionElement.innerHTML;
+          }
+
+          if(primaryProduct && document.querySelector('.fetch-js-reviews-slider-wrapper')) {
+            const reviewApi = await fetch(`${primaryProduct.url}`);
+            const reviewHtml = await reviewApi.text();
+
+            const parser = new DOMParser();
+            const reviews = parser.parseFromString(reviewHtml, "text/html");
+
+            const reviewElement = reviews.querySelector('.reviews-slider-wrapper .wrapper');
+            document.querySelector('.fetch-js-reviews-slider-wrapper .wrapper').innerHTML = reviewElement.innerHTML;
+
+            $('.fetch-js-reviews-slider-wrapper .reviews-slider__blocks').slick({
+              infinite: true,
+              slidesToShow: 3,
+              slidesToScroll: 1,
+              dots: false,
+              arrows: true,
+              prevArrow: `<div class="slick-prev">{% render 'slider-prev-arrow' %}</div>`,
+              nextArrow: `<div class="slick-next">{% render 'slider-next-arrow' %}</div>`,
+              responsive: [
+                {
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                  }
+                }
+              ]
+            });
+          }
+          
+          for (let index = 0; index < products.length; index++) {
+            try {
+              let productHtml;
+              productHtml = await product_template(products[index], index);
+              primaryProducts.push(productHtml.html);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+          if (primaryProducts.length) {
+            $('.recommendation-header .recommendation-name-container').html(`<span>${user_name}</span>, here is your<br><em> oncologist-recommended</em> daily routine`);
+            $('.recommendation-header .recommendation-h2').html(`Based on the answers from your quiz, here are your results.`);
+
+            if (window.matchMedia("(max-width: 768px)").matches) {
+              // Apply styles for small screens (max-width: 768px)
+              $('.recommendation-header').css({
+                "padding-bottom": "40px",
+                "padding-top": "30px",
+                "background-size": "contain",
+                "background": "url(https://quizzes-assets.nyc3.cdn.digitaloceanspaces.com/survivor-rx.myshopify.com/6204_UQAOY_1738072071951.jpeg)",
+              });
+            } else {
+              // Apply styles for larger screens
+              $('.recommendation-header').css({
+                "padding-bottom": "100px",
+                "padding-top": "80px",
+                "background-size": "cover",
+                "background": "url(https://quizzes-assets.nyc3.cdn.digitaloceanspaces.com/survivor-rx.myshopify.com/6204_UQAOY_1738072071951.jpeg)",
+              });
+            }
+            $('.main-parent-container').css({
+              "display": "flex",
+            });
+    
+            $('#primary-products-container').show();
+            $('.recommendation_middel_container').append(primaryProducts.find(str => str !== ""));
+
+            if(primaryProduct) {
+              const cstmSliderApi = await fetch(`${primaryProduct.url}?view=inside-package`);
+              const cstmSliderHtml = await cstmSliderApi.text();
+              
+              document.body.insertAdjacentHTML('beforeend', cstmSliderHtml);
+              
+              customIngredientsModal()
+  
+              document.querySelectorAll('.js-ingredient-read.essential-support').forEach((item) => {
+                item.addEventListener('click', (e) => {
+                  e.preventDefault();
+                  const handle = item.dataset.handle;
+                  document
+                    .querySelector(`.cstm_ingredient_read[open_text_handle="${handle}"]`)
+                    .click();
+                });
+              });
+            }
+          }
+
+
+          scrollSlides()
+
+          for (let index = 0; index < products.length; index++) {
+            try {
+              const addonProductHTML = await addonProductTemplate(products[index], index);
+              addonProducts.push(addonProductHTML.html);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+
+          if (addonProducts.length) {
+            const subheading = document.querySelector('.addon-subheading');
+            subheading.innerHTML = subheading.innerHTML.replace('{product name w/variant}', primaryProdcutsArr[0]?.title || "")
+            $('.recommendation_container_pack').append(addonProducts.join(''));
+          }
+
+          if(primaryProduct) {
+            const cstmAddonApi = await fetch(`${primaryProduct.url}?view=addon-package`);
+            const cstmAddonHtml = await cstmAddonApi.text();
+
+            document.body.insertAdjacentHTML('beforeend', cstmAddonHtml);
+            
+            customIngredientsModal()
+
+            document.querySelectorAll('.js-ingredient-read.addon-support').forEach((item) => {
+              item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const handle = item.dataset.handle;
+                document
+                  .querySelector(`.cstm_ingredient_read[open_text_handle="${handle}"]`)
+                  .click();
+              });
+            });
+          }
+
+          document.getElementById('vqb-loader-container').style.display = 'none';
+
+          function scrollSlides() {
+            $(".slick-slider-image-container").slick({
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: true,
+              prevArrow: `<div class="slick-prev">{% render 'slider-prev-arrow' %}</div>`,
+              nextArrow: `<div class="slick-next">{% render 'slider-next-arrow' %}</div>`,
+              dots: true,
+              fade: true,
+              asNavFor: ".multi-imgs-blow-slider",
+            });
+            $(".multi-imgs-blow-slider").slick({
+              slidesToShow: 5,
+              slidesToScroll: 5,
+              asNavFor: ".slick-slider-image-container",
+              centerMode: true,
+              focusOnSelect: true,
+            });
+          }
+        }
+    
+      })
+    } else {
+        $('.recommendation-header .recommendation-name-container').html(`<span style="text-transform: capitalize;">${user_name}</span>, thank you for taking our<br><span style="font-style: italic;">personalization quiz!<span>`);
+
+        if (window.matchMedia("(max-width: 768px)").matches) {
+          // Apply styles for small screens (max-width: 768px)
+          $('.recommendation-header').css({
+            "padding-bottom": "40px",
+            "padding-top": "30px",
+            "background-size": "contain",
+          });
+        } else {
+          // Apply styles for larger screens
+          $('.recommendation-header').css({
+            "padding-bottom": "100px",
+            "padding-top": "80px",
+            "background-size": "cover",
+            "background": "url(https://quizzes-assets.nyc3.cdn.digitaloceanspaces.com/survivor-rx.myshopify.com/6204_UQAOY_1738072071951.jpeg)",
+          });
+        }
+
+        $('.dynamic-paragraph').html(`${end_early_message}`);      
+        $('.main-parent-container').css({
+          "display": "flex",
+        });
+        $('.addtocart_recommendation_container').css({
+          "padding": "0",
+        });
+        
+        $('.back-button').css({
+          "margin-left": "-1060px",
+          "margin-bottom": "-20px",
+        });
+
+        $('.end-early-container').css({
+          "display": "flex"
+        });
+
+        $('#MainContent').addClass('failed-quiz');
+      
+
+        $('#vqb-loader-container').css({
+          "display": "none"
+        });
+    }
+
+    // Fetch the product page and extract properties
+    async function fetchProductProperties(productHandle) {
+      const response = await fetch(`/products/${productHandle}?view=metafields-cart`);
+      const text = await response.text();
+    
+      // Parse the HTML response to extract input properties
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, 'text/html');
+      const inputs = doc.querySelectorAll('input[name^="properties["]');
+    
+      // Build the properties object
+      const properties = {};
+      inputs.forEach(input => {
+        const nameMatch = input.name.match(/properties\[(.*?)\]/);
+        if (nameMatch) {
+          const propertyName = nameMatch[1];
+          properties[propertyName] = input.value;
+        }
+      });
+    
+      return properties;
+    }
+
+    // Function to add a product to the cart via AJAX
+    async function addToCartNew(variantId, quantity, selling_plan_id, productHandle) {
+      // Prepare the data to be sent to the Shopify cart
+      const properties = await fetchProductProperties(productHandle);
+
+      var buttonText = document.getElementsByClassName(variantId)[0].getElementsByClassName("buttonText")[0]
+      var spinner = document.getElementsByClassName(variantId)[0].getElementsByClassName("spinner")[0];
+    
+      buttonText.style.display = "none";
+      spinner.style.display = "inline-block";
+      var data = {
+        items: [{
+          id: variantId,  // Product variant ID (not product ID)
+          quantity: quantity,  // Quantity to add
+          selling_plan: selling_plan_id,
+          properties: properties
+        }]
+      };
+    
+      // Make the AJAX request to add the product to the cart
+      await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+
+      document.querySelector('cart-items').getCart();
+      
+      setTimeout(function() {
+          spinner.style.display = "none";
+          buttonText.style.display = "inline-block";
+      }, 100);
+
+    }
+  </script>
+
+
+  <style>
+
+      .main-parent-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+
+    .spiner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .vqb-loader {
+      display: block; /* Initially hide the loader */
+      border: 4px solid #FFFFF;
+      border-top: 4px solid #5A7D22;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 2s linear infinite;
+      margin-left: auto;
+      margin-right: auto;
+      transform: translate(-50%, -50%);
+    }
+    .vqb-loader-container {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+        /*style for Header container for title and sub title*/
+        .recommendation-name-container{
+            text-align: center;
+            margin: 0 auto;
+            max-width: 900px;
+            font-size: 50px;
+            letter-spacing: 0px;
+            color: #333333;
+        }
+        .recommendation-h2{
+            text-align: center;
+            margin: 0 auto;
+            max-width: 900px;
+            font-size: 24px;
+            letter-spacing: 0px;
+            color: #333333;
+        }
+        /*style for middel section*/
+        .recommendation_middel_container{
+            display: flex;
+            gap: 45px;
+            justify-content: center;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        /*style for slick slider*/
+        
+        .recommendation_middel_container .slick-slider-container {
+            max-width: 716px;
+            max-height: 816px;
+            position: relative;
+        }
+        .main-product-image {
+            position: relative;
+        }
+        .main-product-image img {
+            width: 674px;
+            max-height: 676px;
+            object-fit: cover;
+            border-radius: 25px;
+        }
+        .arrow-icons {
+            display: flex !important;
+            justify-content: space-between;
+        }
+        .recommendation_middel_container .slick-prev,
+        .recommendation_middel_container .slick-next{
+            width: 42px;
+            height: 42px;
+            position: absolute;
+            top: 44%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+            /*style for slick dots*/
+        .recommendation_middel_container .slick-dots {
+            bottom: 20px;
+        }
+        .recommendation_middel_container .slick-dots li{
+            width: 10px;
+        }
+        .recommendation_middel_container .slick-dots li button:hover, 
+        .recommendation_middel_container .slick-dots li button:focus{
+            outline: none;
+        }
+        .recommendation_middel_container .slick-dots li button:hover:before, 
+        .slick-dots li button:focus:before{
+            background-color: #333333;
+        }
+        .recommendation_middel_container .slick-dots li button:before{
+            width: 12px;
+            height: 12px;
+            color: black;
+            border: 2px solid black;
+            border-radius:50%;
+            opacity: 1;
+        }
+        .recommendation_middel_container .slick-dots li.slick-active button:before{
+            color: black;
+            width: 12px;
+            background-color:black;
+            height: 12px;
+        }
+        .recommendation_middel_container .slick-dots li button::before{
+            content: "";
+        }
+        .recommendation_middel_container .slick-prev:before,
+        .recommendation_middel_container .slick-next:before {
+            font-size: 0px !important;
+        }
+        .recommendation_middel_container .slick-prev {
+            left: -58px !important;
+        }
+        .recommendation_middel_container .slick-icon{
+            width: 42px;
+            height: 42px;
+            background-color: #FFFFFF;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+        .multi-imgs-blow-slider {
+            display: flex;
+            gap: 10px !important;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .multi-products-images img {
+            max-width: 125px;
+            max-height: 125px;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+        .recommendation_middel_container .slick-dotted.slick-slider{
+            margin: 0 !important;
+        }
+        .recommendation_middel_container .slick-list{
+            padding: 0 !important;
+        }
+        @media (min-width: 769px) {
+          .recommendation_middel_container .slick-list{
+              padding: 0 !important;
+              width: 674px !important;
+          }
+        }
+
+    
+
+    
+        /*style for recommendation right side */
+        .recommendation-rightSide_container{
+            border: 1px solid #707070;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+        .rightside{
+            max-width: 700px;
+        }
+        /*style for WellSurvivor */
+        .rightSide_title{
+            background-color: #295135;
+            padding-left: 30px;
+            padding-bottom: 15px;
+            padding-top: 20px;
+            padding-right: 10px;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+        }
+        .header_title_h1{
+            margin: 0 auto;
+            color: #FFFFFF;
+            letter-spacing: 0px;
+            font-size: 38px;
+        }
+        .header_description_h2{
+            margin: 0 auto;
+            color: #FFFFFF;
+            letter-spacing: 0px;
+            font-size: 18px;
+        }
+        .essential_support_container{
+            padding-right: 30px;
+            padding-left: 30px;
+            padding-top: 50px;
+        }
+        .sub-title{
+            padding-bottom: 15px;
+            margin: 0;
+            text-align: left;
+            color: #333333;
+            letter-spacing: 3.6px;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+        .image_container{
+            padding: 15px;
+            display: flex;
+            padding-top: 10px;
+        }
+        .image_1{
+            border-radius: 50px;
+            width: 100px;
+            height: 100px;
+        }
+        .title_1{
+            margin: 0;
+            padding: 0;
+            letter-spacing: 0px;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0px;
+            line-height: 26px;
+            color: #24352B;
+        }
+        .sub_title_2{
+            margin: 0;
+            padding: 0;
+            letter-spacing: 0px;
+            font-size: 16px;
+            letter-spacing: 0px;
+            line-height: 20px;
+            color: #24352B;
+        }
+        .description_1{
+            margin: 0;
+            padding: 0;
+            letter-spacing: 0px;
+            padding-bottom: 10px;
+            font-size: 16px;
+            letter-spacing: 0px;
+            line-height: 20px;
+            color: #333333;
+        }
+        .description_1 a{
+            color: #24352B;
+        }
+        .recommendation_support_detail{
+            display: flex;
+            padding-right: 15px;
+            padding-left: 15px;
+            padding-top: 30px;
+        }
+        .add-to-cart-btn{
+            width: 640px;
+            background-color: #295135;
+            border-radius: 30px;
+            height: 40px;
+            cursor: pointer;
+            margin-top: 50px;
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-bottom: 15px;
+            color: #FFFFFF;
+            text-decoration: none;
+            display: flex;
+            margin: 0 auto;
+            padding: 15px 0;
+            border: 2px;
+            justify-content: center;
+            margin-top: auto;
+        }
+        .list{
+            display: flex;
+            margin: 15px auto 30px auto;
+            font-size: 16px;
+            gap: 13px;
+        }
+        .item{
+            list-style: none;
+        }
+    
+        .addtocart_recommendation_container{
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+    
+        .recommendation_container_pack{
+            grid-template-columns: repeat(2, 1fr);
+            display: grid;
+            gap: 30px;
+        }
+        .recommendation_pack{
+            max-width: 700px;
+            border-radius: 25px;
+            border: 1px solid #707070;
+        }
+        .product_title{
+            background-color: #295135;
+            max-width: 700px;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            padding-bottom: 17px;
+            padding-right: 50px;
+            padding-top: 25px;
+            padding-left: 50px;
+        }
+        .heading_container p{
+            line-height: 30px;
+            font-size: 24px;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .description_container p{
+            line-height: 24px;
+            font-size: 18px;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            padding-top: 7px;
+        }
+        .addtocart_product_details{
+            display: flex;
+            gap: 0px;
+            padding-top: 50px;
+            padding-right: 50px;
+            padding-bottom: 10px;
+        }
+        .product_image_container{
+            padding: 10px 20px;
+            padding-top: 0;
+        }
+        .title-2{
+            font-weight: 600;
+        }
+        .product_image_1{
+            border-radius: 50px;
+            width: 100px;
+            height: 100px;
+        }
+        .product_detail_1 p{
+            padding: 0;
+            margin: 0;
+            line-height: 26px;
+            font-size: 22px;
+        }
+        .sub_heading_1 p{
+            padding: 0;
+            margin: 0;
+            font-size: 16px;
+            line-height: 20px;
+        }
+        .product_description p{
+            padding: 0;
+            margin: 0;
+            font-size: 16px;
+            line-height: 20px;
+        }
+        .product_description a{
+            color: #295135;
+        }
+        .add_to_cart_btn{
+            width: -webkit-fill-available;
+            margin: 20px;
+            border-radius: 20px;
+            border: 2px solid #295135;
+            background-color: white;
+            cursor: pointer;
+            height: 40px;
+            color: #295135;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-button {
+          display: flex;
+          flex-direction: row;
+          margin-top: 50px;
+          margin-bottom: 30px;
+          width: fit-content;
+          margin-left: -1261px;
+          z-index: 9999;
+
+          svg {
+            width: 18px;
+            margin-right: 10px;
+            fill: #808080;
+          }
+
+          span {
+            color: #808080;
+            font-style: italic;
+            text-decoration: underline;
+            font-weight: 500 !important;
+            font-size: 16px !important;
+          }
+        }
+
+        .list li{
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        @media (min-width: 769px) and (max-width: 1920px) {
+
+            .back-button {
+              margin-left: -900px;
+            }
+
+            .recommendation-container{
+                margin: 0 auto;
+            }
+            .recommendation-name-container {
+                font-size: 50px !important;
+            }
+            .recommendation-h2 {
+                font-size: 24px !important;
+            }
+            .recommendation_middel_container {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+            .recommendation_support_detail {
+                padding-top: 25px;
+            }
+            .recommendation_middel_container .slick-slider-container{
+                max-width: 500px;
+                max-height: 750px;
+                position: relative;
+            }
+            .recommendation_middel_container .slick-prev, 
+            .recommendation_middel_container .slick-next {
+                top: 44%
+            }
+            .recommendation_middel_container .slick-dots li{
+                width: 10px;
+            }
+            .rightside{
+                max-width: 500px;
+            }
+            .rightSide_title{
+                padding: 10px 20px;
+            }
+            .header-title h1{
+                font-size: 30px;
+            }
+            .header_description_h2{
+                font-size: 20px;
+            }
+            .recommendation-rightside-container{
+                max-width: 500px;
+            }
+            .essential_support_container{
+                padding-top: 50px;
+                padding-bottom: 5px;
+            }
+            .sub-title{
+                letter-spacing: 1.6px;
+                font-size: 24px;
+            }
+            .title_1{
+                font-size: 20px;
+                line-height: 25px;
+            }
+            .sub_title_2 {
+                font-size: 18px;
+                line-height: 20px;
+            }
+            .description_1 {
+                font-size: 16px;
+                line-height: 20px;
+            }
+            .list{
+                margin-bottom: 30px;
+                padding: 0;
+                justify-content: center;
+                gap: 5px;
+            }
+            .list li{
+                font-size: 13px;
+            }
+            .addtocart_recommendation_container{
+                padding-left: 20px;
+                padding-right: 20px;
+                margin: 0 auto;
+            }
+            .recommendation_pack {
+                max-width: 500px;
+            }
+            .product_title{
+                padding: 10px 20px;
+            }
+            .heading_container p {
+                line-height: 26px;
+                font-size: 24px;
+            }
+            .description_container p {
+                line-height: 15px;
+                font-size: 14px;
+            }
+            .addtocart_product_details {
+                gap: 0;
+                padding-top: 30px;
+                padding-bottom: 10px;
+                padding-right: 20px;
+                padding-left: 0;
+            }
+            .product_image_container img{
+                width: 100px;
+            }
+            .product_detail_1 p {
+                line-height: 20px;
+                font-size: 20px;
+            }
+            .sub_heading_1 p {
+                font-size: 18px;
+                line-height: 18px;
+            }
+            .product_description p {
+                font-size: 16px;
+                line-height: 18px;
+            }
+            .add-to-cart-btn{
+                padding: 7px;
+                margin-top: 50px;
+                height: 40px;
+                width: 90%;
+                align-items: center;
+            }
+
+            .slick-icon {
+                width: 32px;
+                height: 32px;
+            }
+            .multi-products-images img{
+                max-width: 90px;
+            }
+            .main-product-image img{
+                max-width: 500px;
+                object-fit: cover;
+                border-radius: 25px;
+            }
+            .recommendation_container_pack{
+                gap: 45px;
+            }
+        }
+        @media (max-width: 768px){
+            .add-to-cart-btn {
+              margin-top: 20px;
+            }
+
+            .list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+
+                li {
+                  font-size: 16px;
+                }
+                    
+                li::marker {
+                  margin-right: 0;      
+                }
+          
+                .item {
+                  list-style: unset;
+                }
+            }
+
+            .slick-dots li.slick-active button:before{
+              width: 7px;
+              height: 7px;
+            }
+
+            .slick-dots li button:before{
+              width: 7px;
+              height: 7px;
+            }
+
+            .slick-slider-container {
+              position: relative !important;
+            }
+          
+            .recommendation-header {
+              background: #F3F6EF !important
+            }
+
+            .end-early-container {
+              flex-direction: column-reverse !important;
+              padding: 15px;
+              gap: 0 !important;
+            }
+
+            .early-image-container, .early-heading-container {
+              max-width: 100% !important;
+            }
+
+            .early-image-container {
+              margin-top: 20px;
+            }
+
+            .unfortunately-text {
+              font-size: 40px !important;
+              margin-top: 10px !important;
+              margin-bottom: 10px !important;
+            }
+
+            .dynamic-text {
+              font-size: 18px !important;
+            }
+
+            .recommendation_pack {
+              margin-bottom: 10px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+            }
+
+            .back-button {
+              margin-left: unset !important;
+            }
+
+            .recommendation-container{
+                margin: 0 auto;
+            }
+            .recommendation-name-container {
+                max-width: 345px;
+                font-size: 25px;
+                line-height: 28px;
+            }
+            .recommendation-h2{
+                max-width: 345px;
+                font-size: 14px;
+            }
+            .recommendation_middel_container {
+                flex-direction: column;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            .slick-slider-container{
+                max-width: 320px;
+                margin: 0 auto;
+            }
+            .slick-slider-container .slick-list{
+                width: 320px !important;
+            }
+            .slick-dots li{
+                width: 7px;
+                height: 7px;
+            }
+            .multi-imgs-blow-slider {
+                display: flex;
+            }
+            .main-product-image img {
+                max-width: 320px;
+            }
+            .slick-icon{
+                display: none;
+            }
+            
+            .multi-products-images img {
+                max-width: 60px;
+            }
+            .recommendation-rightSide_container{
+                max-width: 430px;
+                margin: 0 auto;
+            }
+            .rightside{
+                max-width: 430px;
+            }
+            .rightSide_title{
+                padding: 10px;
+            }
+            .header_title_h1{
+                font-size: 28px;
+            }
+            .header_description_h2 {
+                font-size: 18px;
+                line-height: 20px;
+            }
+            .essential_support_container {
+                padding-right: 20px;
+                padding-left: 30px;
+                padding-top: 20px;
+            }
+            .sub-title{
+                letter-spacing: 0;
+                font-size: 20px;
+            }
+            .recommendation_support_detail {
+                display: flex;
+                padding-right: 10px;
+                padding-top: 10px;
+            }
+            .image_container {
+                padding: 10px;
+            }
+            .image_1{
+                width: 60px;
+                height: 60px;
+            }
+            .title_1{
+                font-size: 20px;
+            }
+            .sub_title_2, .description_1{
+                font-size: 14px;
+                line-height: 16px;
+            }
+            .add-to-cart-btn{
+                padding: 10px;
+                width: 300px;
+                height: 30px;
+                font-size: 12px;
+            }
+            .list{
+                padding: 0;
+                justify-content: center;
+                margin-bottom: 20px;
+                font-size: 8px;
+                gap: 5px;
+            }
+            .addtocart_recommendation_container{
+                padding-left: 10px;
+                padding-right: 10px;
+                justify-content: start;
+            }
+            .recommendation_container_pack{
+                display: block;
+                margin: 0 auto;
+            }
+            .product_image_1{
+                width: 60px;
+                height: 60px;
+                margin-top: 10px;
+            }
+            .product_title {
+                padding: 10px;
+            }
+            .description_container p {
+                line-height: 14px;
+                font-size: 12px;
+                padding-top: 5px;
+            }
+            .product_image_container {
+                padding: 10px;
+            }
+            .addtocart_product_details{
+                padding-top: 20px;
+                padding-right: 10px;
+                padding-bottom: 10px;
+                padding-left: 0px;
+                gap: 0px;
+            }
+            .product_detail_1 p{
+                font-size: 20px;
+            }
+            .sub_heading_1 p{
+                font-size: 16px;
+            }
+            .product_description p {
+                font-size: 16px;
+                line-height: 20px;
+            }
+            .add_to_cart_btn{
+                margin-bottom: 20px;
+            }
+        }
+        .recommendation_middel_container .slick-icon {
+          width: 35px;
+          height: 35px;
+          padding: 10px;
+          fill: black;
+        }
+
+      .title_image_container1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .straight_line {
+        margin: 0;
+        border: 1px solid #707070;
+      }
+
+      .add_to_cart_btn, .add-to-cart-btn {
+        font-size: 18px;
+        line-height: 25px;
+        align-items: center;
+        width: 90%;
+        height: 40px;
+        
+        #buttonText {
+            font-family: 'Figtree', sans-serif !important;
+            font-weight: 600;
+        }
+      }
+
+      .header_description_h2 p, .sub-title, .sub_title_2, .description_1, .title_1, .description_1 a, .list li,
+      .description_container p, .product_detail_1 p, .sub_heading_1 p, .product_description a, .back-button span,
+      .dynamic-text, .recommendation-h2 {
+        font-family: 'Figtree', sans-serif !important;
+      }
+    
+      .product_detail_1 p, .sub_heading_1 p {
+        color: #24352B;
+      }
+
+      .description_1 a, .list li, .sub_title_2, .product_description a, .dose-heading {
+        font-style: italic !important;
+      }
+      .dose-heading, .sub_title_2 {
+        margin: 5px 0 !important;
+      }
+
+      .spinner {
+          display: none;
+          border: 3px solid #f3f3f3; /* Light grey */
+          border-top: 3px solid grey; /* Blue */
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          animation: spin 1s linear infinite;
+      }
+
+      /* Spinner animation */
+      @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+      }
+
+      .social-icon {
+        width: 35px;
+        height: 35px;
+      }
+
+      .social-icons-container {
+        gap: 20px;
+        display: flex;
+      }
+
+      .early-image-container {
+        max-width: 550px;
+        border-radius: 25px;
+      }
+
+      .end-early-container {
+        display: flex;
+        justify-content: center;
+        gap: 70px;
+        margin-bottom: 45px;
+      }
+
+      .early-heading-container {
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .unfortunately-text {
+        font-size: 40px;
+        color: #333333;
+        font-family: 'ITC CheltenhamStd' !important;
+        font-weight: 450 !important;
+        line-height: normal !important;
+        margin-top: 75px;
+      }
+
+      .social-text {
+        margin-top: 40px;
+        margin-bottom: 30px;
+      }
+
+      .dynamic-text {
+        font-size: 18px;
+        line-height: normal;
+        font-weight: 100;
+      }
+
+      .recommendation-header span{
+        text-transform: capitalize;
+      }
+
+      .recommendation_pack {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .recommendation-header {
+        background-size: cover !important;
+      }
+
+      .recommendation-h2 {
+        margin-top: 10px;
+      }
+
+      .add-to-cart-btn:hover {  
+        background: white;
+        color: #295135;
+        border: 2px solid #295135;
+      }
+  
+      .add_to_cart_btn:hover {
+        background: #295135;
+        color: white;
+      }
+
+      .description_1, .product_description p{
+        color: #24352B;
+        font-weight: 100;
+      }
+
+    .heading_container p, .recommendation-name-container em {
+      font-family: var(--heading-font) !important;
+    }
+
+    .recommendation_middel_container .slick-next {
+      right: -5px !important;
+    }
+
+    .recommendation_middel_container .slick-next, 
+    .recommendation_middel_container .slick-prev {
+      display: none !important;
+    }
+
+    .recommendation_middel_container .slick-slider-image-container.slick-initialized.slick-slider:hover {
+      .slick-prev, .slick-next {
+        display: block !important;
+      }
+    }
+
+    .recommendation_middel_container .slick-slider-container {
+      position: sticky;
+      top: 0;
+    }
+
+    .recommendation_middel_container .slick-dots {
+      position: absolute;
+      bottom: 10px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: unset;
+    }
+
+    .truemed-entry-text {
+      font-family: Figtree !important;
+      color: rgb(51, 51, 51) !important;
+      font-size: 14px!important;
+    }
+    .truemed-instructions-open.truemed-entry-link {
+      font-family: Figtree !important;
+      color: rgb(51, 51, 51) !important;
+      font-size: 14px!important;
+    }
+
+    .truemed-entry-box {
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+  .recommendation-name-container span {
+    font-family: "ITC CheltenhamStd" !important;
+    font-weight: 400;
+  }
+  .reviews-slider__blocks .slick-arrow:before {
+    content: unset !important;
+  }
+  .reviews-slider__blocks .slick-arrow {
+    width: auto;
+    height: auto;
+  }
+  .main-content failed-quiz {
+      
+  }
+  .main-content.failed-quiz .shopify-section:not(:first-child) {
+    display: none;
+  }
+  .reviews-slider__blocks .reviews-slider__rating .star_rating path {
+    fill: #24352B !important;
+  }
+  .fetch-js-reviews-slider-wrapper {
+    padding: 50px 0;
+  }
+  @media (max-width: 768px) {
+    .slick-slider-image-container .slick-dots {
+      gap: 5px;
+    }
+    .slick-slider-image-container .slick-dots li.slick-active {
+        background: #333333;
+    }
+    .slick-slider-image-container .slick-dots li {
+        width: 10px;
+        height: 10px;
+        border: 2px solid #333333;
+        border-radius: 50%;
+        margin: 0;
+    }
+    .slick-slider-image-container .slick-dots li button:before {
+      content: unset;
+    }
+    .back-button {
+      z-index: 1;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Recommendation Section",
+  "class": "recommendation",
+}
+{% endschema %}

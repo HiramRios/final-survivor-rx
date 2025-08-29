@@ -1,0 +1,921 @@
+{
+  "sections": {
+    "slideshow": {
+      "type": "section-slideshow",
+      "blocks": {
+        "slideshow-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_12_0413ba92-c788-4b1b-b2cf-265aa1902aa7.jpg",
+            "overlay_opacity": 20,
+            "overlay_color": "#000000",
+            "show_overlay_text": false,
+            "title": "Supplements designed",
+            "heading_size": 2,
+            "description": "<h1>For survivors<br\/>& their journey <br\/><i>beyond cancer<\/i><\/h1>",
+            "text_size": 11,
+            "flex_align_desktop": "align--middle-left-desktop",
+            "flex_align_mobile": "align--middle-center-mobile",
+            "bg_color": "",
+            "color": "#ffffff",
+            "first_button_text": "Shop Now",
+            "first_button_link": "shopify:\/\/collections\/all",
+            "first_button_type": "btn--white",
+            "first_button_size": "",
+            "first_button_style": "btn--solid",
+            "first_button_show_arrow": false,
+            "second_button_text": "",
+            "second_button_link": "",
+            "second_button_type": "btn--white",
+            "second_button_size": "",
+            "second_button_style": "btn--solid",
+            "second_button_show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "slideshow-0"
+      ],
+      "settings": {
+        "height": "image-height",
+        "mobile_height": "screen-height-three-quarters--mobile",
+        "width": "wrapper--full",
+        "transition": "slide",
+        "show_arrows": true,
+        "autoplay": false,
+        "autoplay_speed": 8
+      }
+    },
+    "section_announcement_P7a3TA": {
+      "type": "section-announcement",
+      "blocks": {
+        "text_AaXhk9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Oncologist curated research backed<\/p>",
+            "text_style": "font-body",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_tFXeJ8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>cancer & subcancer specific<\/p>",
+            "text_style": "font-body",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_WtHXdd": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>30 day risk free gain<\/p>",
+            "text_style": "font-body",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "message_NgAHPA": {
+          "type": "message",
+          "disabled": true,
+          "settings": {
+            "show_wheel": false,
+            "message": "30 day risk free gain",
+            "text_style": "font-body",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        },
+        "text_Lp8Uw8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Oncologist curated research backed<\/p>",
+            "text_style": "font-body",
+            "color": "",
+            "target_device_enabled": false,
+            "target_device": "mobile"
+          }
+        }
+      },
+      "block_order": [
+        "text_AaXhk9",
+        "text_tFXeJ8",
+        "text_WtHXdd",
+        "message_NgAHPA",
+        "text_Lp8Uw8"
+      ],
+      "settings": {
+        "custom_class": "custom_announcement",
+        "show_border": true,
+        "layout": "marquee",
+        "slider_speed": 7,
+        "text_alignment": "center",
+        "marquee_speed": 100,
+        "direction": "ticker-rtl",
+        "message_spacing": 20,
+        "text_size": 2,
+        "bg_color": "#f5f0f9",
+        "color": "",
+        "padding_top": 15,
+        "padding_bottom": 15
+      }
+    },
+    "docs": {
+      "type": "section-rich-text",
+      "blocks": {
+        "text_kqEMzi": {
+          "type": "text",
+          "settings": {
+            "text": "Take the guesswork out of <i>survivorship<\/i>",
+            "text_size": 7,
+            "text_style": "font-heading",
+            "padding_bottom": 16
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Out team of oncologist, pharmacist, naturopaths, and survivors all have one goal: creating the safest and most effective formulas, specific to survivors & their needs<\/p>",
+            "text_size": 4,
+            "text_style": "font-body",
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "text_kqEMzi",
+        "text"
+      ],
+      "settings": {
+        "custom_class": "custom_richtext_wrapper",
+        "width": "wrapper--full-padded",
+        "align_text": "text-center",
+        "overlay_opacity": 0,
+        "overlay_color": "#000000",
+        "show_overlay_text": false,
+        "bg_color": "#fff9f2",
+        "color": "",
+        "padding_top": 100,
+        "padding_bottom": 0
+      }
+    },
+    "section_columns_9qNMCn": {
+      "type": "section-columns",
+      "blocks": {
+        "image_XXKYhX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Mask_group_5.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Breast Support",
+            "heading_size": 4,
+            "text": "<p>Our complete vitamin routine to support your fertility. Explore now<\/p>",
+            "text_size": 3,
+            "button_text": "Explore now",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        },
+        "image_wy7KkY": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Mask_group_6.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Prostate Support",
+            "heading_size": 4,
+            "text": "<p>Our complete vitamin routine to support your fertility.<\/p>",
+            "text_size": 3,
+            "button_text": "Explore now",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        },
+        "image_R8HeCr": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Mask_group_7.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Colorectal Support",
+            "heading_size": 4,
+            "text": "<p>Our complete vitamin routine to support your fertility.<\/p>",
+            "text_size": 3,
+            "button_text": "Explore now",
+            "button_url": "",
+            "button_type": "btn--black",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        },
+        "image_qrX9wd": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Mask_group_8_04821e1f-2ea9-430e-851f-1a538714b400.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Gastro Intestinal Support",
+            "heading_size": 4,
+            "text": "<p>Our complete vitamin routine to support your fertility.<\/p>",
+            "text_size": 3,
+            "button_text": "Explore Now",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "image_XXKYhX",
+        "image_wy7KkY",
+        "image_R8HeCr",
+        "image_qrX9wd"
+      ],
+      "settings": {
+        "custom_class": "custom_guesswork_wrapper",
+        "title": "",
+        "sub_head": "",
+        "bottom_text": "",
+        "bottom_link": "",
+        "heading_size": 5,
+        "layout": "slider",
+        "grid": 3,
+        "align_heading": "text-left",
+        "align_text": "text-left",
+        "align_columns": "flex-align-top",
+        "width": "wrapper--full-padded",
+        "bg_color": "",
+        "color": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "layout_mobile": "slider"
+      }
+    },
+    "section_double_gkVE9T": {
+      "type": "section-double",
+      "blocks": {
+        "accordion_FfqXwL": {
+          "type": "accordion",
+          "settings": {
+            "title": "Comprehensive supplement routine with research base effective dosing",
+            "content": "<p>Highest level extractions to maximize benefits and minimize the number of pills<\/p>",
+            "show_icon": true,
+            "icon_name": "icon-award",
+            "icon_image": "shopify:\/\/shop_images\/Vector.jpg",
+            "icon_size": 45,
+            "icon_color": "#545454",
+            "padding_bottom": 16
+          }
+        },
+        "accordion_ch66k8": {
+          "type": "accordion",
+          "settings": {
+            "title": "Ingredients survivors need and  nothing they should not have",
+            "content": "<p>Highest level extractions to maximize benefits and minimize the number of pills<\/p>",
+            "show_icon": true,
+            "icon_name": "icon-award",
+            "icon_image": "shopify:\/\/shop_images\/Group_3614.jpg",
+            "icon_size": 45,
+            "icon_color": "#545454",
+            "padding_bottom": 16
+          }
+        },
+        "accordion_63khfX": {
+          "type": "accordion",
+          "settings": {
+            "title": "Oncologist and expert formulated specifically to cancer type",
+            "content": "<p>Highest level extractions to maximize benefits and minimize the number of pills<\/p>",
+            "show_icon": true,
+            "icon_name": "icon-award",
+            "icon_image": "shopify:\/\/shop_images\/Frame_5454.jpg",
+            "icon_size": 45,
+            "icon_color": "#545454",
+            "padding_bottom": 16
+          }
+        },
+        "accordion_AF3NzJ": {
+          "type": "accordion",
+          "settings": {
+            "title": "Quality nutrients in their most bioavailable forms",
+            "content": "<p>Share details about your shipping policies, item returns, or customer service.<\/p>",
+            "show_icon": true,
+            "icon_name": "icon-award",
+            "icon_image": "shopify:\/\/shop_images\/Group_1.jpg",
+            "icon_size": 45,
+            "icon_color": "#545454",
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "accordion_FfqXwL",
+        "accordion_ch66k8",
+        "accordion_63khfX",
+        "accordion_AF3NzJ"
+      ],
+      "settings": {
+        "custom_class": "custom_image_with-text_wrapper",
+        "section_haeding": "<h2>Explore by <i>survivor-specific <\/i>support<\/h2>",
+        "layout": "",
+        "height": "image-height",
+        "mobile_height": "screen-height-one-half--mobile",
+        "width": "wrapper--full-padded",
+        "image_1": "shopify:\/\/shop_images\/image_5.jpg",
+        "image_width": "one-half",
+        "text_alignment": "text-center",
+        "reverse_blocks": false,
+        "bg_color": "#fff5f7",
+        "color": "",
+        "padding_top": 100,
+        "padding_bottom": 60
+      }
+    },
+    "section_columns_jpDxFF": {
+      "type": "section-columns",
+      "blocks": {
+        "image_z4Gzgg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Ellipse_7_8e5c37da-0876-4f03-b438-42b4331f8d78.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Dr. Joseph Migrel",
+            "heading_size": 4,
+            "text": "<p>Founder SurvivorRX<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "btn--small",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        },
+        "image_UaFCWt": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Ellipse_7_1.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Dr. Brian Levine",
+            "heading_size": 4,
+            "text": "<p>MD, MS, FACOG<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--black",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false
+          }
+        },
+        "image_8WTVLK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Ellipse_7_2.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Dr. Amber Samuel",
+            "heading_size": 4,
+            "text": "<p>MD, OB\/GYN & MFM<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        },
+        "image_gQrjUx": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Ellipse_7_3.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Dr. Andy Huang",
+            "heading_size": 4,
+            "text": "<p>MD, FACOG<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--black",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        },
+        "image_mXXzFA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Ellipse_7_5.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Dr. Aminah Bliss",
+            "heading_size": 4,
+            "text": "<p>MD, OB\/GYN<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        },
+        "image_XkeLUa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Ellipse_7_5.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Dr. Aminah Bliss",
+            "heading_size": 4,
+            "text": "<p>MD, OB\/GYN<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "image_z4Gzgg",
+        "image_UaFCWt",
+        "image_8WTVLK",
+        "image_gQrjUx",
+        "image_mXXzFA",
+        "image_XkeLUa"
+      ],
+      "settings": {
+        "custom_class": "custom_research_so_you_wrapper custom-slider",
+        "title": "We do all the research <i>so you don’t have to<\/i>",
+        "sub_head": "<p>Meet our team of oncologists & experts<\/p>",
+        "bottom_text": "Meet the rest of the team",
+        "bottom_link": "#",
+        "heading_size": 7,
+        "layout": "slider",
+        "grid": 6,
+        "align_heading": "text-center",
+        "align_text": "text-center",
+        "align_columns": "flex-align-top",
+        "width": "wrapper--full-padded",
+        "bg_color": "#ffffff",
+        "color": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "layout_mobile": "slider"
+      }
+    },
+    "section_columns_b6HBnJ": {
+      "type": "section-columns",
+      "blocks": {
+        "image_9QpGnV": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Ellipse_7_8e5c37da-0876-4f03-b438-42b4331f8d78.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Dr. Joseph Migrel",
+            "heading_size": 4,
+            "text": "<p>Founder SurvivorRX<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        },
+        "image_rx3zjw": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Ellipse_7_1.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Dr. Brian Levine",
+            "heading_size": 4,
+            "text": "<p>MD, MS, FACOG<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false
+          }
+        },
+        "image_UjyzNY": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Ellipse_7_2.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Dr. Amber Samuel",
+            "heading_size": 4,
+            "text": "<p>MD, OB\/GYN & MFM<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        },
+        "image_DzzUc8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Ellipse_7_3.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Dr. Andy Huang",
+            "heading_size": 4,
+            "text": "<p>MD, FACOG<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--black",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        },
+        "image_y4TJtH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Ellipse_7_5.png",
+            "image_aspect_ratio": 1,
+            "mobile_image_aspect_ratio": 1,
+            "image_shape": "normal",
+            "title": "Dr. Aminah Bliss",
+            "heading_size": 4,
+            "text": "<p>MD, OB\/GYN<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--text",
+            "show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "image_9QpGnV",
+        "image_rx3zjw",
+        "image_UjyzNY",
+        "image_DzzUc8",
+        "image_y4TJtH"
+      ],
+      "settings": {
+        "custom_class": "custom_research_so_you_wrapper-inner",
+        "title": "Survivor panel",
+        "sub_head": "",
+        "bottom_text": "",
+        "bottom_link": "",
+        "heading_size": 7,
+        "layout": "grid",
+        "grid": 5,
+        "align_heading": "text-center",
+        "align_text": "text-left",
+        "align_columns": "flex-align-top",
+        "width": "wrapper--full-padded",
+        "bg_color": "#ffffff",
+        "color": "",
+        "padding_top": 0,
+        "padding_bottom": 50,
+        "layout_mobile": "slider"
+      }
+    },
+    "section_text_row_CJAbca": {
+      "type": "section-text-row",
+      "blocks": {
+        "icon_eHQkNY": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-shield",
+            "icon_size": 80,
+            "icon_color": "#545454",
+            "image": "shopify:\/\/shop_images\/Frame_5478.png",
+            "title": "",
+            "heading_size": 4,
+            "text": "<p>Formulated by oncologist & experts<\/p>",
+            "text_size": 3
+          }
+        },
+        "icon_gEVTY7": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-trophy",
+            "icon_size": 80,
+            "icon_color": "#545454",
+            "image": "shopify:\/\/shop_images\/Frame_5480.png",
+            "title": "",
+            "heading_size": 4,
+            "text": "<p>Made in USA<\/p>",
+            "text_size": 3
+          }
+        },
+        "icon_4J4et8": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-chat",
+            "icon_size": 80,
+            "icon_color": "#545454",
+            "image": "shopify:\/\/shop_images\/Frame_5479.png",
+            "title": "",
+            "heading_size": 3,
+            "text": "<p>Certified C.L.E.A.N<\/p>",
+            "text_size": 3
+          }
+        },
+        "icon_UY4R3D": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-award",
+            "icon_size": 80,
+            "icon_color": "#545454",
+            "image": "shopify:\/\/shop_images\/Frame_5481.png",
+            "title": "",
+            "heading_size": 4,
+            "text": "<p>3rd party tested<\/p>",
+            "text_size": 3
+          }
+        },
+        "icon_HQxp6d": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-award",
+            "icon_size": 80,
+            "icon_color": "#545454",
+            "image": "shopify:\/\/shop_images\/Frame_5482.png",
+            "title": "",
+            "heading_size": 4,
+            "text": "<p>Non - GMO<\/p>",
+            "text_size": 3
+          }
+        },
+        "icon_rKnEhG": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-award",
+            "icon_size": 80,
+            "icon_color": "#545454",
+            "image": "shopify:\/\/shop_images\/Frame_5483.png",
+            "title": "",
+            "heading_size": 4,
+            "text": "<p>Made with love<\/p>",
+            "text_size": 3
+          }
+        }
+      },
+      "block_order": [
+        "icon_eHQkNY",
+        "icon_gEVTY7",
+        "icon_4J4et8",
+        "icon_UY4R3D",
+        "icon_HQxp6d",
+        "icon_rKnEhG"
+      ],
+      "settings": {
+        "custom_class": "custom_quantity",
+        "title": "<i>Quality<\/i> you don't have to question",
+        "heading_size": 7,
+        "layout": "grid",
+        "grid": 6,
+        "align_heading": "text-center",
+        "align_text": "text-center",
+        "icon_alignment": "icon--top",
+        "align_columns": "flex-align-center",
+        "width": "wrapper",
+        "bg_color": "#f9f6fb",
+        "color": "",
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "layout_mobile": "slider"
+      }
+    },
+    "section_reviews_a3iA8d": {
+      "type": "section-reviews",
+      "blocks": {
+        "review_z84k6i": {
+          "type": "review",
+          "settings": {
+            "title": "Samantha R.",
+            "subheading": "Customer",
+            "heading": "Great Product!",
+            "rating_star": 5,
+            "review_text": "“I feel like I hit the prenatal jackpot! So many people have trouble finding prenatal vitamins that don’t have crappy side effects like nausea or fishy aftertaste.”",
+            "review_url": ""
+          }
+        },
+        "review_8m37xn": {
+          "type": "review",
+          "settings": {
+            "title": "Bunnie L.",
+            "subheading": "Customer",
+            "heading": "Love SurvivorRX!!!",
+            "rating_star": 5,
+            "review_text": "Use this text to showcase a review from one of your customers. A great review is honest and speaks to the concerns of your customers.",
+            "review_url": ""
+          }
+        },
+        "review_9wKm38": {
+          "type": "review",
+          "settings": {
+            "title": "Sick to it!",
+            "subheading": "Customer",
+            "heading": "Elizabeth M.",
+            "rating_star": 5,
+            "review_text": "Use this text to showcase a review from one of your customers. A great review is honest and speaks to the concerns of your customers.",
+            "review_url": ""
+          }
+        },
+        "review_6XeWdJ": {
+          "type": "review",
+          "settings": {
+            "title": "Samantha R.",
+            "subheading": "Customer",
+            "heading": "Great Product!",
+            "rating_star": 5,
+            "review_text": "“I feel like I hit the prenatal jackpot! So many people have trouble finding prenatal vitamins that don’t have crappy side effects like nausea or fishy aftertaste.”",
+            "review_url": ""
+          }
+        },
+        "review_e3GHyr": {
+          "type": "review",
+          "settings": {
+            "title": "Samantha R.",
+            "subheading": "Customer",
+            "heading": "Great Product!",
+            "rating_star": 5,
+            "review_text": "“I feel like I hit the prenatal jackpot! So many people have trouble finding prenatal vitamins that don’t have crappy side effects like nausea or fishy aftertaste.”",
+            "review_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_z84k6i",
+        "review_8m37xn",
+        "review_9wKm38",
+        "review_6XeWdJ",
+        "review_e3GHyr"
+      ],
+      "settings": {
+        "section_heading": "Don’t just take<i> our words for it!<\/i>",
+        "sub_section_heading": "Here is what people are saying",
+        "show_featured_image": false,
+        "image_aspect_ratio": 1.3,
+        "show_quotation_marks": false,
+        "text_align": "text-left",
+        "text_size": 4,
+        "bg_color": "#e7eedd",
+        "color": "",
+        "card_bg_color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 100
+      }
+    },
+    "section_blog_cjqBYL": {
+      "type": "section-blog",
+      "settings": {
+        "custom_class": "ready-take-custom",
+        "blog_name": "survivorship-simplified",
+        "title": "<p>Ready to take control of your <i>survivorship journey<\/i><\/p>",
+        "sub_title": "Learn about post treatment wellness nutrition, an more at:",
+        "section_heading": "Beyond Cancer",
+        "button_text": "View all articles",
+        "button_link": "shopify:\/\/blogs\/survivorship-simplified",
+        "heading_size": 7,
+        "width": "wrapper--full-padded",
+        "grid": 3,
+        "rows": 1,
+        "aspect_ratio": 1,
+        "title_size": 4,
+        "show_tags": true,
+        "show_author": false,
+        "show_date": true,
+        "show_button": true,
+        "show_comments": false,
+        "bg_color": "#ffffff",
+        "color": "",
+        "padding_top": 75,
+        "padding_bottom": 70
+      }
+    },
+    "section_custom_content_aV3RU4": {
+      "type": "section-custom-content",
+      "blocks": {
+        "text_Qgiqzb": {
+          "type": "text",
+          "settings": {
+            "custom_class": "custom-sisters-of-sea",
+            "image_section": "shopify:\/\/shop_images\/image_22.png",
+            "subheading": "This month featured is",
+            "subheading_size": 3,
+            "title": "Sisters of the Sea",
+            "heading_size": 7,
+            "text": "<p>Since its inception in 1998, Sisters of the Sea’s mission has been to encourage more women to hit the waves and raise funds to support women in their community battling breast cancer.To that end, they created an Annual Sisters of the Sea Women's Surf Classic PRO\/AM. Over the past 25 years, thousands of women of all ages and skill levels have participated, helping them raise funds which they then pass on to survivor causes that make a meaningful impact on the lives of those affected by breast cancer.<\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "show_social_links": false,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "bg_color": "#ffffff",
+            "color": ""
+          }
+        },
+        "text_QhrVpK": {
+          "type": "text",
+          "settings": {
+            "custom_class": "",
+            "subheading": "",
+            "subheading_size": 3,
+            "title": "The Tiny Loving Community (TLC) Project",
+            "heading_size": 7,
+            "text": "<p>We know that to thrive, survivors need to surround themselves with a loving community. Loving communities are those that, little by little, one survivor at a time, make a real difference in people’s lives. Those small loving communities, often started by just a few volunteers with negligible budgets can have a huge impact on survivorship. They are not the giant research centers, or hospitals, or oncology clinics, just tiny non-for profits making their communities better for survivors in a supportive and loving way. At SurvivorRx we call them: TLC - Tiny Loving Communities and every month, we find a TLC in the USA and donate part of our profits as well as products to its members. If you know of a Tiny Loving Community that could use our support, email us at <a href=\"mailto:TLC@survivorRx.com\" title=\"mailto:TLC@survivorRx.com\">TLC@survivorRx.com<\/a><\/p>",
+            "text_size": 3,
+            "button_text": "",
+            "button_url": "",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false,
+            "show_social_links": false,
+            "text_columns": 1,
+            "align_text": "text-left",
+            "bg_color": "",
+            "color": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_Qgiqzb",
+        "text_QhrVpK"
+      ],
+      "settings": {
+        "custom_class": "custom_content_section_wrapper",
+        "height": "image-height",
+        "mobile_height": "screen-height-one-half--mobile",
+        "width": "wrapper--full-padded",
+        "borders": false,
+        "gutters": false,
+        "reverse_blocks": false,
+        "padding_top": 100,
+        "padding_bottom": 100
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "section_announcement_P7a3TA",
+    "docs",
+    "section_columns_9qNMCn",
+    "section_double_gkVE9T",
+    "section_columns_jpDxFF",
+    "section_columns_b6HBnJ",
+    "section_text_row_CJAbca",
+    "section_reviews_a3iA8d",
+    "section_blog_cjqBYL",
+    "section_custom_content_aV3RU4"
+  ]
+}

@@ -1,0 +1,58 @@
+
+<div class="wrapper--full-padded">
+     {% assign max_value = -1 %} 
+
+{% for item in page.metafields.custom.survivor.value %}
+  {% if item.custom_sort_order > max_value %}
+    {% assign max_value = item.custom_sort_order %}
+  {% endif %}
+{% endfor %}
+  <h2 class="cstmsurvivirhead--jtpl">Meet our team of cancer survivors & caretakers</h2>
+{% for i in (1..max_value) %}
+  {% for item in page.metafields.custom.survivor.value %}
+  {% if item.custom_sort_order == i %}
+  {% if item.image  != blank %}
+    <div class="cstm_survivodata--jtpl" id="{{ item.name | handleize }}">
+    <div class="cstm__srvvrtxt--jtpl">
+      
+      <img src="{{ item.image | img_url:'master' }}" alt="Girl in a jacket" width="100" height="100">
+       
+      {% if item.name != blank %}
+    <i>{{ item.name }}</i>
+        {% endif %}
+      {% if item.credential != blank %}
+      <p>{{ item.credential }}</p>
+        {% endif %}
+      {% if item.role != blank %}
+  <p>{{ item.role }}</p>
+        {% endif %}
+    </div>
+       
+    <div class="cstm__survivor--description">
+      {% if item.description != blank %}
+      {{ item.description | metafield_tag}}
+      {% endif %}
+    </div>
+    </div>
+     {% endif %}
+    {% endif %}
+   {% endfor %}
+{% endfor %}
+
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Survivor",
+    "settings": [
+      
+    ],
+    "presets": [
+      {
+        "name":"Survivor"
+      }
+    ]
+  }
+{% endschema %}

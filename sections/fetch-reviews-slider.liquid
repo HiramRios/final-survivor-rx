@@ -1,0 +1,32 @@
+{% if section.settings.background != blank %}
+  <style>
+    #shopify-section-{{ section.id }}.fetch-js-reviews-slider-wrapper {
+      background: {{ section.settings.background }};
+    }
+  </style>
+{% endif %}
+
+<div class="wrapper">
+  <div class="reviews-slider">
+    
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Fetch JS Reviews Slider",
+  "class": "fetch-js-reviews-slider-wrapper",
+   "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fetch JS Reviews Slider",
+    }
+  ]
+}
+{% endschema %}

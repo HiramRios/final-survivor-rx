@@ -1,0 +1,182 @@
+{% layout none %}
+{% if product.metafields.custom.is_primary_product == true %}
+  <div class="slick-slider-container">
+    <div class="slick-slider-image-container">
+      {% for image in product.images %}
+        <div class="main-product-image">
+          <img
+            src="{{ image | img_url: '1000x' }}"
+            alt="images"
+          />
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="multi-imgs-blow-slider">
+      {% for image in product.images %}
+        <div class="multi-products-images">
+          <img
+            src="{{ image | img_url: '180x' }}"
+            alt="images"
+          />
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="recommendation-rightSide_container">
+    <div class="rightside">
+      <div class="rightSide_title">
+        <h1 class="header_title_h1">{{ product.title }}</h1>
+        <h1 class="header_description_h2">{{ product.description }}</h1>
+      </div>
+  
+      {% if product.metafields.custom.survivor_essential_support != blank %}
+        <div class="essential_support">
+          <div class="essential_support_container">
+            <p class="sub-title">SURVIVOR ESSENTIAL SUPPORT</p>
+            <hr class="straight_line"/>
+          </div>
+          {% for obj in product.metafields.custom.survivor_essential_support.value %}
+            <div class="recommendation_support_detail">
+              <div class="image_container">
+                <img class="image_1" src="{{ obj.image | img_url: '200x' }}" />
+              </div>
+              <div class="title_image_container1">
+                <p class="title_1">{{ obj.heading }}</p>
+                <div class="sub_title_image1">
+                  <p class="sub_title_2">{{ obj.sub_heading }}</p>
+                  <div class="image_container1_description">
+                    <p class="description_1">
+                      {{ obj.quiz_short_description }}
+                      <a class="js-ingredient-read essential-support" data-handle="{{ obj.heading | handle }}" href="#">Learn More.</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+  
+      {% if product.metafields.custom.cancer_specific_support != blank %}
+        <div class="cancer_specific_container">
+          <div class="essential_support_container">
+            <p class="sub-title">CANCER SPECIFIC SUPPORT</p>
+            <hr class="straight_line"/>
+          </div>
+          {% for obj in product.metafields.custom.cancer_specific_support.value %}
+            <div class="recommendation_support_detail">
+              <div class="image_container">
+                <img class="image_1" src="{{ obj.image | img_url: '200x' }}" />
+              </div>
+              <div class="title_image_container1">
+                <p class="title_1">{{ obj.heading }}</p>
+                <div class="sub_title_image1">
+                  <p class="sub_title_2">{{ obj.sub_heading }}</p>
+                  <div class="image_container1_description">
+                    <p class="description_1">
+                      {{ obj.quiz_short_description }}
+                      <a class="js-ingredient-read essential-support" data-handle="{{ obj.heading | handle }}" href="#">Learn More.</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+  
+      {% if product.metafields.custom.immune_support != blank %}
+        <div class="immune_support_container">
+          <div class="essential_support_container">
+            <p class="sub-title">IMMUNE SUPPORT</p>
+            <hr class="straight_line"/>
+          </div>
+          {% for obj in product.metafields.custom.immune_support.value %}
+            <div class="recommendation_support_detail">
+              <div class="image_container">
+                <img class="image_1" src="{{ obj.image | img_url: '200x' }}" />
+              </div>
+              <div class="title_image_container1">
+                <p class="title_1">{{ obj.heading }}</p>
+                <div class="sub_title_image1">
+                  <p class="sub_title_2">{{ obj.sub_heading }}</p>
+                  <div class="image_container1_description">
+                    <p class="description_1">
+                      {{ obj.quiz_short_description }}
+                      <a class="js-ingredient-read essential-support" data-handle="{{ obj.heading | handle }}" href="#">Learn More.</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="pdp-supplement-ingredient">
+      {% if product.metafields.custom.ingredient_summary_image != blank %}
+        <div class="pdp-ingredient-summary">
+          <a href="{{ product.metafields.custom.ingredient_summary_image | file_url }}" target="_blank">Ingredient Summary</a>
+        </div>
+      {% endif %}
+      <div class="pdp-supplement-facts">
+        {% if product.metafields.custom.supplement_fact_panel != blank %}
+          <a href="{{ product.metafields.custom.supplement_fact_panel | file_url }}" target="_blank">Supplement Facts</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <button data-handle="{{ product.handle }}" onclick="addToCartNew('{{ product.variants[0].id }}', 1, {{ product.selling_plan_groups[0].selling_plans[0].id }}, '{{ product.handle }}')" class="add-to-cart-btn {{ product.variants[0].id }}">
+      <span id="buttonText" class="buttonText">ADD TO CART - {{ product.price | money }}</span>
+      <div id="spinner" class="spinner"></div>
+    </button>
+    <div class="list">
+      <li class="item">4-Week Supply</li>
+      <li>AM/PM Packs</li>
+      <li>Auto-renew</li>
+      <li>Cancel Anytime</li>
+    </div>
+    <div id="truemed-prequalify" style="font-size: 14px;" icon-height="12" data-public-id="tm_qual_yppyyw9rg8"></div>
+  </div>
+{% else %}
+  <div class="recommendation_pack">
+    <div class="content_detail">
+      <div class="product_title">
+        <div class="heading_container">
+          <p>{{ product.metafields.custom.quiz_add_on_categories.value.quiz_add_on_support_categories }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="addtocart_product_details">
+      <div class="product_image_container">
+        <img
+          class="product_image_1"
+          {% for obj in product.metafields.custom.inside_the_package.value %}
+            src="{{ obj.image | img_url: '200x' }}"
+          {% endfor %}
+          alt="{{ product.title }}"
+        />
+      </div>
+      <div class="product_detail_1">
+        {% for obj in product.metafields.custom.inside_the_package.value %}
+          <p class="title-2">{{ obj.heading }}</p>
+          <div class="sub_heading_1">
+            <p class="dose-heading">{{ obj.sub_heading }}</p>
+            <div class="product_description">
+              <p>
+                {{ obj.quiz_short_description }}
+                <a class="js-ingredient-read addon-support" data-handle="{{ obj.heading | handle }}" href="#">Learn More.</a>
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <button data-handle="{{ product.handle }}" onclick="addToCartNew('{{ product.variants[0].id }}', 1, {{ product.selling_plan_groups[0].selling_plans[0].id }}, '{{ product.handle }}')" class="add_to_cart_btn {{ product.variants[0].id }}">
+      <span id="buttonText" class="buttonText">ADD TO PACK - {{ product.price | money }}</span>
+      <div id="spinner" class="spinner"></div>
+    </button>
+  </div>
+{% endif %}

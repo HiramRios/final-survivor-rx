@@ -1,0 +1,125 @@
+{% layout none %}
+{% if product.metafields.custom.portal_blogs != blank %}
+  <div class="recharge-blog">
+    <div class="recharge-blog__header">
+      <span class="recharge-blog__title">{{ settings.pt_blog_heading }}</span>
+      <span class="recharge-blog__content">{{ settings.pt_blog_content }}</span>
+    </div>
+    <div class="recharge-blog__inner">
+      {% for handle in product.metafields.custom.portal_blogs.value %}
+        {% assign article = articles[handle] %}
+        <div class="recharge-blog__item">      
+          {%- capture tags -%}
+            {%- if article.tags.size > 0 -%}
+              <div class="article__tags">
+                {%- for tag in article.tags limit: 3 -%}
+                  <a href="{{ blog.url }}/tagged/{{ tag | handle }}" target="_blank" title="{{ blog.title }} tagged {{ tag | escape }}" class="article__tag">{{ tag }}</a>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          {%- endcapture -%}
+          <article class="article grid-item">
+            <div class="article__link_image_text_wrapper">
+              {%- if article.image -%}
+                <div class="article__image__outer">
+                  <div class="article__image">
+                    <a class="article__image-link" target="_blank" href="{{ article.url }}" aria-label="{{ article.title | strip_html | escape }}">
+                      {%- capture sizes -%}
+                        (min-width: 990px) calc((100vw - 100px) / 3), (min-width: 750px) calc((100vw - 60px) / 3), calc(100vw - 32px)
+                      {%- endcapture -%}
+                      {%- render 'image' image: article.image, widths: '250, 280, 360, 480, 560, 640, 720, 840, 960, 1280, 1440, 1600, 1840, 2100, 2400', sizes: sizes, aspect_ratio: 2.0, loading: 'lazy', show_backfill: true -%}
+                    </a>
+                    {{ tags }}
+                  </div>
+                </div>
+              {%- else -%}
+                {{ tags }}
+              {%- endif -%}
+              <div class="article__text-wrapper">
+                <p class="article__meta">
+                  {%- assign published_at = article.published_at | date: format: 'full_date' -%}
+                  <time datetime="{{ published_at }}">{{ published_at }}</time> 
+                </p>
+                <h2 class="article__title {{ title_size_class }}">
+                  <a href="{{ article.url }}" target="_blank" title="{{ article.title | strip_html | escape }}">
+                    {{ article.title }}
+                  </a>
+                </h2>
+                <a href="{{ article.url }}" target="_blank"><p class="article__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 30 }}</p></a>
+                {% if article.metafields.custom.author_name.value != blank %}
+                  <p class="article__meta__author cstm__metafieldtxt">Written By: {{ article.metafields.custom.author_name.value }}</p>
+                {% endif %}
+                {% if article.metafields.custom.reviewed_by_author.value != blank %}
+                  <p class="article__meta__reviewer cstm__metafieldtxt">Reviewed By: {{ article.metafields.custom.reviewed_by_author.value }}</p>
+                {% endif %}
+                <div class="article__link">
+                  <a href="{{ article.url }}" target="_blank" class="btn btn--text" aria-label="{{ 'blogs.article.read_more' | t }}">
+                    <span>{{ 'blogs.article.read_more' | t }} - {{ article.metafields.custom.minute_read_time }} min</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="recharge-referral">
+    <div class="recharge-referral__text">
+      <span class="recharge-referral__title">{{ settings.pt_referral_heading }}</span>
+      <span class="recharge-referral__content">{{ settings.pt_referral_content }}</span>
+      <a href="https://survivorrx.com/pages/referral-program" target="_blank" class="recharge-referral__cta btn btn--solid  btn--primary">Refer a Friend</a>
+    </div>
+    <div class="recharge-referral__image">
+      <img src="{{ settings.pt_referral_img | img_url: '700x' }}">
+    </div>
+  </div>
+
+  <div class="recharge-faq">
+    <span class="recharge-faq__heading">Frequently Asked Questions</span>
+    <collapsible-elements single="true">
+      {%- for faq in product.metafields.custom.portal_faqs.value -%}
+        {%- liquid
+          assign title = faq.question
+          assign content = faq.answer | metafield_tag
+          assign default_open = false
+        -%}
+      
+        {%- if title != blank and content != blank -%}
+          {%- if title != blank -%}
+            {%- assign animation_order = animation_order | plus: 1 -%}
+            <details
+              class="accordion"
+              data-collapsible
+              {% if default_open %}
+                open="true"
+              {% endif %}
+              style="order: {{ faq.custom_sort_order }}"
+            >
+              <summary class="accordion__title h6" data-collapsible-trigger>
+                {{ title }}
+                {%- render 'arrow-up' -%}
+                {%- render 'arrow-down' -%}
+              </summary>
+      
+              <div
+                class="accordion__body rte"
+                {% if default_open != blank %}
+                  style="height: auto;"
+                {% endif %}
+                data-collapsible-body
+              >
+                <div class="accordion__content" data-collapsible-content>
+                  {{ content }}
+                </div>
+              </div>
+            </details>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </collapsible-elements>
+  </div>
+  
+{% endif %}
+

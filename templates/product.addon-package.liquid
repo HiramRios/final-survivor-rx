@@ -1,0 +1,145 @@
+{% layout none %}
+<div class="product-addon-package-section" style="height:0; overflow: hidden">
+  <div class="shopify-section">
+    {% if product.metafields.shopify--discovery--product_recommendation.complementary_products != blank %}
+      <div class="wrapper">
+        <div class="recommended-addons">
+          <div class="recommended-addons__blocks tab tab-active active-a" data-id="viewall">
+            {% for item in product.metafields.shopify--discovery--product_recommendation.complementary_products.value %}
+              {% assign am_pill_count = 0 %}
+              {% assign pm_pill_count = 0 %}
+              
+              <div class="recommended-addons__block">
+                <a href="{{ item.url }}"><img class="addon-block__img" src="{{ item.featured_image | img_url: '600x' }}"></a>
+                <span class="addon-block__title">{{ item.title }}</span>
+                {% if item.metafields.custom.am_pill_count != blank %}
+                    {% assign am_pill_count = item.metafields.custom.am_pill_count %}
+                {% endif %}
+                {% if item.metafields.custom.pm_pill_count != blank %}
+                  {% assign pm_pill_count = item.metafields.custom.pm_pill_count %}
+                {% endif %}
+                {% if am_pill_count > 0 %}
+                  {% if pm_pill_count > 0 %}
+                    <span class="addon-block__subtitle">{{ am_pill_count }} Capsule{% if am_pill_count > 1 %}s{% endif %} - AM | {{ pm_pill_count }} Capsule{% if pm_pill_count > 1 %}s{% endif %} - PM</span>
+                  {% else %}
+                    <span class="addon-block__subtitle">{{ am_pill_count }} Capsule{% if am_pill_count > 1 %}s{% endif %} - AM</span>
+                  {% endif %}
+                {% else %}
+                  {% if pm_pill_count > 0 %}
+                    <input type="hidden" name="properties[Dose]" value="{{ pm_pill_count }} Capsule{% if pm_pill_count > 1 %}s{% endif %} - PM">
+                    <span class="addon-block__subtitle">{{ pm_pill_count }} Capsule{% if pm_pill_count > 1 %}s{% endif %} - PM</span>
+                  {% endif %}
+                {% endif %}
+                <span class="addon-black__price">{{ item.price | money }} Every Four Weeks</span>
+                <span class="addon-block__content">
+                  <ul>
+                    {% for feature in item.metafields.custom.pdp_features.value limit: 5 %}
+                      <li>{{ feature }}</li>
+                    {% endfor %}
+                    <li>
+                      <span class="addon-block__learn cstm_ingredient_read" 
+                        data-id="{{ item.title | handle }}"
+                        open_text_handle="{{ item.title | handle }}"
+                        open_text="{{ item.title | handle }}">Learn More</span>
+                    </li>
+                  </ul>
+                </span>
+                {%- form 'product', product, class: 'product-form', data-product-form: '' -%}
+                  {% if item.metafields.custom.am_pill_count != blank %}
+                    {% assign am_pill_count = item.metafields.custom.am_pill_count %}
+                  {% endif %}
+                  {% if item.metafields.custom.pm_pill_count != blank %}
+                    {% assign pm_pill_count = item.metafields.custom.pm_pill_count %}
+                  {% endif %}
+                  {% if am_pill_count > 0 %}
+                    {% if pm_pill_count > 0 %}
+                      <input type="hidden" name="properties[Dose]" value="{{ am_pill_count }} Capsule{% if am_pill_count > 1 %}s{% endif %} - AM | {{ pm_pill_count }} Capsule{% if pm_pill_count > 1 %}s{% endif %} - PM">
+                    {% else %}
+                      <input type="hidden" name="properties[Dose]" value="{{ am_pill_count }} Capsule{% if am_pill_count > 1 %}s{% endif %} - AM">
+                    {% endif %}
+                  {% else %}
+                    {% if pm_pill_count > 0 %}
+                      <input type="hidden" name="properties[Dose]" value="{{ pm_pill_count }} Capsule{% if pm_pill_count > 1 %}s{% endif %} - PM">
+                    {% endif %}
+                  {% endif %}
+    
+                  {% if item.metafields.custom.is_primary_product.value == false %}
+                    {% if item.metafields.custom._okc_toa != blank %}
+                      <input type="hidden" name="properties[_okc_toa]" value="{{ item.metafields.custom._okc_toa.value }}">
+                    {% endif %}
+                    {% if item.metafields.custom._okc_quantity != blank %}
+                      <input type="hidden" name="properties[_okc_quantity]" value="{{ item.metafields.custom._okc_quantity.value }}">
+                    {% endif %}
+                  {% endif %}
+                  
+                  {% if item.selling_plan_groups.size > 0 %}
+                    <input type="hidden" name="selling_plan" value="{{ item.selling_plan_groups.first.selling_plans.first.id }}" />
+                  {% endif %}
+                  <input type="hidden" name="id" value="{{ item.selected_or_first_available_variant.id }}">
+                  <button class="addon-block__link btn btn--solid" type="button">Add To Pack</button>
+                {%- endform -%}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="cstm_slider_wrapper cstm_new_popup" style="visibility:hidden">
+        <div class="cstm-popup-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M25 7L7 25" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25 25L7 7" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      
+        <div class="main_tab_wrapper cstm-slider-img" style="display:none">
+          {% assign counting = 0 %}
+          {% for item in product.metafields.shopify--discovery--product_recommendation.complementary_products.value %}
+            {% if item.title %}
+              {% assign counting = counting | plus: 1 %}
+              
+              <div
+                class="tab newidtab"
+                data-count="{{ counting }}"
+                data-id="viewall"
+                open_tab_cstm="{{ item.title | handle }}"
+              >
+                <div class="inner_wrapper_tab">
+                  <div class="cstm-inner-contnt">
+                    <!-- Content here -->
+                  </div>
+                  <img
+                    src="{{ item.featured_image | img_url: '500x' }}"
+                    alt="Ingredient Image"
+                    width="200px"
+                    height="200px"
+                  >
+    
+                  <div class="center-text ingredient-heading">
+                    <h3>{{ item.title }}</h3>
+                    <p style="text-align:center;">1 PM Capsule</p>
+                  </div>
+    
+                  <hr>
+    
+                  <div class="csmt_info--jtpl ingredients-content">
+                    {{ item.metafields.custom.product_descriptionn | metafield_tag }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      
+        <div class="btn-wrap">
+          <button class="prev-btn  ">
+            {% render 'slider-prev-arrow' %}
+          </button>
+          <div class="e_count"></div>
+          <button class="next-btn">
+            {% render 'slider-next-arrow' %}
+          </button>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

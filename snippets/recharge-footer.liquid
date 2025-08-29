@@ -1,0 +1,1203 @@
+<script type="text/html" data-recharge-slot="*.sidebar">
+  <div id="placeholder-for-my-app" class="recharge-card"></div>
+</script>
+<script>
+  const rechargeAPINew = {
+      session: null,
+
+      async authenticate() {
+          if (!this.session) {
+              this.session = await recharge.auth.loginCustomerPortal().catch(error => {
+                  console.error("Authentication failed:", error);
+                  throw error;
+              });
+          }
+          return this.session;
+      },
+
+      async fetchSubscriptions() {
+          const response = await recharge.subscription.listSubscriptions(this.session, {
+              limit: 250,
+              sort_by: 'id-asc',
+              //status: 'Active',
+              include: 'bundle_product'
+          }).catch(error => {
+              console.error("Fetching subscriptions failed:", error);
+              throw error;
+          });
+          window.RechargeSubscriptions = response.subscriptions;
+
+          // Upsell update
+          for (let i = 0; i < window.RechargeSubscriptions.length; i ++) {
+            if (window.RechargeSubscriptions[i].status == 'active') {
+              const style = document.createElement('style');
+              style.innerHTML = `
+                  .recharge-section-product-carousel [aria-label="Add ${window.RechargeSubscriptions[i].product_title}"] {
+                    pointer-events: none;
+                    opacity: 0.6;
+                  }
+              `;
+              document.head.appendChild(style);
+
+              if (window.RechargeSubscriptions[i].product_title == 'SurvivorRx Immunity Plus' || window.RechargeSubscriptions[i].product_title == 'WellSurvivor Breast ER+') {
+                let intervalId = setInterval(function () {
+                  if (document.querySelector('[aria-label="Add Curcumin/Turmeric 3rd Gen"]') != null) {
+                    document.querySelector('[aria-label="Add Curcumin/Turmeric 3rd Gen"]').closest('.recharge-component-carousel-item').parentNode.remove();
+                    clearInterval(intervalId);
+                  }
+                }, 100);
+              }
+            }
+          }
+
+          return response.subscriptions;
+      },
+
+      async fetchOnetimes() {
+          const response = await recharge.onetime.listOnetimes(this.session, {
+              limit: 25,
+              sort_by: 'id-asc'
+          }).catch(error => {
+              console.error("Fetching onetimes failed:", error);
+              throw error;
+          });
+          window.RechargeOnetimes = response.onetimes;
+          return response.onetimes;
+      },
+
+      async fetchBundles() {
+          const response = await recharge.bundle.listBundleSelections(this.session, {
+            limit: 25,
+            sort_by: 'id-asc',
+            active_purchase_items: true,
+          }).catch(error => {
+              console.error("Fetching subscriptions failed:", error);
+              throw error;
+          });
+          return response.bundle_selections;
+      },
+
+      async nextQueuedCharges() {
+          try {
+              // Filter subscriptions with queued charges
+              const subsWithQueuedCharges = window.RechargeSubscriptions.filter(sub => 
+                  sub && 
+                  sub.has_queued_charges === true && 
+                  sub.next_charge_scheduled_at
+              );
+      
+              if (!subsWithQueuedCharges.length) {
+                  console.error('No subscriptions with queued charges found');
+                  return [];
+              }
+      
+              // Find the oldest next charge date
+              const oldestDate = new Date(Math.min(
+                  ...subsWithQueuedCharges.map(sub => new Date(sub.next_charge_scheduled_at))
+              ));
+      
+              // Create array of unique address_id and next_charge_scheduled_at combinations
+              const nextSubscriptions = Array.from(new Set(
+                  subsWithQueuedCharges.map(sub => 
+                      JSON.stringify({
+                          address_id: sub.address_id,
+                          next_charge_scheduled_at: sub.next_charge_scheduled_at
+                      })
+                  )
+              )).map(str => JSON.parse(str));
+      
+              // Sort by next charge date
+              nextSubscriptions.sort((a, b) => 
+                  new Date(a.next_charge_scheduled_at) - new Date(b.next_charge_scheduled_at)
+              );
+      
+              return nextSubscriptions;
+      
+          } catch (error) {
+              console.error('Error processing next queued charges:', error);
+              return [];
+          }
+      },
+    
+      async updateChargeDate(nextChargeDate) {
+          try {
+              const nextQueuedCharges = await this.nextQueuedCharges();
+              
+              if (!nextQueuedCharges?.length) {
+                  console.error('No queued charges found');
+                  return;
+              }
+      
+              for (const queuedCharge of nextQueuedCharges) {
+                  console.log('Processing charge:', {
+                      address_id: queuedCharge.address_id,
+                      next_charge_scheduled_at: queuedCharge.next_charge_scheduled_at
+                  });
+      
+                  // Filter and map subscriptions
+                  const subscriptions = window.RechargeSubscriptions
+                      .filter(sub => 
+                          sub.address_id === queuedCharge.address_id && 
+                          sub.next_charge_scheduled_at === queuedCharge.next_charge_scheduled_at
+                      )
+                      .map(sub => ({
+                          id: sub.id,
+                          order_interval_frequency: sub.order_interval_frequency,
+                          charge_interval_frequency: sub.charge_interval_frequency,
+                          order_interval_unit: sub.order_interval_unit,
+                          next_charge_scheduled_at: nextChargeDate
+                      }));
+      
+                  // Filter and map onetimes
+                  const onetimes = window.RechargeOnetimes
+                      .filter(item => 
+                          item.address_id === queuedCharge.address_id && 
+                          item.next_charge_scheduled_at === queuedCharge.next_charge_scheduled_at
+                      )
+                      .map(item => ({
+                          id: item.id,
+                          next_charge_scheduled_at: nextChargeDate
+                      }));
+      
+                  console.log('Subscriptions to update:', subscriptions);
+                  console.log('Onetimes to update:', onetimes);
+      
+                  if (!subscriptions.length) {
+                      continue;
+                  }
+      
+                  const updateOptions = { allow_onetimes: true };
+      
+                  try {
+                      // Update subscriptions
+                      const response = await recharge.subscription.updateSubscriptions(
+                          this.session,
+                          queuedCharge.address_id,
+                          subscriptions,
+                          updateOptions
+                      );
+      
+                      if (response.length >= 0) {
+                          // Update onetimes if they exist
+                          if (onetimes.length > 0) {
+                              await recharge.subscription.updateSubscriptions(
+                                  this.session,
+                                  queuedCharge.address_id,
+                                  onetimes,
+                                  updateOptions
+                              );
+                          }
+                      } else {
+                          throw new Error('Recharge Affinity API Token error');
+                      }
+                  } catch (error) {
+                      console.error('Failed to update charges:', error);
+                      throw error;
+                  }
+              }
+      
+              // Reload page after all updates are complete
+              window.location.reload();
+          } catch (error) {
+              console.error('Update charge date failed:', error);
+              alert('Failed to update charge date. Please try again.');
+          }
+      },
+    
+      async updateFrequency(frequency, unit) {
+          try {
+              const nextQueuedCharges = await this.nextQueuedCharges();
+              
+              if (!nextQueuedCharges?.length) {
+                  console.error('No queued charges found');
+                  return;
+              }
+      
+              for (const queuedCharge of nextQueuedCharges) {
+                  console.log('Processing charge:', {
+                      address_id: queuedCharge.address_id,
+                      next_charge_scheduled_at: queuedCharge.next_charge_scheduled_at
+                  });
+      
+                  // Filter and map subscriptions
+                  const subscriptions = window.RechargeSubscriptions
+                      .filter(sub => 
+                          sub.address_id === queuedCharge.address_id && 
+                          sub.next_charge_scheduled_at === queuedCharge.next_charge_scheduled_at
+                      )
+                      .map(sub => ({
+                          id: sub.id,
+                          order_interval_frequency: frequency,
+                          charge_interval_frequency: frequency,
+                          order_interval_unit: unit,
+                          next_charge_scheduled_at: queuedCharge.next_charge_scheduled_at
+                      }));
+      
+                  // Filter and map onetimes
+                  const onetimes = window.RechargeOnetimes
+                      .filter(item => 
+                          item.address_id === queuedCharge.address_id && 
+                          item.next_charge_scheduled_at === queuedCharge.next_charge_scheduled_at
+                      )
+                      .map(item => ({
+                          id: item.id,
+                          next_charge_scheduled_at: queuedCharge.next_charge_scheduled_at
+                      }));
+      
+                  console.log('Subscriptions to update:', subscriptions);
+                  console.log('Onetimes to update:', onetimes);
+      
+                  if (!subscriptions.length) {
+                      continue;
+                  }
+      
+                  const updateOptions = { allow_onetimes: true };
+      
+                  try {
+                      // Update subscriptions
+                      const response = await recharge.subscription.updateSubscriptions(
+                          this.session,
+                          queuedCharge.address_id,
+                          subscriptions,
+                          updateOptions
+                      );
+      
+                      if (response.length >= 0) {
+                          // Update onetimes if they exist
+                          if (onetimes.length > 0) {
+                              await recharge.subscription.updateSubscriptions(
+                                  this.session,
+                                  queuedCharge.address_id,
+                                  onetimes,
+                                  updateOptions
+                              );
+                          }
+                      } else {
+                          throw new Error('Recharge Affinity API Token error');
+                      }
+                  } catch (error) {
+                      console.error('Failed to update charges:', error);
+                      throw error;
+                  }
+              }
+      
+              // Reload page after all updates are complete
+              window.location.reload();
+          } catch (error) {
+              console.error('Update frequency failed:', error);
+              alert('Failed to update frequency. Please try again.');
+          }
+      },
+
+      async cancelSubscriptions() {
+          try {
+              const nextQueuedCharges = await this.nextQueuedCharges();
+              
+              if (!nextQueuedCharges?.length) {
+                  console.error('No queued charges found');
+                  return;
+              }
+
+              let reason = $('[name="reason-popup__month"]:checked').val();
+              let reasonNote = '';
+              if (reason == 'Other reason') {
+                reasonNote = $('.reason-popup__input').val();
+              }
+              else if (reason.indexOf('side effect') >= 0) {
+                let sideEffect = '';
+                $('[name="reason-popup__sideeffect"]:checked').each(function () {
+                  sideEffect += $(this).val() + ' ';
+                });
+                if (sideEffect.indexOf('Not Listed') >= 0) {
+                  sideEffect = 'Not Listed: ' + $('.reason-popup__side__input').val();
+                }
+                reasonNote = sideEffect;
+              }
+      
+              for (const queuedCharge of nextQueuedCharges) {
+                  console.log('Processing charge:', {
+                      address_id: queuedCharge.address_id,
+                      next_charge_scheduled_at: queuedCharge.next_charge_scheduled_at
+                  });
+      
+                  // Filter and map subscriptions
+                  const subscriptions = window.RechargeSubscriptions
+                      .filter(sub => 
+                          sub.address_id === queuedCharge.address_id && 
+                          sub.next_charge_scheduled_at === queuedCharge.next_charge_scheduled_at
+                      )
+                      .map(sub => ({
+                          id: sub.id,
+                          status: "CANCELLED",
+                          cancellation_reason: reason,
+                          cancellation_reason_comments: reasonNote
+                      }));
+      
+                  // Filter and map onetimes
+                  const onetimes = window.RechargeOnetimes
+                      .filter(item => 
+                          item.address_id === queuedCharge.address_id && 
+                          item.next_charge_scheduled_at === queuedCharge.next_charge_scheduled_at
+                      )
+                      .map(item => ({
+                          id: item.id,
+                          next_charge_scheduled_at: queuedCharge.next_charge_scheduled_at
+                      }));
+      
+                  console.log('Subscriptions to update:', subscriptions);
+                  console.log('Onetimes to update:', onetimes);
+      
+                  if (!subscriptions.length) {
+                      continue;
+                  }
+      
+                  const updateOptions = { allow_onetimes: true };
+
+                  try {
+                      // Update subscriptions
+                      const response = await recharge.subscription.updateSubscriptions(
+                          this.session,
+                          queuedCharge.address_id,
+                          subscriptions,
+                          updateOptions
+                      );
+      
+                      if (response.length >= 0) {
+                          // Update onetimes if they exist
+                         if (onetimes.length > 0) {
+                           await Promise.all(onetimes.map(oneTime => 
+                             recharge.onetime.deleteOnetime(this.session, oneTime.id)
+                           ));
+                         }
+                      } else {
+                          throw new Error('Recharge Affinity API Token error');
+                      }
+                  } catch (error) {
+                      console.error('Failed to cancel charges:', error);
+                      throw error;
+                  }
+              }
+      
+              // Reload page after all updates are complete
+              window.location.reload();
+          } catch (error) {
+              console.error('cancel failed:', error);
+              alert('Failed to cancel. Please try again.');
+          }
+      },
+    
+      async removeItem(itemId) {
+        let subscriptions = [];
+        if (window.RechargeSubscriptions.length > 0) {
+          const nextQueuedCharges = await this.nextQueuedCharges();
+          
+          let addressId = nextQueuedCharges[0].address_id;
+
+          // Remove onetime
+          for (i = 0; i < window.RechargeOnetimes.length; i ++) {
+            if (itemId == window.RechargeOnetimes[i].id) {
+              const response = await recharge.onetime.deleteOnetime(this.session, window.RechargeOnetimes[i].id);
+              window.location.reload();
+            }
+          }
+
+          // Cancel subscription
+          for (let i = 0; i < window.RechargeSubscriptions.length; i ++) {
+            if (itemId == window.RechargeSubscriptions[i].id) {
+              subscriptions.push({
+                id: window.RechargeSubscriptions[i].id,
+                status: "CANCELLED"
+              });
+            }
+          }
+          if (subscriptions.length > 0) {
+            const response = await recharge.subscription.updateSubscriptions(this.session, addressId, subscriptions, {
+              allow_onetimes: true 
+            }).catch(error => {
+                console.error("Fetching subscriptions failed:", error);
+                throw error;
+            });
+            console.log(response);
+            if (response.length >= 0) {
+              window.location.reload();
+            }
+            else {
+              alert('Recharge Affinity API Token error.');
+              window.location.reload();
+            }
+          }
+          
+          return response;
+        }
+        return false;
+      },
+  };
+
+  // Function to fetch images for multiple variants
+  async function getVariants(variantIds) {
+    const storefrontAccessToken = '2f12fed2c9ef8df77bed02d6b74c7e0e';
+    const shopDomain = 'angelinos-com.myshopify.com';
+  
+    // GraphQL query to fetch images for multiple variants
+    const query = `
+      query getVariantsImages($variantIds: [ID!]!) {
+        nodes(ids: $variantIds) {
+          ... on ProductVariant {
+            id
+            title
+            image {
+              originalSrc
+            }
+            product {
+              title
+              featuredImage {
+                originalSrc
+              }
+            }
+          }
+        }
+      }
+    `;
+  
+    // Prepare the variant GIDs (Global IDs) for Shopify API
+    const variantGIDs = variantIds.map(id => `gid://shopify/ProductVariant/${id}`);
+  
+    const url = `https://${shopDomain}/api/2024-10/graphql.json`;
+  
+    // Creating the request payload
+    const requestBody = JSON.stringify({
+      query: query,
+      variables: { variantIds: variantGIDs }
+    });
+  
+    // Make the request using pure JavaScript (Fetch API)
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': storefrontAccessToken
+      },
+      body: requestBody
+    });
+  
+    // Parse the response
+    const responseBody = await response.json();
+  
+    // Check for any errors in the response
+    if (responseBody.errors) {
+      console.error('Errors:', responseBody.errors);
+      return null;
+    }
+  
+    // Extract and format the variant image data
+    const variants = responseBody.data.nodes;
+  
+    return variants;
+  }
+
+  const productsAvailableForPurchaseManagerNew = {
+      async init() {
+          try {
+              await rechargeAPINew.authenticate();
+              const subscriptions = await this.getActiveSubscription();
+              const onetimes = await rechargeAPINew.fetchOnetimes();
+              const bundles = await rechargeAPINew.fetchBundles();
+
+              window.bundleVariantsHtml = [];
+            
+              if (bundles) {
+                for (let bundle of bundles) {
+                  let variantIds = [];
+  
+                  for (let item of bundle.items) {
+                      variantIds.push(item.external_variant_id);
+                  }
+
+                  getVariants(variantIds).then(function (variants) {
+                    let variantsHtml = `<div class="bundle-variants">`;
+
+                    for (let j = 0; j < variants.length; j ++) {
+                      let variantTitle = ``;
+                      if (variants[j].title.indexOf('Default') >= 0) {}
+                      else {
+                        variantTitle = `<span class="bundle-variant__title--v">${variants[j].title}</span>`;
+                      }
+  
+                      let variantPrice = ``;
+                      for (let k = 0; k < bundle.items.length; k ++) {
+                        if (variants[j].id.indexOf(bundle.items[k].external_variant_id) >= 0) {
+                          variantPrice = `${bundle.items[k].quantity} x $${bundle.items[k].price}`
+                        }
+                      }
+                      
+                      variantsHtml += `
+                        <div class="bundle-variant">
+                          <div class="bundle-variant__img">
+                            <img src="${variants[j].image.originalSrc}">
+                          </div>
+                          <div class="bundle-variant__title">
+                            <span class="bundle-variant__title--p">${variants[j].product.title}</span>
+                            ${variantTitle}
+                          </div>
+                          <div class="bundle-variant__price">
+                            ${variantPrice}
+                          </div>
+                        </div>  
+                      `;
+                    }
+
+                    variantsHtml += `</div>`;
+                  
+                    window.bundleVariantsHtml.push({
+                      purchase_item_id: bundle.purchase_item_id,
+                      html: variantsHtml
+                    });
+                  });
+                }
+              }
+
+              const hasActiveSubscriptions = subscriptions !== undefined ? true : false;
+
+              if (!hasActiveSubscriptions) {
+                  const style = document.createElement('style');
+                  style.innerHTML = `
+                      div.recharge-section-product-carousel {
+                          display: none;
+                      }
+                  `;
+                  document.head.appendChild(style);
+              }
+
+          } catch (error) {
+              console.error("Initialization failed:", error);
+          }
+      },
+
+      async getActiveSubscription() {
+        const subscriptions = await rechargeAPINew.fetchSubscriptions();
+        return subscriptions.find(sub => sub.status === "active");
+      },      
+
+      async updateFrequency(frequency, unit) {
+        try {
+          await rechargeAPINew.updateFrequency(frequency, unit);
+        } catch (error) {
+          console.error("Update frequency failed:", error);
+        }
+      },      
+
+      async updateChargeDate(nextChargeDate) {
+        try {
+          await rechargeAPINew.updateChargeDate(nextChargeDate);
+        } catch (error) {
+          console.error("Update next charge date failed:", error);
+        }
+      },
+
+      async cancelSubscriptions() {
+        try {
+          await rechargeAPINew.cancelSubscriptions();
+        } catch (error) {
+          console.error("Update next charge date failed:", error);
+        }
+      },
+
+      async removeItem(itemId) {
+        try {
+          await rechargeAPINew.removeItem(itemId);
+        } catch (error) {
+          console.error("Removing item failed:", error);
+        }
+      },
+  };  
+</script>
+
+<script>
+  /* Auto redirect */
+  document.addEventListener("Recharge::action::orderChanged", event => {
+    let url = new URL(window.location.href);
+    url.searchParams.delete('product');
+    let ref = url.searchParams.delete('subscription');
+    history.replaceState(history.state, '', url.href);
+    window.location.reload();
+  });
+  
+  /* Update contents */
+  setInterval(function () {
+    if ($('#build-a-box .rb-box-builder').length) {
+      if ($('.babox-search').length) {}
+      else {
+        $('#build-a-box .rb-box-builder').prepend(`
+          <div class="babox-search">
+            <div class="babox-search__icon">
+              <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M6.766 12.96a6.194 6.194 0 1 0 0-12.389 6.194 6.194 0 0 0 0 12.389ZM15.428 15.429l-4.285-4.286" stroke="currentColor" stroke-width="1.143" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </div>
+            <input class="babox-search__input" placeholder="Search products" value="">
+          </div>
+          <div class="babox-empty">
+            <div class="babox-empty__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none"><path d="M30.7222 46.0555C30.7222 50.1222 32.3376 54.0222 35.2132 56.8978C38.0888 59.7734 41.9889 61.3888 46.0555 61.3888C50.1222 61.3888 54.0222 59.7734 56.8978 56.8978C59.7734 54.0222 61.3888 50.1222 61.3888 46.0555C61.3888 41.9889 59.7734 38.0888 56.8978 35.2132C54.0222 32.3376 50.1222 30.7222 46.0555 30.7222C41.9889 30.7222 38.0888 32.3376 35.2132 35.2132C32.3376 38.0888 30.7222 41.9889 30.7222 46.0555Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M35.2148 56.8962L56.8987 35.2123" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M28.1666 61.3889H5.16664C4.48886 61.3889 3.83885 61.1196 3.35959 60.6404C2.88033 60.1611 2.61108 59.5111 2.61108 58.8333V5.16664C2.61108 4.48886 2.88033 3.83885 3.35959 3.35959C3.83885 2.88033 4.48886 2.61108 5.16664 2.61108H39.1376C39.8154 2.61123 40.4653 2.88057 40.9444 3.35986L50.4179 12.8333C50.8972 13.3125 51.1665 13.9624 51.1666 14.6401V23.0555" stroke="var(--recharge-color-brand, currentColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </div>
+            <div class="babox-empty__text1">
+              We couldn't find any matches for “<span class="babox-empty__value"></span>”.
+            </div>
+            <div class="babox-empty__text2">
+              Try adjusting search term or checking your spelling.
+            </div>
+          </div>
+        `);
+      }
+
+      $('#build-a-box .rb-box-builder .rb-item .rb-input').each(function () {
+        let value = parseInt($(this).val());
+        if (value == 0) {
+          $(this).parent().addClass('rb-qty-wrapper--zero');
+        }
+      });
+    }
+  }, 100);
+
+  /* Update contents - Search */
+  $(document).on('input', '.babox-search__input', function () {
+    let value = $(this).val().toLowerCase();
+    let rbItems = $('#build-a-box .rb-box-builder .rb-item');
+    let hiddenCount = 0;
+
+    for (let i = 0; i < rbItems.length; i ++) {
+      if (value.length == 0) {
+        $(rbItems[i]).css('display', 'flex');
+      }
+      else {
+        let rbTitle = $(rbItems[i]).find('.rb-title').text().toLowerCase();
+        if (rbTitle.indexOf(value) >= 0) {
+          $(rbItems[i]).css('display', 'flex');
+        }
+        else {
+          $(rbItems[i]).css('display', 'none');
+          hiddenCount ++;
+        }
+      }
+    }
+
+    if (hiddenCount == rbItems.length) {
+      $('.babox-empty__value').text($(this).val());
+      $('.babox-empty').css('display', 'block');
+    }
+    else {
+      $('.babox-empty').css('display', 'none');
+    }
+  });
+
+  /* Update contents - Quantity */
+  $(document).on('input', '#build-a-box .rb-box-builder .rb-input', function () {
+    let value = parseInt($(this).val());
+    
+    if (value == 0) {
+      $(this).parent().addClass('rb-qty-wrapper--zero');
+    }
+    else {
+      $(this).parent().removeClass('rb-qty-wrapper--zero');
+    }
+  });
+
+  $(document).on('click', '#build-a-box .rb-box-builder .rb-btn-qty-minus', function () {
+    let value = parseInt($(this).parent().find('input').val());
+    
+    if (value == 0) {
+      $(this).parent().addClass('rb-qty-wrapper--zero');
+    }
+    else {
+      $(this).parent().removeClass('rb-qty-wrapper--zero');
+    }
+  });
+
+  $(document).on('click', '#build-a-box .rb-box-builder .rb-btn-qty-plus', function () {
+    let value = parseInt($(this).parent().find('input').val());
+    
+    if (value == 0) {
+      $(this).parent().addClass('rb-qty-wrapper--zero');
+    }
+    else {
+      $(this).parent().removeClass('rb-qty-wrapper--zero');
+    }
+  });
+
+  /* Add Cancel subscription button, change frequency button, build a box line items */
+  document.addEventListener("Recharge::slot::mounted", event => {
+    if (event.detail.pathname === "/overview") {
+      productsAvailableForPurchaseManagerNew.init();
+      
+      let intervalId = setInterval(function () {
+        if ($('.recharge-component-schedule-item .recharge-card > div > div:last-child > div > div:last-child > div > div:last-child').length && $('.recharge-component-schedule-item .recharge-alert').length == 0) {
+          if ($('.yno-cancel').length == 0) {
+            $('.recharge-component-schedule-item .recharge-card > div > div:last-child > div > div:last-child > div > div:last-child').append(`
+              <button class="yno-cancel">
+                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.143 4h13.714M2.857 4h10.286v10.286A1.143 1.143 0 0 1 12 15.429H4a1.143 1.143 0 0 1-1.143-1.143V4ZM5.143 4v-.571a2.857 2.857 0 0 1 5.714 0V4M6.286 7.43v4.573M9.714 7.43v4.573"></path></g></svg>
+                <span>Cancel</span>
+              </button>
+            `);
+            $('.recharge-component-schedule-item .recharge-card > div > div:last-child > div > div:last-child > div > div:first-child').append(`
+              <span class="yno-label">Cancel subscription</span>
+            `);
+            $('body').append(`
+              <div class="cancel-popup">
+                <div class="cancel-popup__overlay"></div>
+                <div class="cancel-popup__inner">
+                  <div class="cancel-popup__close">
+                    <button class="cancel-popup__close__btn">
+                      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1 1 12 12M1 13 13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </button>
+                  </div>
+                  <div class="cancel-popup__body">
+                    <div class="cancel-popup__heading">
+                      <h3>Would you like to pause instead?</h3>
+                      <p>Cancellation can’t be undone. Would you like to pause instead?</p>
+                    </div>
+                    <div class="cancel-popup__options">
+                      <div class="cancel-popup__option">
+                        <input type="radio" id="cancel_1_month" name="cancel-popup__month" value="1 month" checked>
+                        <label for="cancel_1_month">1 month</label>
+                      </div>
+                      <div class="cancel-popup__option">
+                        <input type="radio" id="cancel_2_months" name="cancel-popup__month" value="2 months">
+                        <label for="cancel_2_months">2 months</label>
+                      </div>
+                      <div class="cancel-popup__option">
+                        <input type="radio" id="cancel_3_months" name="cancel-popup__month" value="3 months">
+                        <label for="cancel_3_months">3 months</label>
+                      </div>
+                    </div>
+                    <div class="cancel-popup__notice">
+                      <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></circle><circle cx="9" cy="5.5" fill="currentColor" r="1"></circle><path d="M9 8.5v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                      <span>Your subscription will be rescheduled for <span class="cancel-popup__date"></span></span>
+                    </div>
+                    <div class="cancel-popup__actions">
+                      <button class="cancel-popup__pause">Pause subscription<span class="btn__loadingbar"></span></button>
+                      <button class="cancel-popup__cancel">Cancel subscription<span class="btn__loadingbar"></span></button>
+                      <button class="cancel-popup__keep">Keep subscription</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="reason-popup">
+                <div class="reason-popup__overlay"></div>
+                <div class="reason-popup__inner">
+                  <div class="reason-popup__close">
+                    <button class="reason-popup__close__btn">
+                      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1 1 12 12M1 13 13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </button>
+                  </div>
+                  <div class="reason-popup__body">
+                    <div class="reason-popup__heading">
+                      <h3>Please tell us why you want to cancel</h3>
+                      <p>We're sorry to see you go. Please help us improve by telling us why you want to cancel!</p>
+                    </div>
+                    <div class="reason-popup__options">
+                      <div class="reason-popup__option">
+                        <input type="radio" id="reason_1" name="reason-popup__month" checked value="{{ settings.rc_reason_1 }}">
+                        <label for="reason_1">{{ settings.rc_reason_1 }}</label>
+                      </div>
+                      <div class="reason-popup__option">
+                        <input type="radio" id="reason_2" name="reason-popup__month" value="{{ settings.rc_reason_2 }}">
+                        <label for="reason_2">{{ settings.rc_reason_2 }}</label>
+                      </div>
+                      <div class="reason-popup__discount">
+                        {{ settings.rc_discount_msg }}
+                      </div>
+                      <div class="reason-popup__option">
+                        <input type="radio" id="reason_3" name="reason-popup__month" value="{{ settings.rc_reason_3 }}">
+                        <label for="reason_3">{{ settings.rc_reason_3 }}</label>
+                      </div>
+                      <div class="reason-popup__option">
+                        <input type="radio" id="reason_4" name="reason-popup__month" value="{{ settings.rc_reason_4 }}">
+                        <label for="reason_4">{{ settings.rc_reason_4 }}</label>
+                      </div>
+                      <div class="reason-popup__option">
+                        <input type="radio" id="reason_5" name="reason-popup__month" value="{{ settings.rc_reason_5 }}">
+                        <label for="reason_5">{{ settings.rc_reason_5 }}</label>
+                      </div>
+                      <div class="reason-popup__option">
+                        <input type="radio" id="reason_6" name="reason-popup__month" value="{{ settings.rc_reason_6 }}">
+                        <label for="reason_6">{{ settings.rc_reason_6 }}</label>
+                      </div>
+                      <div class="reason-popup__sideeffects">
+                        <div class="reason-popup__sideeffect_item">
+                          <input type="checkbox" id="sideeffect_1" name="reason-popup__sideeffect" value="Nausea">
+                          <label for="sideeffect_1">Nausea</label>
+                        </div>
+                        <div class="reason-popup__sideeffect_item">
+                          <input type="checkbox" id="sideeffect_2" name="reason-popup__sideeffect" value="Headache">
+                          <label for="sideeffect_2">Headache</label>
+                        </div>
+                        <div class="reason-popup__sideeffect_item">
+                          <input type="checkbox" id="sideeffect_3" name="reason-popup__sideeffect" value="Vivid Dreams/Nightmares">
+                          <label for="sideeffect_3">Vivid Dreams/Nightmares</label>
+                        </div>
+                        <div class="reason-popup__sideeffect_item">
+                          <input type="checkbox" id="sideeffect_4" name="reason-popup__sideeffect" value="Rash">
+                          <label for="sideeffect_4">Rash</label>
+                        </div>
+                        <div class="reason-popup__sideeffect_item">
+                          <input type="checkbox" id="sideeffect_5" name="reason-popup__sideeffect" value="Not Listed">
+                          <label for="sideeffect_5">Not Listed</label>
+                          <input type="text" placeholder="Please write your side effects here." class="reason-popup__side__input">
+                        </div>
+                      </div>
+                      <div class="reason-popup__option">
+                        <input type="radio" id="reason_7" name="reason-popup__month" value="{{ settings.rc_reason_7 }}">
+                        <label for="reason_7">{{ settings.rc_reason_7 }}</label>
+                      </div>
+                      <div class="reason-popup__option">
+                        <input type="radio" id="reason_8" name="reason-popup__month" value="{{ settings.rc_reason_8 }}">
+                        <label for="reason_8">{{ settings.rc_reason_8 }}</label>
+                      </div>
+                      <div class="reason-popup__option">
+                        <input type="radio" id="reason_9" name="reason-popup__month" value="{{ settings.rc_reason_9 }}">
+                        <label for="reason_9">{{ settings.rc_reason_9 }}</label>
+                      </div>
+                      <div class="reason-popup__other">
+                        <input type="text" placeholder="Please write your reason here." class="reason-popup__input">
+                      </div>
+                    </div>
+                    <div class="reason-popup__actions">
+                      <button class="reason-popup__confirm">Cancel subscription<span class="btn__loadingbar"></span></button>
+                      <button class="reason-popup__keep">Keep subscription</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `);
+          }
+          /*
+          if ($('.yno-frequency').length == 0) {
+            $(`
+              <button class="yno-frequency">
+                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="m5.714 13.989-5.143 1.44 1.44-5.143L11.43.914a1.142 1.142 0 0 1 1.634 0l2.023 2.035a1.145 1.145 0 0 1 0 1.622L5.714 13.99Z" stroke="currentColor" stroke-width="1.143" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span>Change Frequency</span>
+              </button>
+            `).insertAfter($('[data-testid="recharge-internal-reschedule-button"]').parent().parent());
+            $('body').append(`
+              <div class="frequency-popup">
+                <div class="frequency-popup__overlay"></div>
+                <div class="frequency-popup__inner">
+                  <div class="frequency-popup__close">
+                    <button class="frequency-popup__close__btn">
+                      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1 1 12 12M1 13 13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </button>
+                  </div>
+                  <div class="frequency-popup__body">
+                    <div class="frequency-popup__heading">
+                      <h3>Would you like to update frequency?</h3>
+                      <p>Choose frequency below</p>
+                    </div>
+                    <div class="frequency-popup__options">
+                      <div class="frequency-popup__option">
+                        <input type="radio" id="interval_1_month" name="frequency-popup__interval" value="1 month">
+                        <label for="interval_1_month">1 month subscription with 5% discount</label>
+                      </div>
+                      <div class="frequency-popup__option">
+                        <input type="radio" id="interval_6_week" name="frequency-popup__interval" value="6 week">
+                        <label for="interval_6_week">6 week subscription with 5% discount</label>
+                      </div>
+                      <div class="frequency-popup__option">
+                        <input type="radio" id="interval_2_month" name="frequency-popup__interval" value="2 month">
+                        <label for="interval_2_month">2 month subscription with 5% discount</label>
+                      </div>
+                      <div class="frequency-popup__option">
+                        <input type="radio" id="interval_10_week" name="frequency-popup__interval" value="10 week">
+                        <label for="interval_10_week">10 week subscription with 5% discount</label>
+                      </div>
+                      <div class="frequency-popup__option">
+                        <input type="radio" id="interval_3_month" name="frequency-popup__interval" value="3 month">
+                        <label for="interval_3_month">3 month subscription with 5% discount</label>
+                      </div>
+                      <div class="frequency-popup__option">
+                        <input type="radio" id="interval_4_month" name="frequency-popup__interval" value="4 month">
+                        <label for="interval_4_month">4 month subscription with 5% discount</label>
+                      </div>
+                    </div>
+                    <div class="frequency-popup__actions">
+                      <button class="frequency-popup__update" disabled>Update frequency<span class="btn__loadingbar"></span></button>
+                      <button class="frequency-popup__keep">Keep frequency</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `);
+          }
+          */
+          document.querySelectorAll('[data-testid^="schedule-contents-card-"]').forEach(element => {
+            if (element.querySelector('.recharge-heading') != null) {
+              if (element.querySelector('.recharge-heading').innerHTML.indexOf('Build-A-Box') >= 0) {
+                if (element.querySelector('.bundle-variants') == null) {
+                  const testIdValue = element.getAttribute('data-testid');
+                  const match = testIdValue.match(/schedule-contents-card-(\d+)/);
+                  console.log("match", match[1]);
+                  //element.insertAdjacentHTML('beforeend', variantsHtml);
+                  element.insertAdjacentHTML('beforeend', bundleVariantsHtml.find(item => item.purchase_item_id == match[1]).html);
+                  bundleVariantsHtml
+                  element.classList.add('build-box');
+                  element.querySelector('[data-testid="recharge-internal-general-view-button"]').parentNode.classList.add('edit-selections');
+                }
+              }
+              else if (element.querySelector('.recharge-heading').innerHTML.indexOf('Survivor') >= 0) {}
+              else {
+                element.insertAdjacentHTML('beforeend', `
+                  <button class="card-remove">Remove</button>
+                `);
+                element.classList.add('normal-box');
+                
+                if ($('.remove-popup').length == 0) {
+                  $('body').append(`
+                    <div class="remove-popup">
+                      <div class="remove-popup__overlay"></div>
+                      <div class="remove-popup__inner">
+                        <div class="remove-popup__close">
+                          <button class="remove-popup__close__btn">
+                            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1 1 12 12M1 13 13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                          </button>
+                        </div>
+                        <div class="remove-popup__body">
+                          <div class="remove-popup__heading">
+                            <h3>Would you like to remove item?</h3>
+                            <p>Click 'Remove item' if you want to remove</p>
+                          </div>
+                          <input type="hidden" name="remove-popup__id" value="">
+                          <div class="remove-popup__actions">
+                            <button class="remove-popup__remove">Remove item<span class="btn__loadingbar"></span></button>
+                            <button class="remove-popup__keep">Keep item</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  `);
+                }
+              }
+            }
+          });
+
+          // Add title at the top
+          if ($('.recharge-customer__name').length == 0) {
+            $('.recharge-section-next-order-actions').prepend(`
+              <div class="recharge-customer__name">{{ settings.pt_heading }} ${ReCharge.customer.first_name}!</div>
+            `);     
+          }
+
+          // Addon title and description
+          if ($('.recharge-section-product-carousel .recharge-heading-h2').length) {
+            $('.recharge-section-product-carousel .recharge-heading-h2').html(`<div class="recharge-blog__title">{{ settings.pt_addon_heading }}</div>`);
+            $('.recharge-section-product-carousel .recharge-heading-h2').parent().append(`<span class="recharge-blog__content" style="margin-bottom: 0;">{{ settings.pt_addon_content }}</span>`);
+          }
+
+          // Add blogs, referral, faqs
+          let productHandle = '';
+          for (let i = 0; i < ReCharge.subscriptions.length; i ++) {
+            if (ReCharge.subscriptions[i].status == 'ACTIVE') {
+              if (ReCharge.subscriptions[i].product.shopify_details.tags[0] == 'primary') {
+                productHandle = ReCharge.subscriptions[i].product.shopify_details.handle;
+              }
+            }
+          }
+          if (productHandle) {
+            let getUrl = 'https://survivorrx.com/products/' + productHandle + '?view=portal-sections';
+            $.ajax({
+                type: "GET",
+                url: getUrl,
+                success: function (data) {
+                  $('.recharge-section-product-carousel').append(data);
+                }
+            });
+          }
+
+          clearInterval(intervalId);
+        }
+      }, 100);
+    }
+  });
+
+  $(document).on('click', '.build-box .recharge-heading', function () {
+    $('.build-box').toggleClass('build-box--active');
+  });
+
+  $(document).on('click', '.yno-cancel', async function () {
+    if (window.RechargeSubscriptions.length > 0) {
+      // Init state
+      const nextQueuedCharges = await rechargeAPINew.nextQueuedCharges();
+  
+      $('#cancel_1_month').prop('checked', true);
+      let currentDate = new Date(nextQueuedCharges[0].next_charge_scheduled_at);
+      let futureDate = new Date(currentDate.setDate(currentDate.getDate() + 28));
+      let options = { year: 'numeric', month: 'long', day: 'numeric' };
+      let formattedDate = futureDate.toLocaleDateString('en-US', options);
+      $('.cancel-popup__date').text(formattedDate);
+      $('.cancel-popup__date').data('date', futureDate.toISOString().split('T')[0]);
+      
+      $('.cancel-popup').addClass('cancel-popup--active');
+    }
+  });
+
+  $(document).on('change', '[name="cancel-popup__month"]', async function () {
+    const nextQueuedCharges = await rechargeAPINew.nextQueuedCharges();
+   
+    let currentDate = new Date(nextQueuedCharges[0].next_charge_scheduled_at);
+    let numberOfDays = 28 * parseInt($(this).val().split(' ')[0]);
+    let futureDate = new Date(currentDate.setDate(currentDate.getDate() + numberOfDays));
+    let options = { year: 'numeric', month: 'long', day: 'numeric' };
+    let formattedDate = futureDate.toLocaleDateString('en-US', options);
+    $('.cancel-popup__date').text(formattedDate);
+    $('.cancel-popup__date').data('date', futureDate.toISOString().split('T')[0]);
+  });
+
+  $(document).on('click', '.cancel-popup__pause', function () {
+    let nextChargeDate = $('.cancel-popup__date').data('date');
+    $(this).prop('disabled', true);
+    $(this).addClass('btn--loading');
+    productsAvailableForPurchaseManagerNew.updateChargeDate(nextChargeDate);
+  });
+
+  $(document).on('click', '.cancel-popup__cancel', function () {
+    $('.cancel-popup').removeClass('cancel-popup--active');
+    $('.reason-popup').addClass('reason-popup--active');
+    /*
+    $(this).prop('disabled', true);
+    $(this).addClass('btn--loading');
+    productsAvailableForPurchaseManagerNew.cancelSubscriptions();
+    */
+  });
+
+  $(document).on('click', '.cancel-popup__close, .cancel-popup__overlay, .cancel-popup__keep', function () {
+    $('.cancel-popup').removeClass('cancel-popup--active');
+  });
+
+  $(document).on('click', '.reason-popup__confirm', function () {
+    if ($('[name="reason-popup__month"]:checked').val() == '') {
+      alert('Please choose the reason here.');
+    }
+    else {
+      if ($('[name="reason-popup__month"]:checked').val().indexOf('Other') >= 0 && $('.reason-popup__input').val() == '') {
+        alert('Please input your reason.');
+      }
+      else if ($('#sideeffect_5').prop('checked') == true && $('.reason-popup__side__input').val() == '') {
+        alert('Please input your side effect.');
+      }
+      else if ($('[name="reason-popup__month"]:checked').val().indexOf('side effect') >= 0 && $('[name="reason-popup__sideeffect"]:checked').length == 0) {
+        alert('Please choose your side effect.');
+      }
+      else {
+        $(this).prop('disabled', true);
+        $(this).addClass('btn--loading');
+        productsAvailableForPurchaseManagerNew.cancelSubscriptions();
+      }
+    }
+  });
+
+  $(document).on('change', '[name="reason-popup__month"]', function () {
+    if ($(this).val() == 'Other reason') {
+      $('.reason-popup__other').addClass('reason-popup__other--active');
+      $('.reason-popup__discount').removeClass('reason-popup__discount--active');
+      $('.reason-popup__sideeffects').removeClass('reason-popup__sideeffects--active');
+    }
+    else if ($(this).val().indexOf('expensive') >= 0) {
+      $('.reason-popup__other').removeClass('reason-popup__other--active');
+      $('.reason-popup__discount').addClass('reason-popup__discount--active');
+      $('.reason-popup__sideeffects').removeClass('reason-popup__sideeffects--active');
+    }
+    else if ($(this).val().indexOf('side effect') >= 0) {
+      $('.reason-popup__other').removeClass('reason-popup__other--active');
+      $('.reason-popup__discount').removeClass('reason-popup__discount--active');
+      $('.reason-popup__sideeffects').addClass('reason-popup__sideeffects--active');
+    }
+    else {
+      $('.reason-popup__other').removeClass('reason-popup__other--active');
+      $('.reason-popup__discount').removeClass('reason-popup__discount--active');
+      $('.reason-popup__sideeffects').removeClass('reason-popup__sideeffects--active');
+    }
+  });
+
+  $(document).on('change', '[name="reason-popup__sideeffect"]', function () {
+    if ($(this).prop('checked') == true && $(this).val().indexOf('Not Listed') >= 0) {
+      $('[name="reason-popup__sideeffect"]').prop('checked', false);
+      $(this).prop('checked', true);
+      $('.reason-popup__side__input').addClass('reason-popup__side__input--active');
+    }
+    else if ($(this).prop('checked') == true) {
+      $('#sideeffect_5').prop('checked', false);
+      $('.reason-popup__side__input').removeClass('reason-popup__side__input--active');
+    }
+    else {
+      $('.reason-popup__side__input').removeClass('reason-popup__side__input--active');
+    }
+  });
+
+  $(document).on('click', '.reason-popup__close, .reason-popup__overlay, .reason-popup__keep', function () {
+    $('.reason-popup').removeClass('reason-popup--active');
+  });
+
+  $(document).on('click', '.yno-frequency', async function () {
+    if (window.RechargeSubscriptions.length > 0) {
+      // Init state
+      const nextQueuedCharges = await rechargeAPINew.nextQueuedCharges();
+
+      const matchingSubscriptions = window.RechargeSubscriptions.filter(sub => 
+        sub.address_id === nextQueuedCharges[0].address_id && 
+          sub.next_charge_scheduled_at === nextQueuedCharges[0].next_charge_scheduled_at
+      );
+ 
+      let currentFrequency = matchingSubscriptions[0].order_interval_frequency + ' ' + matchingSubscriptions[0].order_interval_unit;
+      $(`.frequency-popup__option [value="${currentFrequency}"]`).prop('checked', true);
+      $('.frequency-popup__update').prop('disabled', true);
+      
+      $('.frequency-popup').addClass('frequency-popup--active');
+    }
+  });
+
+  $(document).on('click', '.frequency-popup__close, .frequency-popup__overlay, .frequency-popup__keep', function () {
+    $('.frequency-popup').removeClass('frequency-popup--active');
+  });
+
+  $(document).on('change', '[name="frequency-popup__interval"]', async function () {
+    const nextQueuedCharges = await rechargeAPINew.nextQueuedCharges();
+
+    const matchingSubscriptions = window.RechargeSubscriptions.filter(sub => 
+      sub.address_id === nextQueuedCharges[0].address_id && 
+        sub.next_charge_scheduled_at === nextQueuedCharges[0].next_charge_scheduled_at
+    );
+ 
+    let currentFrequency = matchingSubscriptions[0].order_interval_frequency + ' ' + matchingSubscriptions[0].order_interval_unit;
+    let optionValue = $(this).val();
+    if (currentFrequency == optionValue) {
+      $('.frequency-popup__update').prop('disabled', true);
+    }
+    else {
+      $('.frequency-popup__update').prop('disabled', false);
+    }
+  });
+
+  $(document).on('click', '.frequency-popup__update', function () {
+    let selectedValue = $('[name="frequency-popup__interval"]:checked').val();
+    const frequency = selectedValue.split(' ')[0];
+    const unit = selectedValue.split(' ')[1];
+    $(this).prop('disabled', true);
+    $(this).addClass('btn--loading');
+    productsAvailableForPurchaseManagerNew.updateFrequency(frequency, unit);
+  });
+
+  $(document).on('click', '.card-remove', function () {
+    // Init state
+    let itemId = $(this).parents('.normal-box').data('testid').replace('schedule-contents-card-', '');
+    $('[name="remove-popup__id"]').val(itemId);
+    
+    $('.remove-popup').addClass('remove-popup--active');
+  });
+
+  $(document).on('click', '.remove-popup__close, .remove-popup__overlay, .remove-popup__keep', function () {
+    $('.remove-popup').removeClass('remove-popup--active');
+  });
+
+  $(document).on('click', '.remove-popup__remove', function () {
+    let itemId = $('[name="remove-popup__id"]').val();
+    $(this).prop('disabled', true);
+    $(this).addClass('btn--loading');
+    productsAvailableForPurchaseManagerNew.removeItem(itemId);
+  });
+</script>

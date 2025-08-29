@@ -1,0 +1,147 @@
+{% if section.settings.background != blank and section.settings.star != blank %}
+  <style>
+    #shopify-section-{{ section.id }}.reviews-slider-wrapper {
+      background: {{ section.settings.background }};
+    }
+    #shopify-section-{{ section.id }}.reviews-slider-wrapper .reviews-slider__rating svg path {
+      fill: {{ section.settings.star }};
+    }
+  </style>
+{% endif %}
+<div class="wrapper">
+  <div class="reviews-slider">
+    <h2 class="reviews-slider__heading">{{ section.settings.title }}</h2>
+    <div class="reviews-slider__content">{{ section.settings.content }}</div>
+    <div class="reviews-slider__blocks">
+      {% for block in section.blocks %}
+        <div class="reviews-slider__block">
+          <div class="reviews-slider__rating">        
+            <span class="star_rating" count="1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
+                <path d="M10 0L12.4805 6.58595L19.5106 6.90983L14.0135 11.3041L15.8779 18.0902L10 14.22L4.12215 18.0902L5.98654 11.3041L0.489435 6.90983L7.51955 6.58595L10 0Z" fill="#DFAD2D"></path>
+              </svg>
+            </span>
+            <span class="star_rating" count="2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
+                <path d="M10 0L12.4805 6.58595L19.5106 6.90983L14.0135 11.3041L15.8779 18.0902L10 14.22L4.12215 18.0902L5.98654 11.3041L0.489435 6.90983L7.51955 6.58595L10 0Z" fill="#DFAD2D"></path>
+              </svg>
+            </span>
+            <span class="star_rating" count="3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
+                <path d="M10 0L12.4805 6.58595L19.5106 6.90983L14.0135 11.3041L15.8779 18.0902L10 14.22L4.12215 18.0902L5.98654 11.3041L0.489435 6.90983L7.51955 6.58595L10 0Z" fill="#DFAD2D"></path>
+              </svg>
+            </span>
+            <span class="star_rating" count="4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
+                <path d="M10 0L12.4805 6.58595L19.5106 6.90983L14.0135 11.3041L15.8779 18.0902L10 14.22L4.12215 18.0902L5.98654 11.3041L0.489435 6.90983L7.51955 6.58595L10 0Z" fill="#DFAD2D"></path>
+              </svg>
+            </span>      
+            <span class="star_rating" count="5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
+                <path d="M10 0L12.4805 6.58595L19.5106 6.90983L14.0135 11.3041L15.8779 18.0902L10 14.22L4.12215 18.0902L5.98654 11.3041L0.489435 6.90983L7.51955 6.58595L10 0Z" fill="#DFAD2D"></path>
+              </svg>
+            </span>
+          </div>
+          <span class="review-block__title">{{ block.settings.title }}</span>
+          <span class="review-block__content">{{ block.settings.content }}</span>
+          {% if block.settings.image != blank %}
+            <img class="review-block__img" src="{{ block.settings.image | img_url: '200x' }}">
+          {% endif %}
+          <span class="review-block__name">{{ block.settings.name }}</span>
+          <span class="review-block__info">{{ block.settings.info }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('.reviews-slider__blocks').slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      dots: false,
+      arrows: true,
+      prevArrow: `<div class="slick-prev">{% render 'slider-prev-arrow' %}</div>`,
+      nextArrow: `<div class="slick-next">{% render 'slider-next-arrow' %}</div>`,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Reviews Slider",
+  "class": "reviews-slider-wrapper",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "star",
+      "label": "Star color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "text",
+          "id": "info",
+          "label": "Info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Slider",
+      "category": "Text"
+    }
+  ]
+  }
+{% endschema %}

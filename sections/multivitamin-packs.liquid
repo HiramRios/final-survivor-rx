@@ -1,0 +1,148 @@
+{% if product.metafields.shopify--discovery--product_recommendation.complementary_products != blank %}
+  <div class="wrapper">
+    <div class="recommended-addons">
+      <h2 class="recommended-addons__heading">
+        {{ section.settings.title }}
+      </h2>
+
+      <p class="recommended-addons__content">
+        {{ section.settings.content }}
+      </p>
+
+      <div class="recommended-addons__blocks tab tab-active active-a" data-id="viewall">
+        {% for item in product.metafields.shopify--discovery--product_recommendation.complementary_products.value %}
+          <div class="recommended-addons__block">
+            <a href="{{ item.url }}"><img class="addon-block__img" src="{{ item.featured_image | img_url: '600x' }}"></a>
+            <span class="addon-block__title">{{ item.title }}</span>
+            <span class="addon-block__content">
+              {{ item.metafields.custom.shop_all_short_description }}
+            </span>
+            <span class="addon-black__price">{{ item.price | money }} Every Four Weeks</span>
+            {%- form 'product', product, class: 'product-form', data-product-form: '' -%}
+              {% if item.selling_plan_groups.size > 0 %}
+                <input type="hidden" name="selling_plan" value="{{ item.selling_plan_groups.first.selling_plans.first.id }}" />
+              {% endif %}
+              <input type="hidden" name="id" value="{{ item.selected_or_first_available_variant.id }}">
+              <button class="addon-block__link btn btn--solid" type="button">Add To Cart</button>
+            {%- endform -%}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="cstm_slider_wrapper cstm_new_popup" style="visibility:hidden">
+    <div class="cstm-popup-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M25 7L7 25" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M25 25L7 7" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  
+    <div class="main_tab_wrapper cstm-slider-img" style="display:none">
+      {% assign counting = 0 %}
+      {% for item in product.metafields.shopify--discovery--product_recommendation.complementary_products.value %}
+        {% if item.title %}
+          {% assign counting = counting | plus: 1 %}
+          
+          <div
+            class="tab newidtab"
+            data-count="{{ counting }}"
+            data-id="viewall"
+            open_tab_cstm="{{ item.title | handle }}"
+          >
+            <div class="inner_wrapper_tab">
+              <div class="cstm-inner-contnt">
+                <!-- Content here -->
+              </div>
+              <img
+                src="{{ item.featured_image | img_url: '500x' }}"
+                alt="Ingredient Image"
+                width="200px"
+                height="200px"
+              >
+
+              <div class="center-text ingredient-heading">
+                <h3>{{ item.title }}</h3>
+                <p style="text-align:center;">1 PM Capsule</p>
+              </div>
+
+              <hr>
+
+              <div class="csmt_info--jtpl ingredients-content">
+                {{ item.metafields.custom.product_descriptionn | metafield_tag }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  
+    <div class="btn-wrap">
+      <button class="prev-btn  ">
+        {% render 'slider-prev-arrow' %}
+      </button>
+      <div class="e_count"></div>
+      <button class="next-btn">
+        {% render 'slider-next-arrow' %}
+      </button>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $('.recommended-addons__blocks').slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        dots: true,
+        arrows: true,
+        prevArrow: `<div class="slick-prev">{% render 'slider-prev-arrow' %}</div>`,
+        nextArrow: `<div class="slick-next">{% render 'slider-next-arrow' %}</div>`,
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      });
+    });
+  </script>
+  <style>
+    .recommended-addons {
+      background-color: {{ section.settings.bg_color }};
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Multivitamin Packs",
+  "class": "recommended-addons multivision-packs",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multivitamin Packs",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

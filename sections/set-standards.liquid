@@ -1,0 +1,101 @@
+<div class="wrapper--full-padded">
+  <div class="set-standards__heading">
+    <h2 class="heading-size-7">{{ section.settings.title }}</h2>
+  </div>
+  <div class="set-standards__blocks">
+    {% for block in section.blocks %}
+      <div class="set-standards__block">
+        <img class="set-standards__block__img" src="{{ block.settings.image | img_url: '800x' }}">
+        <span class="set-standards__click">&nbsp;</span>
+        <div class="set-standards__content">
+          <img src="{{ block.settings.icon | img_url: '100x' }}">
+          <h3>{{ block.settings.title }}</h3>
+          <span>{{ block.settings.content }}</span>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Set Standards",
+  "class": "set-standards-wrapper",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+     {
+      "name": "block",
+      "type": "Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+     }
+  ],
+  "presets": [
+    {
+      "name":"Set Standards"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  const blockElements = document.getElementsByClassName("set-standards__block");
+
+  const hoverHandler = function(e) {
+    if (window.innerWidth > 768) {
+      const blockElement = e.currentTarget;
+      if (blockElement.classList.contains('active')) {    
+        blockElement.querySelector('.set-standards__content').style.height = blockElement.querySelector('.set-standards__content h3').clientHeight  + "px";
+        blockElement.classList.remove('active');
+      }
+      else {
+        blockElement.querySelector('.set-standards__content').style.height = blockElement.clientHeight  + "px";
+        blockElement.classList.add('active');
+      }
+    }
+  }
+
+  const clickHandler = function(e) {
+    const blockElement = e.currentTarget.parentNode;
+    if (blockElement.classList.contains('active')) {    
+      blockElement.querySelector('.set-standards__content').style.height = blockElement.querySelector('.set-standards__content h3').clientHeight  + "px";
+      blockElement.classList.remove('active');
+    }
+    else {
+      blockElement.querySelector('.set-standards__content').style.height = blockElement.clientHeight  + "px";
+      blockElement.classList.add('active');
+    }
+  }
+
+  Array.from(blockElements).forEach(elem => {
+    elem.addEventListener("mouseenter", (e) => hoverHandler(e)); 
+    elem.addEventListener("mouseleave", (e) => hoverHandler(e));
+    elem.querySelector('.set-standards__click').addEventListener("click", (e) => clickHandler(e));
+  });
+</script>

@@ -1,0 +1,13 @@
+{% layout none %}
+{
+  "items": [
+    {% for item in cart.items %}
+      {
+        "id": {{ item.id }},
+        "is_primary": {{ item.product.metafields.custom.is_primary_product.value | json }},
+        "key": "{{ item.key }}"
+      }
+      {% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}

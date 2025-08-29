@@ -1,0 +1,97 @@
+
+<div class="wrapper">
+  <div class="addon-benefits">
+    <h2 class="addon-benefits__heading">
+      {{ section.settings.title }}
+    </h2>
+
+    <div class="addon-benefits__blocks" data-id="viewall">
+      {% for block in section.blocks %}
+        <div class="addon-benefits__block">
+          <div class="addon-benefits__block-heading">
+            <div class="addon-benefits__block-image">
+              <img class="benefit-block__img" src="{{ block.settings.icon | img_url: '70x' }}">
+            </div>
+            <div class="addon-benefits__block-title">
+              <span class="benefit-block__title benefits-block__title">{{ block.settings.heading }}</span>
+            </div>
+            <div class="addon-benefits__block-icon">
+              <span class="benefit-block__link btn btn--solid" 
+                data-id="{{ item.heading | handle }}"
+                href="#"
+                open_text_handle="{{ item.heading | handle }}"
+                open_text="{{ item.heading | handle }}">+</span>
+            </div>
+          </div>
+          <div class="addon-benefits__block-content">
+            {{ block.settings.content }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).on('click', '.addon-benefits__block-icon', function() {
+    $('.addon-benefits__block-content.active').removeClass('active').slideToggle();
+    $(this).closest('.addon-benefits__block').find('.addon-benefits__block-content').addClass('active').slideToggle();
+  });
+    
+</script>
+
+<style>
+  .add-on-benefits {
+    background-image: url({{ section.settings.bg_image | img_url: 'master' }});
+    background-size: cover;
+    background-position: right;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Add-on Benefits",
+  "class": "add-on-benefits",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    },
+  ],  
+  "presets": [
+    {
+      "name": "Add-on Benefits",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

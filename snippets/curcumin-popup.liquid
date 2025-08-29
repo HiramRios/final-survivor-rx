@@ -1,0 +1,71 @@
+<div class="curcumin-popup">
+  <div class="curcumin-popup__overlay"></div>
+  <div class="curcumin-popup__inner">
+    <div class="curcumin-popup__close">
+      <button class="curcumin-popup__close__btn">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1 1 12 12M1 13 13 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      </button>
+    </div>
+    <div class="curcumin-popup__body">
+      <div class="curcumin-popup__heading">
+        <h3>Important Notice</h3>
+        {{ settings.rc_curcumin_msg }}
+      </div>
+      <div class="curcumin-popup__actions">
+        <button class="curcumin-popup__accept">Accept and keep in cart<span class="btn__loadingbar"></span></button>
+        <button class="curcumin-popup__cancel">Remove from cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $(document).on('click', '.curcumin-popup__trigger', function () {
+      $('.curcumin-popup').addClass('curcumin-popup--active');
+    });
+
+    $(document).on('click', '.curcumin-popup__close, .curcumin-popup__overlay', function () {
+      $('.curcumin-popup').removeClass('curcumin-popup--active');
+    });
+
+    $(document).on('click', '.curcumin-popup__accept', function () {
+      let key = $('.curcumin-popup__trigger').parents('.cart__item').attr('data-item');
+      let properties = [];
+      $.ajax({
+        type: "POST",
+        url: '/cart/change.js',
+        data: {
+          id: key,
+          properties: {
+            _suppress_complimentary_products_rule: 'true',
+            Dose: "1 AM Capsule",
+            _okc_toa: "AM",
+            _okc_quantity: "1"
+          }
+        },
+        success: function (data) {
+          $('.curcumin-popup').removeClass('curcumin-popup--active');
+          document.querySelector('cart-items').getCart();
+        }
+      });
+    });
+
+    $(document).on('click', '.curcumin-popup__cancel', function () {
+      let key = $('.curcumin-popup__trigger').parents('.cart__item').attr('data-item');
+      let properties = [];
+      $.ajax({
+        type: "POST",
+        url: '/cart/change.js',
+        data: {
+          id: key,
+          quantity: 0
+        },
+        success: function (data) {
+          $('.curcumin-popup').removeClass('curcumin-popup--active');
+          document.querySelector('cart-items').getCart();
+        }
+      });
+    });
+  });
+</script>

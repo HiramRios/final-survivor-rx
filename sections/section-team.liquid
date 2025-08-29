@@ -1,0 +1,211 @@
+<style>
+  .custom-main-tabs .newidtab{
+    display:none;
+  }
+   .slider__counter:first-child{
+     display:block;
+   }
+   .slider__counter{
+     display:none;
+   }
+   .tab.newidtab.tab-active {
+     display:block;
+   }
+   .tab.newidtab{
+     display:none;
+   }
+</style>
+
+{% assign filter_string = '' %}
+{% for member in shop.metaobjects.team_members.values %}
+  {% for filter in member.member_role.value %}
+    {% unless filter_string contains filter %}
+      {% assign filter_string = filter_string | append: filter | append: ',' %}
+    {% endunless %}
+  {% endfor %}
+{% endfor %}
+{% assign filter_list = filter_string | split: ',' %}
+
+{% assign filter_list = 'Oncologist, Expert, Survivor, Caretaker, Author, Executive Team' | split: ', ' %}
+
+<div class="wrapper">
+<div class="tab-container custom-main-tabs custom-main-tabs--team">
+  <div class="tab-menu">
+    <ul>
+      <li><a href="#" class="tab-a btn btn--solid" data-id="viewall">View all</a></li>
+      {% for filter in filter_list %}
+        {% if filter %}
+          <li>
+            <a href="#" class="tab-a btn btn--solid" data-id="{{ filter }}">{{ filter }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="main_tab_wrapper">
+    {% for filter in filter_list %}
+      <div class="tab" data-id="{{ filter }}">
+        <h2 class="our-team__heading h1">Our <i>{{ filter }}{% unless filter contains 'Executive' %}s{% endunless %}</i></h2>
+
+        <div class="outer_wrapper_ingrediant">
+
+          {% assign sorted_members = shop.metaobjects.team_members.values | sort: 'name' | sort_natural: 'custom_sort_order_full' %}
+          {% for member in sorted_members %}
+            {% assign has_matches = false %}
+            {% for filter_value in member.member_role.value %}
+              {% if filter_value == filter %}
+                {% assign has_matches = true %}
+              {% endif %}
+            {% endfor %}
+            {% if has_matches %}
+              <div class="inner_wrapper_tab cstm-metaobject-add" data-index="{{ forloop.index }}">
+                <a
+                  class="cstm_ingredient_read"
+                  data-id="{{ filter }}"
+                  href="#"
+                  open_text="{{ member.name }}"
+                >
+                  <img
+                    src="{{ member.image | img_url: 'master' }}"
+                    alt="Member Image"
+                    width="200px"
+                    height="200px"
+                  >
+                </a>
+
+                <h3 class="custom_heading_text">{{ member.name }}</h3>
+                <span class="member-info">
+                  {{ member.credential }}<br>{{ member.role }}
+                </span>
+                <a
+                  class="cstm_ingredient_read read_btn"
+                  data-id="{{ filter }}"
+                  href="#"
+                  open_text_handle="{{ member.name | handleize }}"
+                  open_text="{{ member.name }}"
+                  >Learn More</a
+                >
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% comment %}only for view all{% endcomment %}
+  <div class="main_tab_wrapper cstm-viewall" style="display:none">
+    <h2 class="our-team__heading h1">Our <i>Team</i></h2>
+    <div class="tab" data-id="viewall">
+      <div class="outer_wrapper_ingrediant cstm-viewall_ingrediant">
+
+        {% assign sorted_members = shop.metaobjects.team_members.values | sort: 'name' | sort_natural: 'custom_sort_order_full' %}
+
+        {% for member in sorted_members %}
+          <div class="inner_wrapper_tab cstm-metaobject-add" data-index="{{ forloop.index }}">
+            <a
+              class="cstm_ingredient_read"
+              data-id="{{ filter }}"
+              href="#"
+              open_text="{{ member.name }}"
+            >
+              <img
+                src="{{ member.image | img_url: 'master' }}"
+                alt="Member Image"
+                width="200px"
+                height="200px"
+              >
+            </a>
+
+            <h3 class="custom_heading_text">{{ member.name }}</h3>
+            <span class="member-info">
+              {{ member.credential }}<br>{{ member.role }}
+            </span>
+            <a
+              class="cstm_ingredient_read read_btn"
+              data-id="{{ filter }}"
+              href="#"
+              open_text_handle="{{ member.name | handleize }}"
+              open_text="{{ member.name }}"
+              >Learn More</a
+            >
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {% comment %} only for view all {% endcomment %}
+</div>
+
+<div class="cstm_slider_wrapper cstm_slider_wrapper--team cstm_new_popup" style="visibility:hidden">
+  <div class="cstm-popup-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M25 7L7 25" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M25 25L7 7" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div class="main_tab_wrapper cstm-slider-img" style="display:none">
+    {% assign sorted_members = shop.metaobjects.team_members.values | sort: 'name' | sort_natural: 'custom_sort_order_full' %}
+    {% for member in sorted_members %}
+      {% assign counting = 0 %}
+      {% for filter in member.member_role.value %}
+        {% assign counting = counting | plus: 1 %}
+        <div
+                class="tab newidtab"
+                data-count="{{ counting }}"
+                data-id="{{ filter }}"
+                open_tab_cstm="{{ member.name }}"
+              >
+          <div class="inner_wrapper_tab">
+            <img
+              src="{{ member.image | img_url: 'master' }}"
+              alt="Member Image"
+              width="200px"
+              height="200px"
+            >
+            <div class="member-popup__info">
+              <span class="member-popup__name">{{ member.name }}</span>
+              <span class="member-popup__role">
+                {{ member.credential }}<br>{{ member.role }}
+              </span>
+              <hr>
+              <div class="member-popup__content">{{ member.description | metafield_tag }}</div>
+            </div>
+            <div class="cstm-inner-contnt">
+              <!-- Content here -->
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+
+  <div class="btn-wrap">
+    <button class="prev-btn  ">
+      {% render 'slider-prev-arrow' %}
+    </button>
+    <div class="e_count"></div>
+    <button class="next-btn">
+      {% render 'slider-next-arrow' %}
+    </button>
+  </div>
+</div>
+
+</div>
+
+        
+
+{% schema %}
+  {
+    "name": "Section Team",
+    "settings": [],
+    "presets": [
+      {
+        "name":"Team"
+      }
+    ]
+  }
+{% endschema %}

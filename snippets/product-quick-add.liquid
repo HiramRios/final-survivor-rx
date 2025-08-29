@@ -1,0 +1,48 @@
+{% assign subscription_product = false %}
+{% assign selling_plan_id = '' %}
+
+{% if product.selling_plan_groups.size > 0 %}
+  {% assign subscription_product = true %}
+  {% assign selling_plan_id = product.selling_plan_groups.first.selling_plans.first.id %}
+{% endif %}
+
+{% if is_pack == true %}
+  {% assign atc_label = 'Add to Pack' %}
+{% else %}
+  {% assign atc_label = 'Add to Cart' %}
+{% endif %}
+
+{%- form 'product', product, class: 'product-form', data-product-form: '' -%}
+  {% assign am_pill_count = 0 %}
+  {% assign pm_pill_count = 0 %}
+  {% if product.metafields.custom.am_pill_count != blank %}
+    {% assign am_pill_count = product.metafields.custom.am_pill_count %}
+  {% endif %}
+  {% if product.metafields.custom.pm_pill_count != blank %}
+    {% assign pm_pill_count = product.metafields.custom.pm_pill_count %}
+  {% endif %}
+  {% if am_pill_count > 0 %}
+    {% if pm_pill_count > 0 %}
+      <input type="hidden" name="properties[Dose]" value="{{ am_pill_count }} AM | {{ pm_pill_count }} PM Capsules">
+    {% else %}
+      <input type="hidden" name="properties[Dose]" value="{{ am_pill_count }} AM Capsule{% if am_pill_count > 1 %}s{% endif %}">
+    {% endif %}
+  {% else %}
+    {% if pm_pill_count > 0 %}
+      <input type="hidden" name="properties[Dose]" value="{{ pm_pill_count }} PM Capsule{% if pm_pill_count > 1 %}s{% endif %}">
+    {% endif %}
+  {% endif %}
+  {% if product.metafields.custom.is_primary_product.value == false %}
+    {% if product.metafields.custom._okc_toa != blank %}
+      <input type="hidden" name="properties[_okc_toa]" value="{{ product.metafields.custom._okc_toa.value }}">
+    {% endif %}
+    {% if product.metafields.custom._okc_quantity != blank %}
+      <input type="hidden" name="properties[_okc_quantity]" value="{{ product.metafields.custom._okc_quantity.value }}">
+    {% endif %}
+  {% endif %}
+  <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+  {% if subscription_product %}
+    <input type="hidden" name="selling_plan" value="{{ selling_plan_id }}">
+  {% endif %}
+  <button type="button" class="btn btn--solid addon-block__link">{{ atc_label }}</button>
+{%- endform -%}

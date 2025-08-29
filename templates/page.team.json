@@ -1,0 +1,255 @@
+{
+  "sections": {
+    "section_rich_text_kaiYD7": {
+      "type": "section-rich-text",
+      "blocks": {
+        "subheading_Ft9R7G": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "GET TO KNOW US",
+            "text_size": 5,
+            "padding_bottom": 16
+          }
+        },
+        "heading_8qwFCt": {
+          "type": "heading",
+          "settings": {
+            "title": "Our <i>World-Class<\/i> Team",
+            "text_size": 9,
+            "padding_bottom": 16
+          }
+        },
+        "text_eDyTbc": {
+          "type": "text",
+          "settings": {
+            "text": "A team dedicated to bridging the gap in ​post-treatment care, support, and education.",
+            "text_size": 4,
+            "text_style": "font-body",
+            "padding_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "subheading_Ft9R7G",
+        "heading_8qwFCt",
+        "text_eDyTbc"
+      ],
+      "custom_css": [
+        ".hero__rte {max-width: 500px; margin: 0 auto;}"
+      ],
+      "settings": {
+        "custom_class": "custom_new-tab-ingredient",
+        "width": "wrapper",
+        "align_text": "text-center",
+        "image": "shopify:\/\/shop_images\/Banner_Ribbon_1.jpg",
+        "overlay_opacity": 0,
+        "overlay_color": "#000000",
+        "show_overlay_text": false,
+        "bg_color": "#f3f7ee",
+        "color": "#333333",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "subheading": "",
+        "subheading_size": 3,
+        "show_title": true,
+        "heading_size": 8,
+        "show_content": true,
+        "text_size": 4,
+        "align_text": "text-center",
+        "width": "wrapper",
+        "bg_color": "#f7f7f7",
+        "color": "",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
+    "section_team_mV9FD3": {
+      "type": "section-team",
+      "settings": {}
+    },
+    "section_text_row_Czcem7": {
+      "type": "section-text-row",
+      "blocks": {
+        "icon_dRQj8T": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-award",
+            "icon_size": 75,
+            "icon_color": "#21362c",
+            "image": "shopify:\/\/shop_images\/Icon_Black_Oncologist.svg",
+            "title": "<i>Oncologist<br>Founded<\/i>",
+            "heading_size": 3,
+            "text": "",
+            "text_size": 3
+          }
+        },
+        "icon_nbRMLC": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-shield",
+            "icon_size": 75,
+            "icon_color": "#21362c",
+            "image": "shopify:\/\/shop_images\/Icon_Black_Cancer_1.svg",
+            "title": "<i>Survivor<br>Guided<\/i>",
+            "heading_size": 3,
+            "text": "",
+            "text_size": 3
+          }
+        },
+        "icon_jVdEkJ": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-trophy",
+            "icon_size": 75,
+            "icon_color": "#21362c",
+            "image": "shopify:\/\/shop_images\/Icon_Black_Integrity.svg",
+            "title": "<i>Integrity in<br>Transparency<\/i>",
+            "heading_size": 3,
+            "text": "",
+            "text_size": 3
+          }
+        },
+        "icon_RLMpYb": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-chat",
+            "icon_size": 75,
+            "icon_color": "#21362c",
+            "image": "shopify:\/\/shop_images\/Icon_Black_Science_Based.svg",
+            "title": "<i>Science-Based<br>Supplements<\/i>",
+            "heading_size": 3,
+            "text": "",
+            "text_size": 3
+          }
+        },
+        "icon_iLVVN6": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-award",
+            "icon_size": 75,
+            "icon_color": "#21362c",
+            "image": "shopify:\/\/shop_images\/Icon_Black_Empower.svg",
+            "title": "<i>Empowering<br>with Education<\/i>",
+            "heading_size": 3,
+            "text": "",
+            "text_size": 3
+          }
+        },
+        "icon_wnka3N": {
+          "type": "icon",
+          "settings": {
+            "icon_name": "icon-award",
+            "icon_size": 75,
+            "icon_color": "#21362c",
+            "image": "shopify:\/\/shop_images\/Icon_Black_Wellness_Benefits.svg",
+            "title": "<i>Survivorship<br>Simplified<\/i>",
+            "heading_size": 3,
+            "text": "",
+            "text_size": 3
+          }
+        }
+      },
+      "block_order": [
+        "icon_dRQj8T",
+        "icon_nbRMLC",
+        "icon_jVdEkJ",
+        "icon_RLMpYb",
+        "icon_iLVVN6",
+        "icon_wnka3N"
+      ],
+      "custom_css": [
+        ".cstm-multicolumn--arrow {display: none;}",
+        ".column__heading {color: #333333; font-family: var(--body-font);}"
+      ],
+      "settings": {
+        "custom_class": "",
+        "title": "Our <i>Commitment<\/i>",
+        "heading_size": 7,
+        "layout": "grid",
+        "grid": 6,
+        "align_heading": "text-center",
+        "align_text": "text-center",
+        "icon_alignment": "icon--top",
+        "align_columns": "flex-align-top",
+        "width": "wrapper--full-padded",
+        "bg_color": "#f9faf5",
+        "color": "",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "layout_mobile": "2"
+      }
+    },
+    "section_hero_fiEfnM": {
+      "type": "section-hero",
+      "blocks": {
+        "heading_DBLkKw": {
+          "type": "heading",
+          "settings": {
+            "title": "<p>Your Path to <i>Wellness<\/i> <br\/>Starts Here<\/p>",
+            "heading_size": 11
+          }
+        },
+        "text_9XegDw": {
+          "type": "text",
+          "settings": {
+            "description": "Ready to personalize your wellness journey? Take our quick, oncologist-designed quiz to get started.",
+            "text_size": 3,
+            "text_style": "font-body"
+          }
+        },
+        "button_jGaYVA": {
+          "type": "button",
+          "settings": {
+            "link_text": "TAKE OUR QUIZ",
+            "link": "shopify:\/\/pages\/quiz",
+            "button_type": "btn--primary",
+            "button_size": "",
+            "button_style": "btn--solid",
+            "show_arrow": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_DBLkKw",
+        "text_9XegDw",
+        "button_jGaYVA"
+      ],
+      "custom_css": [
+        "a {color: #333333; background: #fff; border-color: transparent; --btn-bg-hover: transparent;}",
+        "a:hover {color: #fff; border-color: #fff; background: transparent;}",
+        "a span {font-weight: bold;}",
+        "p {max-width: 600px;}",
+        "@media (max-width: 768px) {.hero__content__wrapper {grid-row-start: 2; grid-column-start: 1; --text: #333333; padding: 20px 10px; } a {background: #295135; color: #fff; } a:hover {background: #295135; color: #fff; border-color: transparent; }}"
+      ],
+      "settings": {
+        "custom_class": "",
+        "height": "five-fifty-height-hero",
+        "width": "wrapper--full",
+        "image_1": "shopify:\/\/shop_images\/Banner_Product_2.jpg",
+        "link": "",
+        "mobile_height": "screen-height-one-third--mobile",
+        "flex_align_desktop": "align--middle-left-desktop",
+        "flex_align_mobile": "align--middle-center-mobile",
+        "overlay_opacity": 0,
+        "overlay_color": "#000000",
+        "show_overlay_text": false,
+        "bg_color": "",
+        "color": "#ffffff",
+        "show_placeholder": true
+      }
+    }
+  },
+  "order": [
+    "section_rich_text_kaiYD7",
+    "main",
+    "section_team_mV9FD3",
+    "section_text_row_Czcem7",
+    "section_hero_fiEfnM"
+  ]
+}

@@ -1,0 +1,142 @@
+<style>
+  .custom-main-tabs .newidtab{
+    display:none;
+  }
+   .slider__counter:first-child{
+     display:block;
+   }
+   .slider__counter{
+     display:none;
+   }
+    .tab.newidtab.tab-active {
+     display:block;
+   }
+   .tab.newidtab{
+     display:none;
+   }
+</style>
+
+{% assign filter_string = '' %}
+{% for member in shop.metaobjects.team_members.values %}
+  {% for filter in member.member_role.value %}
+    {% unless filter_string contains filter %}
+      {% assign filter_string = filter_string | append: filter | append: ',' %}
+    {% endunless %}
+  {% endfor %}
+{% endfor %}
+{% assign filter_list = filter_string | split: ',' %}
+
+<div class="wrapper">
+  <div class="tab-container custom-main-tabs custom-main-tabs--team">
+    {% comment %}only for view all{% endcomment %}
+    <div class="main_tab_wrapper cstm-viewall">
+      <h2 class="our-team__heading h1">The <i>expert</i> team behind SurvivorRx</h2>
+      <h5 class="our-team__subheading">ONCOLOGISTS & EXPERTS</h5>
+      <div class="tab">
+        <div class="outer_wrapper_ingrediant home-setion-team cstm-viewall_ingrediant">
+
+          {% assign sorted_members = shop.metaobjects.team_members.values | sort: 'name' | sort_natural: 'custom_sort_order' %}
+
+          {% for member in sorted_members %}
+            {% if member.member_role.value contains 'Oncologist' or member.member_role.value contains 'Expert' %}
+            <div class="inner_wrapper_tab cstm-metaobject-add" data-index="{{ forloop.index }}">
+              <a
+                class="cstm_ingredient_read--index"
+                data-id="{{ filter }}"
+                href="/pages/our-team?name={{ member.name | handle }}"
+              >
+                <img
+                  src="{{ member.image | img_url: 'master' }}"
+                  alt="Member Image"
+                  width="200px"
+                  height="200px"
+                >
+              </a>
+
+              <h3 class="custom_heading_text">{{ member.name }}</h3>
+              <span class="member-info">
+                {{ member.credential }}<br>{{ member.role }}
+              </span>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <h5 class="our-team__subheading">SURVIVOR & CARETAKER PANEL</h5>
+      <div class="tab">
+        <div class="outer_wrapper_ingrediant cstm-viewall_ingrediant">
+
+          {% assign sorted_members = shop.metaobjects.team_members.values | sort: 'name' | sort_natural: 'custom_sort_order' %}
+
+          {% for member in sorted_members %}
+            {% if member.member_role.value contains 'Survivor' or member.member_role.value contains 'Caretaker' %}
+            <div class="inner_wrapper_tab cstm-metaobject-add" data-index="{{ forloop.index }}">
+              <a
+                class="cstm_ingredient_read"
+                data-id="{{ filter }}"
+                href="/pages/our-team?name={{ member.name | handle }}"
+              >
+                <img
+                  src="{{ member.image | img_url: 'master' }}"
+                  alt="Member Image"
+                  width="200px"
+                  height="200px"
+                >
+              </a>
+
+              <h3 class="custom_heading_text">{{ member.name }}</h3>
+              <span class="member-info">
+                {{ member.credential }}<br>{{ member.role }}
+              </span>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <a href="/pages/our-team" class="btn btn--solid btn--primary btn-meet-team">Meet The Team</a>
+
+    {% comment %} only for view all {% endcomment %}
+  </div>
+</div>
+        
+
+{% schema %}
+  {
+    "name": "Index - Section Team",
+    "settings": [],
+    "class": "index-section-team",
+    "presets": [
+      {
+        "name":"Team"
+      }
+    ]
+  }
+{% endschema %}
+
+<script>
+  $(document).ready(function () {
+    if (window.innerWidth <= 768) {
+      $('.outer_wrapper_ingrediant').slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        dots: false,
+        arrows: true,
+        prevArrow: `<div class="slick-prev">{% render 'slider-prev-arrow' %}</div>`,
+        nextArrow: `<div class="slick-next">{% render 'slider-next-arrow' %}</div>`
+      });
+    } else {
+      $('.outer_wrapper_ingrediant').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        dots: false,
+        arrows: true,
+        prevArrow: `<div class="slick-prev">{% render 'slider-prev-arrow' %}</div>`,
+        nextArrow: `<div class="slick-next">{% render 'slider-next-arrow' %}</div>`
+      });
+    }
+  });
+</script>

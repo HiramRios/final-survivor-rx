@@ -1,0 +1,418 @@
+<style>
+  .custom-main-tabs .newidtab{
+    display:none;
+  }
+   .slider__counter:first-child{
+     display:block;
+   }
+   .slider__counter{
+     display:none;
+   }
+   .tab.newidtab.tab-active {
+     display:block;
+   }
+   .tab.newidtab{
+     display:none;
+   }
+</style>
+
+{% assign supplements = '' %}
+
+{% for item in page.metafields.custom.ingredient.value %}
+  {% for itemn in item.can_be_found_in_supplements.value %}
+    {% assign supplements = supplements | append: itemn.heading | append: ',' %}
+  {% endfor %}
+{% endfor %}
+
+{% assign supplements = supplements | split: ',' | uniq %}
+{% assign supplements = supplements | sort %}
+
+{% assign letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' | split: '' %}
+
+<div class="wrapper">
+
+<div class="tab-container custom-main-tabs custom-main-tabs--team">
+  <div class="tab-menu">
+    <ul style="display:none;">
+      <li><a href="#" class="tab-a" data-id="viewall">View all</a></li>
+      {% for supplement in supplements %}
+        <li>
+          <a href="#" class="tab-a" data-id="{{ supplement }}">{{ supplement }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="tab-menu-selector-wrapper">
+      <label>Select Supplement</label>
+      <select class="tab-menu__selector">
+        <option value="viewall">View all</option>
+        {% for supplement in supplements %}
+          <option value="{{ supplement }}">{{ supplement }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="main_tab_wrapper">
+    {% for supplement in supplements %}
+      <div class="tab" data-id="{{ supplement }}">
+        <div class="outer_wrapper_ingrediant">
+          {% assign letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' | split: '' %}
+
+          {% for letter in letters %}
+            {% assign has_matches = false %}
+            {% for item in page.metafields.custom.ingredient.value %}
+              {% assign firstletter = item.ingredient_short_name | slice: 0, 1 %}
+              {% if firstletter == letter %}
+                {% for itemn in item.can_be_found_in_supplements.value %}
+                  {% if itemn.heading == supplement %}
+                    {% if has_matches == false %}
+                      {% assign has_matches = true %}
+                    {% endif %}
+
+                    <div class="inner_wrapper_tab cstm-metaobject-add" data-index="{{ forloop.index }}">
+                      <a
+                        class="cstm_ingredient_read"
+                        data-id="{{ supplement }}"
+                        href="#"
+                        open_text="{{ item.ingredient_short_name }}"
+                      >
+                        <img
+                          src="{{ item.ingredient_image | img_url: 'master' }}"
+                          alt="Ingredient Image"
+                          width="200px"
+                          height="200px"
+                        >
+                      </a>
+
+                      <h3 class="custom_heading_text">{{ item.ingredient_short_name }}</h3>
+                      {{ item.ingredient_description_new | metafield_tag }}
+                      <a
+                        class="cstm_ingredient_read read_btn"
+                        data-id="{{ supplement }}"
+                        href="#"
+                        open_text_handle="{{ item.ingredient_short_name | handleize }}"
+                        open_text="{{ item.ingredient_short_name }}"
+                        >Learn More</a>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% comment %}only for view all{% endcomment %}
+  <div class="main_tab_wrapper cstm-viewall" style="display:none">
+    <div class="tab" data-id="viewall">
+      <div class="outer_wrapper_ingrediant cstm-viewall_ingrediant">
+        {% assign letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' | split: '' %}
+
+        {% assign sorted_items = page.metafields.custom.ingredient.value | sort: 'ingredient_short_name' | sort_natural: 'custom_sort_order' %}
+        {% comment %} Sort items by ingredient_short_name {% endcomment %}
+
+        {% for letter in letters %}
+          {% assign has_matches = false %}
+
+          {% for item in sorted_items %}
+            {% assign firstletter = item.ingredient_short_name | slice: 0, 1 %}
+
+            {% if firstletter == letter %}
+              {% if has_matches == false %}
+                {% if forloop.index > 1 %}
+                {% endif %}
+
+                {% comment %}<p id="ingredients-{{ firstletter }}" class="cstmletter">{{ firstletter }}</p>{% endcomment %}
+                {% assign has_matches = true %}
+              {% endif %}
+
+              <div
+                class="inner_wrapper_tab cstm-metaobject-add"
+                data-index="{{ forloop.index }}"
+                id="ingredients-{{ firstletter }}"
+              >
+                <a
+                  class="cstm_ingredient_read"
+                  href="#"
+                  open_text="{{ item.ingredient_short_name }}"
+                >
+                  <img
+                    src="{{ item.ingredient_image | img_url: 'master' }}"
+                    alt="Ingredient Image"
+                    width="200px"
+                    height="200px"
+                  >
+                </a>
+
+                <h3 class="custom_heading_text">{{ item.ingredient_short_name }}</h3>
+                {{ item.ingredient_description_new | metafield_tag }}
+                <a
+                  class="cstm_ingredient_read read_btn"
+                  href="#"
+                  open_text_handle="{{ item.ingredient_short_name | handleize }}"
+                  open_text="{{ item.ingredient_short_name }}"
+                  >Learn More</a>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+
+      <div class="cstm-letter--fltr">
+        {% assign letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' | split: '' %}
+        {% assign printed_letters = '' %}
+
+        {% for letter in letters %}
+          {% assign has_matches = false %}
+
+          {% for item in page.metafields.custom.ingredient.value %}
+            {% assign firstletter = item.ingredient_short_name | slice: 0, 1 %}
+
+            {% if firstletter == letter %}
+              {% assign has_matches = true %}
+              {% unless printed_letters contains firstletter %}
+                {% assign printed_letters = printed_letters | append: firstletter %}
+                {% if forloop.index > 1 %}
+                {% endif %}
+                <div class="cstm-viewall-conatiner">
+                  <a href="#ingredients-{{ firstletter }}" class="cstmlettertext">{{ firstletter }}</a>
+                </div>
+              {% endunless %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {% comment %} only for view all {% endcomment %}
+</div>
+<div class="cstm_slider_wrapper cstm_new_popup" style="visibility:hidden">
+  <div class="cstm-popup-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <path d="M25 7L7 25" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M25 25L7 7" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div class="main_tab_wrapper cstm-slider-img" style="display:none">
+    {% assign letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' | split: '' %}
+    {% for letter in letters %}
+      {% assign has_matches = false %}
+      {% assign counting = 0 %}
+
+      {% comment %} Sort items that match the current letter by ingredient_short_name {% endcomment %}
+      {% assign sorted_items = page.metafields.custom.ingredient.value | sort: 'ingredient_short_name' | sort_natural: 'custom_sort_order' %}
+
+      {% for item in sorted_items %}
+        {% assign firstletter = item.ingredient_short_name | slice: 0, 1 %}
+
+        {% if firstletter == letter %}
+          {% for itemn in item.can_be_found_in_supplements.value %}
+            
+            {% if itemn.heading %}
+              {% assign counting = counting | plus: 1 %}
+
+              <div
+                class="tab newidtab"
+                data-count="{{ counting }}"
+                data-id="{% if itemn.heading %}{{ itemn.heading }}{% else %}viewall{% endif %}"
+                open_tab_cstm="{{ item.ingredient_short_name }}"
+              >
+                <div class="inner_wrapper_tab">
+                  <div class="cstm-inner-contnt">
+                    <!-- Content here -->
+                  </div>
+                  <img
+                    src="{{ item.ingredient_image | img_url: 'master' }}"
+                    alt="Ingredient Image"
+                    width="200px"
+                    height="200px"
+                  >
+
+                  <div class="center-text ingredient-heading">
+                    <h3>{{ item.ingredient_short_name }}</h3>
+                    <p style="text-align:center;">{{ item.ingredient_long_name }}</p>
+                  </div>
+
+                  <hr>
+
+                  <div class="csmt_info--jtpl">
+                    {% if item.known_for.value != blank %}
+                      <p>
+                       <b> Known For</b><br>
+                        <span class="halfknown" data-item-id="{{ item.ingredient_short_name }}">
+                          {% for knownfor in item.known_for.value %}
+                            {% if forloop.index < 30 %}
+                              {{ knownfor -}}
+                              {%- unless forloop.last == true %},{% endunless %}
+                            {% endif %}
+                            {% if forloop.index == 30 %}
+                              <a class="viewmore">View more</a>
+                            {% endif %}
+                          {% endfor %}
+                        </span>
+                        <span class="fullknon" style="display:none" data-item-id="{{ item.ingredient_short_name }}">
+                          {% for knownfor in item.known_for.value %}
+                            {{ knownfor -}}
+                            {%- unless forloop.last %},{% endunless %}
+                          {% endfor %}
+                          <a class="lessmore">Show less</a>
+                        </span>
+                      </p>
+                    {% endif %}
+
+                    {% if item.can_be_found_in_supplements.value != blank %}
+                      <p>
+                      <b>Can Be Found In</b>
+
+                     <br>
+                        <span class="halfknown2">
+                          {% for foundin in item.can_be_found_in_supplements.value %}
+                            {% if forloop.index < 30 %}
+                              {{ foundin.heading }}{%- unless forloop.last %},{% endunless %}
+                            {% endif %}
+                            {% if forloop.index == 30 %}
+                              <a class="viewmore2">View more</a>
+                            {% endif %}
+                          {% endfor %}
+                        </span>
+                        <span class="fullknon2" style="display:none">
+                          {% for foundin in item.can_be_found_in__products.value %}
+                            {{ foundin.heading -}}
+                            {%- unless forloop.last %},{% endunless %}
+                          {% endfor %}
+                          <a class="lessmore2">Show less</a>
+                        </span>
+                      </p>
+                    {% endif %}
+
+                    <span class="cstmsurvivor--description">
+                      {% if item.ingredient_description != blank %}
+                        {{ item.ingredient_description | metafield_tag }}
+                      {% endif %}
+                    </span>
+
+                    
+                    {% if item.ingredient_quote != blank %}
+
+                    <span class="cstmingredient--quote">
+                      {% if item.ingredient_quote != blank %}
+                        {{ item.ingredient_quote | metafield_tag }}
+                      {% endif %}
+                    </span>
+                                          {% endif %}
+
+
+                    {% if item.why_we_chose_it != blank %}
+                      <p class="ingredient-size">
+                       Why We Chose It {{ item.why_we_chose_it | metafield_tag }}
+                      </p>
+                    {% endif %}
+
+                    {% if item.where_its_from != blank %}
+                      <p class="ingredient-size">
+                        Where It's From<span>{{ item.where_its_from | metafield_tag }}</span>
+                      </p>
+                    {% endif %}
+
+                    {% if item.the_science != blank %}
+                      <p class="ingredient-size">
+                        The Science <span>{{ item.the_science | metafield_tag }}</span>
+                      </p>
+                    {% endif %}
+
+                    {% if item.references != blank %}
+                      <div class="cstm_reference--jtpl">
+                        <p>
+                          <strong>References</strong> {{ item.references | metafield_tag }}
+                        </p>
+                      </div>
+                    {% endif %}
+
+                    {% for text in item.blog_post_links.value %}
+                      {% if text.text != blank and text.url != blank %}
+                        <a href="{{ text.url }}" target="_blank">{{ text.text }}</a>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+
+                  <div class="cstm_disclaimer--jtpl">
+                    This illustration is not the source of our ingredient and is used for illustration purposes only.
+                  </div>
+
+                  <div class="cstm_disclaimer--jtpl">
+                    These statements have not been evaluated by the Food and Drug Administration. This product is not
+                    intended to diagnose, treat, cure, or prevent any disease. This information and articles are
+                    provided for educational purposes only and are unaffiliated with SurvivorRx. Medical advice should
+                    always come from your health care professional.
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+
+  <div class="btn-wrap">
+    <button class="prev-btn  ">
+      {% render 'slider-prev-arrow' %}
+    </button>
+    <div class="e_count"></div>
+    <button class="next-btn">
+      {% render 'slider-next-arrow' %}
+    </button>
+  </div>
+</div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Custom tabs",
+  "settings": [
+
+  ],
+  "presets":[
+    {
+      "name":"Custom tabs"
+    }
+  ],
+  "blocks": [
+  {
+    "type": "tabs",
+    "name": "tabs",
+    "settings": [
+
+        {
+      "type": "text",
+      "id": "tab",
+      "label": "Tab",
+       },
+      {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+       },
+      {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+       },
+
+
+    ]
+  }
+],
+}
+{% endschema %}
+
+<script>
+  document.querySelector('.tab-menu__selector').addEventListener('change', function () {
+    document.querySelector(`.tab-menu a[data-id="${this.value}"]`).click();
+  });
+</script>

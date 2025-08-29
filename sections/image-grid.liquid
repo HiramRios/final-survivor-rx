@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <div class="desktop-image">
+    <img src="{{ section.settings.desktop_image | img_url: 'master' }}" alt="Desktop Image">
+  </div>
+  <div class="mobile-image">
+    <img src="{{ section.settings.mobile_image | img_url: 'master' }}" alt="Mobile Image">
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Image Grid",
+  "class": "image-grid-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Grid",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
