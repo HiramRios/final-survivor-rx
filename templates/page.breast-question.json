@@ -60,6 +60,7 @@
         "question_eNLKFK",
         "question_FaX7GV"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "#fcf4f6",
         "image": "shopify://shop_images/Breast_Landing_Page.jpg",
@@ -67,10 +68,8 @@
         "subheading": "Your treatment was breast cancer specific—now your supplements can be too."
       }
     },
-
     "cancer_quiz_xaXxzq": {
       "type": "cancer-quiz",
-      "name": "Cancer Quiz",
       "blocks": {
         "question_kmpQk6": {
           "type": "question",
@@ -550,7 +549,7 @@
         "result_hD48aQ",
         "result_q69aRy"
       ],
-
+      "name": "Cancer Quiz",
       "settings": {
         "bg_color": "#f9dee5",
         "padding_top": 0,
@@ -561,7 +560,6 @@
       }
     }
   },
-
   "order": [
     "main",
     "cancer_question_6xCDwY",
