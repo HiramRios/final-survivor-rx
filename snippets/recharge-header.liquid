@@ -112,33 +112,61 @@
   }
   .yno-cancel {
     color: var(--recharge-button-secondary);
-    position: static;
-    right: 25px;
-    top: 22px;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    text-align: right;
-    justify-content: flex-end;
-    /* margin: 30px auto; */
-    padding: 0;
-    width: 100%;
-    margin-top: 5px;
-  }
-  .yno-label {
-    display: block;
-    font-size: var(--recharge-typography-size-5);
-    line-height: 150%;
-    font-weight: var(--recharge-typography-body-font-weight);
-  }
-  @media (max-width: 768px) {
-    .yno-label {
-      display: none;
-    }
   }
   .yno-cancel span {
     font-weight: 500;
+  }
+  .yno-ship-now {
+    background-color: var(--recharge-color-brand-75) !important;
+    border-color: var(--recharge-color-brand-75) !important;
+    color: var(--recharge-color-brand) !important;
+  }
+  .yno-actions {
+    display: flex !important;
+    gap: 8px;
+    width: 100%;
+  }
+  .yno-actions > * {
+    flex: 1 1 0%;
+    margin: 0 !important;
+  }
+  .yno-actions button {
+    width: 100% !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+    line-height: 1;
+  }
+  .yno-actions button span {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
+  .yno-actions .yno-icon {
+    width: 16px;
+    height: 16px;
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+  }
+  .yno-actions .yno-icon svg,
+  .yno-actions .yno-icon i,
+  .yno-actions .yno-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  @media (max-width: 768px) {
+    .yno-actions {
+      flex-direction: column;
+    }
   }
   .cancel-popup {
     position: fixed;
@@ -331,12 +359,6 @@
     }
     .cancel-popup {
       align-items: flex-end;
-    }
-    .yno-cancel {
-      font-size: 16px;
-      justify-content: flex-start;
-      margin-left: 4px;
-      gap: 10px;
     }
   }
 

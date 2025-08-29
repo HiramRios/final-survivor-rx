@@ -723,23 +723,52 @@
   });
 
   /* Add Cancel subscription button, change frequency button, build a box line items */
-  document.addEventListener("Recharge::slot::mounted", event => {
-    if (event.detail.pathname === "/overview") {
-      productsAvailableForPurchaseManagerNew.init();
-      
-      let intervalId = setInterval(function () {
-        if ($('.recharge-component-schedule-item .recharge-card > div > div:last-child > div > div:last-child > div > div:last-child').length && $('.recharge-component-schedule-item .recharge-alert').length == 0) {
-          if ($('.yno-cancel').length == 0) {
-            $('.recharge-component-schedule-item .recharge-card > div > div:last-child > div > div:last-child > div > div:last-child').append(`
-              <button class="yno-cancel">
-                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.143 4h13.714M2.857 4h10.286v10.286A1.143 1.143 0 0 1 12 15.429H4a1.143 1.143 0 0 1-1.143-1.143V4ZM5.143 4v-.571a2.857 2.857 0 0 1 5.714 0V4M6.286 7.43v4.573M9.714 7.43v4.573"></path></g></svg>
-                <span>Cancel</span>
-              </button>
-            `);
-            $('.recharge-component-schedule-item .recharge-card > div > div:last-child > div > div:last-child > div > div:first-child').append(`
-              <span class="yno-label">Cancel subscription</span>
-            `);
-            $('body').append(`
+  /* Custom logic ensures only one Cancel button is injected and the reschedule action is renamed to Pause */
+  function initPortalActions() {
+    productsAvailableForPurchaseManagerNew.init();
+
+    let intervalId = setInterval(function () {
+        const rescheduleBtn = $('[data-testid="recharge-internal-reschedule-button"]');
+        const sendNowBtn = $('[data-testid="recharge-internal-send-now-button"]');
+        const skipBtn = $('[data-testid="recharge-internal-skip-button"]');
+        $('[data-testid="recharge-internal-cancel-button"]').remove();
+        if (rescheduleBtn.length && $('.yno-cancel').length === 0) {
+          const btnClass = rescheduleBtn.attr('class');
+          const rescheduleWrapper = rescheduleBtn.parent();
+          const wrapperClass = rescheduleWrapper.attr('class');
+          const sendNowWrapper = sendNowBtn.parent();
+          const skipWrapper = skipBtn.parent();
+
+          // icons
+          const boxIcon = `<span class="yno-icon">{% render 'icon-box' %}</span>`;
+          const pauseIcon = `<span class="yno-icon">{% render 'icon-pause' %}</span>`;
+          const trashIcon = `<span class="yno-icon">{% render 'icon-trash' %}</span>`;
+
+          // group actions so they share equal width
+          const actionWrappers = sendNowWrapper.add(rescheduleWrapper).add(skipWrapper);
+          if (!$('.yno-actions').length) {
+            actionWrappers.wrapAll('<div class="yno-actions"></div>');
+          }
+
+          sendNowBtn.find('svg, img, i').parent().remove();
+          sendNowBtn.html(boxIcon + '<span>Ship Now</span><span class="btn__loadingbar"></span>');
+          sendNowBtn.addClass('yno-ship-now');
+
+          rescheduleBtn.find('svg, img, i').parent().remove();
+          rescheduleBtn.html(pauseIcon + '<span>Pause</span><span class="btn__loadingbar"></span>');
+
+          skipBtn.find('svg, img, i').each(function() {
+            const icon = $(this);
+            if (icon.parent().is('span')) {
+              icon.parent().addClass('yno-icon');
+            } else {
+              icon.wrap('<span class="yno-icon"></span>');
+            }
+          });
+
+          skipWrapper.after(`<div class="${wrapperClass}"><button class="${btnClass} yno-cancel">${trashIcon}<span>Cancel</span><span class="btn__loadingbar"></span></button></div>`);
+
+          $('body').append(`
               <div class="cancel-popup">
                 <div class="cancel-popup__overlay"></div>
                 <div class="cancel-popup__inner">
@@ -1009,11 +1038,14 @@
             });
           }
 
-          clearInterval(intervalId);
-        }
-      }, 100);
-    }
-  });
+        if (rescheduleBtn.length && $('.yno-cancel').length) {
+              clearInterval(intervalId);
+            }
+          }, 100);
+  }
+
+  document.addEventListener('Recharge::slot::mounted', initPortalActions);
+  document.addEventListener('DOMContentLoaded', initPortalActions);
 
   $(document).on('click', '.build-box .recharge-heading', function () {
     $('.build-box').toggleClass('build-box--active');
