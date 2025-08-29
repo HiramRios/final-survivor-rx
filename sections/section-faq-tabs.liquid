@@ -4,13 +4,16 @@
   assign animation_anchor = '#FaqTabs--' | append: section.id
 
   assign tabs_string = ''
+  assign icons_string = ''
   for block in section.blocks
     assign t = block.settings.tab | strip
     unless tabs_string contains t
       assign tabs_string = tabs_string | append: t | append: '||'
+      assign icons_string = icons_string | append: block.settings.tab_icon | append: '||'
     endunless
   endfor
   assign tabs = tabs_string | split: '||' | compact
+  assign tab_icons = icons_string | split: '||'
 -%}
 
 {%- if section.blocks.size > 0 -%}
@@ -22,7 +25,6 @@
       --PB: {{ section.settings.padding_bottom }}px;
       --card-bg: #fff;
       --card-radius: 14px;
-      --card-shadow: 0 1px 0 rgba(0,0,0,.04), 0 6px 16px rgba(0,0,0,.06);
       --tab-accent: #1d6a3a;
       --muted: #6b7280;
       --heading-font-family: {{ section.settings.heading_font.family }}, {{ section.settings.heading_font.fallback_families }};
@@ -91,6 +93,13 @@
       outline: none;
       transition: color .2s ease;
       white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    #FaqTabs--{{ section.id }} .faq-tabs__head .tab-link__icon{
+      width: 20px;
+      height: 20px;
     }
     #FaqTabs--{{ section.id }} .faq-tabs__head .tab-link.current{ color: #0f172a; }
     #FaqTabs--{{ section.id }} .faq-tabs__head .tab-link.current::after{
@@ -122,7 +131,6 @@
     #FaqTabs--{{ section.id }} details.accordion{
       background: var(--card-bg);
       border-radius: var(--card-radius);
-      box-shadow: var(--card-shadow);
       overflow: hidden;
     }
     #FaqTabs--{{ section.id }} summary.accordion__title{
@@ -202,7 +210,13 @@
                 aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
                 aria-controls="panel-{{ section.id }}-{{ forloop.index0 }}"
                 tabindex="0">
-                <span>{{ tab }}</span>
+                {%- assign tab_icon = tab_icons[forloop.index0] -%}
+                {%- if tab_icon != blank -%}
+                  <img class="tab-link__icon" src="{{ tab_icon | image_url: width: 24 }}" alt="{{ tab | escape }}">
+                {%- endif -%}
+                {%- if tab != blank -%}
+                  <span>{{ tab }}</span>
+                {%- endif -%}
               </li>
             {%- endfor -%}
           </ul>
@@ -354,6 +368,7 @@
       "name": "Question",
       "settings": [
         { "type": "text", "id": "tab", "label": "Tab title", "default": "General Questions" },
+        { "type": "image_picker", "id": "tab_icon", "label": "Tab icon" },
         { "type": "text", "id": "question", "label": "Question", "default": "Sample question?" },
         { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Sample answer content goes here.</p>" }
       ]
