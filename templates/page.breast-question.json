@@ -60,6 +60,7 @@
         "question_eNLKFK",
         "question_FaX7GV"
       ],
+      "disabled": true,
       "settings": {
         "bg_color": "#fcf4f6",
         "image": "shopify://shop_images/Breast_Landing_Page.jpg",
@@ -548,7 +549,6 @@
         "result_hD48aQ",
         "result_q69aRy"
       ],
-      "disabled": true,
       "name": "Cancer Quiz",
       "settings": {
         "bg_color": "#f9dee5",
