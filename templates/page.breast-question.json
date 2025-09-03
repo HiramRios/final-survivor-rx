@@ -173,7 +173,7 @@
           "type": "question",
           "settings": {
             "step": 2,
-            "parent": "Estrogen Positive (ER+)|Estrogen Negative (ER-)|DCIS / LCIS - Estrogen Negative (ER+)|I’ve had multiple breast cancers",
+            "parent": "Estrogen Positive (ER+)|Estrogen Negative (ER-)|DCIS / LCIS - Estrogen Positive (ER+)|I’ve had multiple breast cancers",
             "title": "Triple-Positive Breast Cancer (TPBC)",
             "description": "",
             "value": "TPBC",
@@ -229,7 +229,7 @@
           "type": "question",
           "settings": {
             "step": 3,
-            "parent": "HER2 Positive (HER2+)|Triple-Negative Breast Cancer (TNBC)|HER2 Negative (HER2-)|TNBC (Triple-Negative Breast Cancer)",
+            "parent": "HER2 Positive (HER2+)|Triple-Positive Breast Cancer (TPBC)|HER2 Negative (HER2-)|",
             "title": "SERMs (e.g., tamoxifen)",
             "description": "Selective Estrogen Receptor Modulators, such as tamoxifen, raloxifene, toremifene, ospemifene, are used to block estrogen's effects in hormone-sensitive cancers. Products: tamoxifen (Nolvadex), raloxifene (Evista), toremifene (Fareston), ospemifene (Osphena), lasofoxifene (Fablyn)",
             "value": "SERMs",
