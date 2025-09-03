@@ -215,7 +215,7 @@
           "type": "question",
           "settings": {
             "step": 3,
-            "parent": "HER2 Positive|TPBC (Triple-Positive Breast Cancer)|HER2 Negative|TNBC (Triple-Negative Breast Cancer)",
+            "parent": "HER2 Positive (HER2+)|Triple-Negative Breast Cancer (TNBC)|HER2 Negative (HER2-)|Triple-Negative Breast Cancer (TNBC)",
             "title": "No cancer related support medications",
             "description": "",
             "value": "ncm",
