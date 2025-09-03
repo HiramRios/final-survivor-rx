@@ -164,9 +164,9 @@
             "description": "",
             "value": "HER2+",
             "url": "",
-            "step_heading": "What is your HER2 status?",
+            "step_heading": "What was your HER2 status?",
             "step_subheading": "",
-            "step_why": ""
+            "step_why": "Knowing your HER2 status helps us design a more precise support—so your regimen reflects your history and what matters most for survivors like you."
           }
         },
         "question_XRwM99": {
@@ -222,7 +222,7 @@
             "url": "",
             "step_heading": "Question 3: Are you currently taking any of the following medications?",
             "step_subheading": "I’m currently on:",
-            "step_why": "Understanding your HER2 status helps us provide more personalized support and ensure the safest approach to your wellness."
+            "step_why": "Our oncologist-led team researched and formulated each regimen to work safely with your specific hormone-blocking maintenance medications—not against them."
           }
         },
         "question_D6WGJJ": {
@@ -347,8 +347,8 @@
             "value": "",
             "url": "",
             "step_heading": "Are you postmenopausal?",
-            "step_subheading": "You are considered postmenopausal if you haven’t had a menstrual period for 12 months or if your medical team has told you that you are.",
-            "step_why": ""
+            "step_subheading": "As a cancer survivor, you are considered postmenopausal if you haven’t had a menstrual period for 24 months or if your medical team has told you that you are menopausal due to chemical or surgical reasons.",
+            "step_why": "Once your ovaries stop producing estrogen, your body’s nutritional needs—and how it interacts with certain natural ingredients or cancer medications—shift. Our oncologist-led team took this into account when formulating each SurvivorRx routine, because one size does not fit all."
           }
         },
         "question_t3BJTQ": {
