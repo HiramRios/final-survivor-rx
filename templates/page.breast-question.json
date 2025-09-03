@@ -82,7 +82,7 @@
             "url": "",
             "step_heading": "",
             "step_subheading": "",
-            "step_why": ""
+            "step_why": "Every breast cancer subtype has unique wellness needs, defined by hormone receptor status and other markers. Our regimens are precisely formulated to reflect those differences—making them the safest and most accurate survivor-specific support available today."
           }
         },
         "question_khEiwH": {
@@ -104,8 +104,8 @@
           "settings": {
             "step": 1,
             "parent": "",
-            "title": "DCIS / LCIS - Estrogen Positive (ER+)",
-            "description": "",
+            "title": "DCIS / LCIS Estrogen Positive (ER+)",
+            "description": "DCIS (ductal carcinoma in situ) or LCIS (lobular carcinoma in situ), which are early forms of breast cancer",
             "value": "(ER+) DCIS",
             "url": "",
             "step_heading": "",
@@ -119,7 +119,7 @@
             "step": 1,
             "parent": "",
             "title": "DCIS / LCIS Estrogen Negative (ER-)",
-            "description": "",
+            "description": "DCIS (ductal carcinoma in situ) or LCIS (lobular carcinoma in situ), which are early forms of breast cancer",
             "value": "(ER-) DCIS ",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-6",
             "step_heading": "",
