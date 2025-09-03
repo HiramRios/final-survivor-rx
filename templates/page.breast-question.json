@@ -508,7 +508,7 @@
         "result_eTAkjy": {
           "type": "result",
           "settings": {
-            "combination": "1=ER+| 2=HER2+| PostMeno",
+            "combination": "1=ER+|2=HER2+|PostMeno",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-4"
           }
         },
@@ -529,21 +529,21 @@
         "result_D3HGLA": {
           "type": "result",
           "settings": {
-            "combination": "1=ER+| 2=HER2+| PreMeno",
+            "combination": "1=ER+|2=HER2+|PreMeno",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-3"
           }
         },
         "result_FQHPiE": {
           "type": "result",
           "settings": {
-            "combination": "1=ER+| 2=TPBC| PreMeno",
+            "combination": "1=ER+| 2=TPBC|PreMeno",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-3"
           }
         },
         "result_wiW7pL": {
           "type": "result",
           "settings": {
-            "combination": "1=ER+| 2=HER2-| PreMeno",
+            "combination": "1=ER+| 2=HER2-|PreMeno",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-1"
           }
         }
