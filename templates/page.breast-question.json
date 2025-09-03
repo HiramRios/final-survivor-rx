@@ -218,7 +218,7 @@
             "parent": "HER2 Positive (HER2+)|Triple-Positive Breast Cancer (TPBC)|HER2 Negative (HER2-)",
             "title": "No cancer related support medications",
             "description": "",
-            "value": "ncm",
+            "value": "NoMeds",
             "url": "",
             "step_heading": "Question 3: Are you currently taking any of the following medications?",
             "step_subheading": "I’m currently on:",
@@ -508,42 +508,42 @@
         "result_eTAkjy": {
           "type": "result",
           "settings": {
-            "combination": "1=ER+|2=HER2+|PostMeno",
+            "combination": "1=ER+|2=HER2+|3=NoMeds|4=PostMeno",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-4"
           }
         },
         "result_DLh9iG": {
           "type": "result",
           "settings": {
-            "combination": "1=ER+|2=TPBC|PostMeno",
+            "combination": "1=ER+|2=TPBC|3=NoMeds|4=PostMeno",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-4"
           }
         },
         "result_jnAB9Q": {
           "type": "result",
           "settings": {
-            "combination": "1=ER+|2=HER2-|PostMeno",
+            "combination": "1=ER+|2=HER2-|3=NoMeds|4=PostMeno",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-2"
           }
         },
         "result_D3HGLA": {
           "type": "result",
           "settings": {
-            "combination": "1=ER+|2=HER2+|PreMeno",
+            "combination": "1=ER+| 2=HER+|3=NoMeds|4=PreMeno",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-3"
           }
         },
         "result_FQHPiE": {
           "type": "result",
           "settings": {
-            "combination": "1=ER+| 2=TPBC|PreMeno",
+            "combination": "1=ER+| 2=TPBC|3=NoMeds|4=PreMeno",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-3"
           }
         },
         "result_wiW7pL": {
           "type": "result",
           "settings": {
-            "combination": "1=ER+| 2=HER2-|PreMeno",
+            "combination": "1=ER+| 2=HER2-|3=NoMeds|4=PreMeno",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-1"
           }
         }
