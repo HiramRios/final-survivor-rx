@@ -355,7 +355,7 @@
           "type": "question",
           "settings": {
             "step": 4,
-            "parent": "No cancer related support medications|SERMs (e.g., tamoxifen)|AIs (e.g., anastrozole)|SERDs (e.g., fulvestrant)|4/6 Inhibitors with SERMs (e.g., tamoxifen & Ibrance)|4/6 Inhibitors with AIs (e.g., anastrozole & Ibrance)|4/6 Inhibitors with SERDs (e.g., fulvestrant & Ibrance)",
+            "parent": "No cancer related support medications|",
             "title": "No",
             "description": "",
             "value": "",
