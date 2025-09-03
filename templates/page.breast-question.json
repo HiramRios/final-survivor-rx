@@ -344,7 +344,7 @@
             "parent": "No cancer related support medications",
             "title": "Yes",
             "description": "",
-            "value": "",
+            "value": "PostMeno",
             "url": "",
             "step_heading": "Are you postmenopausal?",
             "step_subheading": "As a cancer survivor, you are considered postmenopausal if you haven’t had a menstrual period for 24 months or if your medical team has told you that you are menopausal due to chemical or surgical reasons.",
@@ -358,7 +358,7 @@
             "parent": "No cancer related support medications",
             "title": "No",
             "description": "",
-            "value": "",
+            "value": "PreMeno",
             "url": "",
             "step_heading": "Are you postmenopausal?",
             "step_subheading": "You are considered postmenopausal if you haven’t had a menstrual period for 12 months or if your medical team has told you that you are.",
@@ -504,6 +504,41 @@
             "combination": "2=TPBC|3=4/6SERDs",
             "url": "https://survivorrx.com/products/wellsurvivor-breast-br-14"
           }
+        },
+        "result_eTAkjy": {
+          "type": "result",
+          "settings": {
+            "combination": "1=ER+| 2=HER2+| PostMeno",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-4"
+          }
+        },
+        "result_jnAB9Q": {
+          "type": "result",
+          "settings": {
+            "combination": "1=ER+| 2=HER2-| PostMeno",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-2"
+          }
+        },
+        "result_D3HGLA": {
+          "type": "result",
+          "settings": {
+            "combination": "1=ER+| 2=HER2+| PreMeno",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-3"
+          }
+        },
+        "result_FQHPiE": {
+          "type": "result",
+          "settings": {
+            "combination": "1=ER+| 2=TPBC| PreMeno",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-3"
+          }
+        },
+        "result_wiW7pL": {
+          "type": "result",
+          "settings": {
+            "combination": "1=ER+| 2=HER2-| PreMeno",
+            "url": "https://survivorrx.com/products/wellsurvivor-breast-br-1"
+          }
         }
       },
       "block_order": [
@@ -547,7 +582,12 @@
         "result_YawKnq",
         "result_7VJyD7",
         "result_hD48aQ",
-        "result_q69aRy"
+        "result_q69aRy",
+        "result_eTAkjy",
+        "result_jnAB9Q",
+        "result_D3HGLA",
+        "result_FQHPiE",
+        "result_wiW7pL"
       ],
       "name": "Cancer Quiz",
       "settings": {
