@@ -404,7 +404,9 @@
     <!-- And above this comment line ================================================== -->
 
     <!-- Recharge -->
-    
+    {% if canonical_url contains 'recurring' %}
+      {% render 'recharge-footer' %}
+    {% endif %}
 
     {% render 'curcumin-popup' %}
     {% render 'disclaimer-popup' %}
